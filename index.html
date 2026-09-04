@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rewind AI – واجهة ذكاء اصطناعي متطورة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================================ */
+        /* 1. التصميم الأساسي (Root Variables)                         */
+        /* ============================================================ */
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111a28;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.06);
+            --text-primary: #e8edf5;
+            --text-secondary: #94a3b8;
+            --accent-1: #60a5fa;
+            --accent-2: #a78bfa;
+            --accent-glow: rgba(96, 165, 250, 0.2);
+            --shadow: rgba(0, 0, 0, 0.6);
+            --radius: 20px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ============================================================ */
+        /* 2. إعادة تعيين الأنماط العامة                                */
+        /* ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+            transition: background var(--transition), color var(--transition);
+            /* خلفية متحركة باستخدام التدرجات */
+            background-image:
+                radial-gradient(ellipse at 20% 50%, rgba(96, 165, 250, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(167, 139, 250, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 0%, rgba(96, 165, 250, 0.04) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        /* ============================================================ */
+        /* 3. الحاوية الرئيسية                                           */
+        /* ============================================================ */
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 30px 80px var(--shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 92vh;
+            max-height: 960px;
+            transition: background var(--transition), border-color var(--transition);
+            backdrop-filter: blur(2px);
+            position: relative;
+        }
+
+        /* ============================================================ */
+        /* 4. رأس الصفحة (Header)                                       */
+        /* ============================================================ */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 28px;
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo i {
+            -webkit-text-fill-color: var(--accent-1);
+            font-size: 28px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .header-actions button,
+        .header-actions select {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 6px 16px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: inherit;
+            backdrop-filter: blur(8px);
+        }
+
+        .header-actions button:hover,
+        .header-actions select:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+            border-color: var(--accent-1);
+        }
+
+        .status-badge {
+            font-size: 13px;
+            color: var(--text-secondary);
+            background: var(--bg-card);
+            padding: 6px 16px;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(8px);
+        }
+
+        .status-badge .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4ade80;
+            display: inline-block;
+            animation: pulse-dot 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(0.8);
+            }
+        }
+
+        /* ============================================================ */
+        /* 5. التخطيط الرئيسي (Main)                                    */
+        /* ============================================================ */
+        .main {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* ============================================================ */
+        /* 6. الشريط الجانبي (Sidebar)                                  */
+        /* ============================================================ */
+        .sidebar {
+            width: 260px;
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border-right: 1px solid var(--border-color);
+            padding: 20px 16px;
+            overflow-y: auto;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transition: all var(--transition);
+        }
+
+        .sidebar h3 {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .model-group .group-label {
+            font-size: 10px;
+            color: var(--text-secondary);
+            padding: 4px 0;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .model-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 6px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all var(--transition);
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .model-btn:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+        }
+
+        .model-btn.active {
+            background: rgba(96, 165, 250, 0.12);
+            color: var(--accent-1);
+            border-left: 3px solid var(--accent-1);
+        }
+
+        .model-btn .badge {
+            font-size: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 2px 10px;
+            border-radius: 20px;
+            color: var(--text-secondary);
+            margin-left: auto;
+        }
+
+        /* ============================================================ */
+        /* 7. منطقة التوكن (Token)                                      */
+        /* ============================================================ */
+        .token-area {
+            border-top: 1px solid var(--border-color);
+            padding-top: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .token-area input {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 8px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+            outline: none;
+            font-family: inherit;
+            transition: all var(--transition);
+        }
+
+        .token-area input:focus {
+            border-color: var(--accent-1);
+        }
+
+        .token-area button {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 6px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 13px;
+            font-family: inherit;
+            transition: all var(--transition);
+        }
+
+        .token-area button:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+            border-color: var(--accent-1);
+        }
+
+        .token-area .link-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 12px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .token-area .link-btn:hover {
+            color: var(--accent-1);
+        }
+
+        /* ============================================================ */
+        /* 8. منطقة المحادثة (Chat Area)                               */
+        /* ============================================================ */
+        .chat-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: transparent;
+            min-width: 0;
+        }
+
+        /* ============================================================ */
+        /* 9. شريط الإعدادات (Settings Row)                           */
+        /* ============================================================ */
+        .settings-row {
+            display: flex;
+            gap: 12px;
+            padding: 8px 28px;
+            flex-wrap: wrap;
+            align-items: center;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(8px);
+        }
+
+        .settings-row input {
+            flex: 2;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 14px;
+            outline: none;
+            min-width: 150px;
+            transition: all var(--transition);
+        }
+
+        .settings-row input:focus {
+            border-color: var(--accent-1);
+        }
+
+        .settings-row label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .settings-row select {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+            outline: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .settings-row select:focus {
+            border-color: var(--accent-1);
+        }
+
+        .settings-row button {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 6px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 13px;
+            font-family: inherit;
+            transition: all var(--transition);
+        }
+
+        .settings-row button:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+            border-color: var(--accent-1);
+        }
+
+        /* ============================================================ */
+        /* 10. رسائل المحادثة (Messages)                               */
+        /* ============================================================ */
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .message {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            opacity: 0;
+            animation: slideUp 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(12px) scale(0.97);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .message .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--text-primary);
+            font-size: 16px;
+            backdrop-filter: blur(8px);
+        }
+
+        .message.user .avatar {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            border: none;
+            color: #fff;
+        }
+
+        .message .bubble {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            padding: 12px 18px;
+            border-radius: 18px;
+            max-width: 80%;
+            line-height: 1.6;
+            word-break: break-word;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transition: all var(--transition);
+        }
+
+        .message.user .bubble {
+            background: rgba(96, 165, 250, 0.08);
+            border-color: rgba(96, 165, 250, 0.2);
+        }
+
+        .message .bubble .time {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            text-align: right;
+        }
+
+        .message .bubble .actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 6px;
+            justify-content: flex-end;
+        }
+
+        .message .bubble .actions button {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 14px;
+            padding: 2px 8px;
+            border-radius: 20px;
+            transition: all var(--transition);
+        }
+
+        .message .bubble .actions button:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+        }
+
+        /* ============================================================ */
+        /* 11. عرض الكود البرمجي (Code Block)                         */
+        /* ============================================================ */
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            margin: 6px 0;
+            padding: 10px 14px 8px 14px;
+            border: 1px solid var(--border-color);
+            overflow-x: auto;
+            backdrop-filter: blur(8px);
+        }
+
+        .code-block pre {
+            font-family: 'Fira Code', monospace;
+            font-size: 13px;
+            color: #c9d1d9;
+            white-space: pre-wrap;
+            word-break: break-all;
+            margin: 0;
+        }
+
+        .code-block .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .code-block .code-header span {
+            font-size: 11px;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.04);
+            padding: 1px 10px;
+            border-radius: 20px;
+        }
+
+        .code-block .copy-code-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 13px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: all var(--transition);
+        }
+
+        .code-block .copy-code-btn:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+        }
+
+        /* ============================================================ */
+        /* 12. رسائل النظام (System Messages)                         */
+        /* ============================================================ */
+        .system-msg {
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            padding: 4px 18px;
+            border-radius: 30px;
+            font-size: 13px;
+            align-self: center;
+            text-align: center;
+            max-width: 90%;
+            margin: 4px 0;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            animation: slideUp 0.35s ease forwards;
+        }
+
+        /* ============================================================ */
+        /* 13. مؤشر الكتابة (Typing Indicator)                        */
+        /* ============================================================ */
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            padding: 8px 18px;
+            background: var(--bg-card);
+            border-radius: 18px;
+            border: 1px solid var(--border-color);
+            gap: 8px;
+            align-items: center;
+            margin-top: 4px;
+            backdrop-filter: blur(8px);
+            animation: typingPulse 1.2s ease-in-out infinite;
+        }
+
+        .typing-indicator .text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .typing-indicator .dots span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-1);
+            margin: 0 2px;
+            animation: dotBounce 1.4s infinite both;
+        }
+
+        .typing-indicator .dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator .dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes dotBounce {
+            0%,
+            60%,
+            100% {
+                transform: translateY(0);
+                opacity: 0.4;
+            }
+            30% {
+                transform: translateY(-8px);
+                opacity: 1;
+            }
+        }
+
+        @keyframes typingPulse {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        /* ============================================================ */
+        /* 14. منطقة الإدخال (Input Area)                             */
+        /* ============================================================ */
+        .input-area {
+            padding: 10px 28px 14px;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+            backdrop-filter: blur(8px);
+        }
+
+        .input-area input[type="text"] {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 12px 20px;
+            border-radius: 40px;
+            font-size: 16px;
+            outline: none;
+            transition: all var(--transition);
+            min-width: 160px;
+        }
+
+        .input-area input:focus {
+            border-color: var(--accent-1);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .input-area button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 40px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: #fff;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .input-area button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 40px var(--accent-glow);
+        }
+
+        .input-area button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* ============================================================ */
+        /* 15. شريط التمرير (Scrollbar)                               */
+        /* ============================================================ */
+        .chat-messages::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: var(--accent-1);
+            border-radius: 10px;
+        }
+
+        /* ============================================================ */
+        /* 16. التوافق مع الأجهزة الصغيرة (Responsive)                */
+        /* ============================================================ */
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 6px;
+            }
+
+            .input-area {
+                flex-direction: column;
+            }
+
+            .input-area button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .chat-messages {
+                padding: 16px;
+            }
+
+            .settings-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!-- 17. هيكل الصفحة (HTML)                                      -->
+    <!-- ============================================================ -->
+
+    <div class="container">
+        <!-- رأس الصفحة -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <span>Rewind AI</span>
+            </div>
+            <div class="header-actions">
+                <span class="status-badge">
+                    <span class="dot"></span>
+                    <span id="statusText">جاهز</span>
+                    <span id="pingDisplay" style="font-size:11px;color:var(--text-secondary);"></span>
+                </span>
+                <select id="themeSelector">
+                    <option value="dark">🌙 داكن</option>
+                    <option value="light">☀️ فاتح</option>
+                    <option value="blue">🔵 أزرق</option>
+                    <option value="green">🟢 أخضر</option>
+                    <option value="purple">🟣 بنفسجي</option>
+                </select>
+                <button id="focusBtn"><i class="fas fa-expand"></i></button>
+                <button id="exportChatBtn"><i class="fas fa-download"></i></button>
+            </div>
+        </header>
+
+        <!-- المحتوى الرئيسي -->
+        <div class="main" id="mainLayout">
+            <!-- الشريط الجانبي -->
+            <aside class="sidebar" id="sidebar">
+                <div>
+                    <h3><i class="fas fa-cubes"></i> النماذج</h3>
+                    <div id="modelList"></div>
+                </div>
+                <div class="token-area">
+                    <h3><i class="fas fa-key"></i> التوكن</h3>
+                    <input type="text" id="tokenInput" placeholder="أدخل التوكن (اختياري)">
+                    <button id="setTokenBtn">تعيين التوكن</button>
+                    <button class="link-btn" id="recreateBtn">إنشاء حساب جديد</button>
+                </div>
+            </aside>
+
+            <!-- منطقة المحادثة -->
+            <section class="chat-area">
+                <!-- شريط الإعدادات (البرومت والسرعة) -->
+                <div class="settings-row">
+                    <input type="text" id="systemPromptInput" placeholder="برومت مخصص (اختياري)" />
+                    <label>
+                        <i class="fas fa-tachometer-alt"></i> السرعة
+                        <select id="speedSelector">
+                            <option value="1">1x</option>
+                            <option value="2">2x</option>
+                            <option value="3" selected>3x</option>
+                            <option value="4">4x</option>
+                            <option value="5">5x</option>
+                        </select>
+                    </label>
+                    <button id="applyPromptsBtn"><i class="fas fa-sync-alt"></i> دمج البروميدات</button>
+                </div>
+
+                <!-- عرض الرسائل -->
+                <div class="chat-messages" id="chatMessages">
+                    <div class="system-msg">👋 مرحباً! اختر نموذجاً، وسيتم دمج جميع البروميدات للحصول على أفضل إجابة.</div>
+                </div>
+
+                <!-- مؤشر الكتابة -->
+                <div class="typing-indicator" id="typingIndicator">
+                    <span class="text">يكتب</span>
+                    <span class="dots"><span></span><span></span><span></span></span>
+                </div>
+
+                <!-- حقل الإدخال والأزرار -->
+                <div class="input-area">
+                    <input type="text" id="userInput" placeholder="اكتب رسالتك..." />
+                    <button id="sendBtn"><i class="fas fa-paper-plane"></i> إرسال</button>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 18. المنطق البرمجي (JavaScript)                              -->
+    <!-- ============================================================ -->
+
+    <script>
+        /**
+         * ============================================================
+         * 1. تعريف النماذج (MODELS)
+         * تحتوي على جميع النماذج المتاحة مع أسمائها والبادئة الخاصة
+         * بكل مزود خدمة.
+         * ============================================================
+         */
+        const MODELS = {
+            '1': { name: 'deepseek-v4-flash', prefix: 'deepseek/' },
+            '2': { name: 'deepseek-v4-pro', prefix: 'deepseek/' },
+            '3': { name: 'deepseek-r1', prefix: 'deepseek/' },
+            '4': { name: 'deepseek-v3.2', prefix: 'deepseek/' },
+            '5': { name: 'kimi-k2.5', prefix: 'moonshotai/' },
+            '6': { name: 'kimi-k2.6', prefix: 'moonshotai/' },
+            '7': { name: 'gemini-3-flash-preview', prefix: 'google/' },
+            '8': { name: 'gemini-3.1-flash-lite', prefix: 'google/' },
+            '9': { name: 'gemini-2.5-pro', prefix: 'google/' },
+            '10': { name: 'qwen3-235b-a22b', prefix: 'qwen/' },
+            '11': { name: 'qwen3-coder-480b-a35b', prefix: 'qwen/' },
+            '12': { name: 'qwen3-vl-235b-a22b-instruct', prefix: 'qwen/' },
+            '13': { name: 'grok-4.3', prefix: 'xai/' }
+        };
+
+        /**
+         * ============================================================
+         * 2. تعريف الثيمات (THEMES)
+         * تحتوي على 5 أنماط ألوان مختلفة مع إمكانية التبديل بينها.
+         * ============================================================
+         */
+        const THEMES = {
+            dark: {
+                '--bg-primary': '#0a0e17',
+                '--bg-secondary': '#111a28',
+                '--bg-card': 'rgba(255,255,255,0.03)',
+                '--border-color': 'rgba(255,255,255,0.06)',
+                '--text-primary': '#e8edf5',
+                '--text-secondary': '#94a3b8',
+                '--accent-1': '#60a5fa',
+                '--accent-2': '#a78bfa',
+                '--accent-glow': 'rgba(96,165,250,0.2)',
+                '--shadow': 'rgba(0,0,0,0.6)'
+            },
+            light: {
+                '--bg-primary': '#f1f5f9',
+                '--bg-secondary': '#ffffff',
+                '--bg-card': 'rgba(0,0,0,0.02)',
+                '--border-color': 'rgba(0,0,0,0.08)',
+                '--text-primary': '#0f172a',
+                '--text-secondary': '#334155',
+                '--accent-1': '#3b82f6',
+                '--accent-2': '#8b5cf6',
+                '--accent-glow': 'rgba(59,130,246,0.15)',
+                '--shadow': 'rgba(0,0,0,0.08)'
+            },
+            blue: {
+                '--bg-primary': '#0a1628',
+                '--bg-secondary': '#0f1f36',
+                '--bg-card': 'rgba(59,130,246,0.04)',
+                '--border-color': 'rgba(59,130,246,0.10)',
+                '--text-primary': '#d0e4ff',
+                '--text-secondary': '#90b4e0',
+                '--accent-1': '#3b82f6',
+                '--accent-2': '#60a5fa',
+                '--accent-glow': 'rgba(59,130,246,0.25)',
+                '--shadow': 'rgba(0,20,40,0.8)'
+            },
+            green: {
+                '--bg-primary': '#0a1a0a',
+                '--bg-secondary': '#0f240f',
+                '--bg-card': 'rgba(74,222,128,0.04)',
+                '--border-color': 'rgba(74,222,128,0.10)',
+                '--text-primary': '#d0e8d0',
+                '--text-secondary': '#90b890',
+                '--accent-1': '#4ade80',
+                '--accent-2': '#34d399',
+                '--accent-glow': 'rgba(74,222,128,0.25)',
+                '--shadow': 'rgba(0,20,0,0.8)'
+            },
+            purple: {
+                '--bg-primary': '#150a1a',
+                '--bg-secondary': '#1f0f28',
+                '--bg-card': 'rgba(167,139,250,0.04)',
+                '--border-color': 'rgba(167,139,250,0.10)',
+                '--text-primary': '#e8d0f0',
+                '--text-secondary': '#b890c8',
+                '--accent-1': '#a78bfa',
+                '--accent-2': '#c084fc',
+                '--accent-glow': 'rgba(167,139,250,0.25)',
+                '--shadow': 'rgba(30,0,40,0.8)'
+            }
+        };
+
+        /**
+         * ============================================================
+         * 3. دوال التحكم بالثيمات
+         * ============================================================
+         */
+        function applyTheme(name) {
+            const t = THEMES[name];
+            if (!t) return;
+            const root = document.documentElement;
+            for (const [key, val] of Object.entries(t)) {
+                root.style.setProperty(key, val);
+            }
+            localStorage.setItem('rewind_theme', name);
+        }
+
+        // تحميل الثيم المحفوظ مسبقاً
+        const savedTheme = localStorage.getItem('rewind_theme') || 'dark';
+        document.getElementById('themeSelector').value = savedTheme;
+        applyTheme(savedTheme);
+        document.getElementById('themeSelector').addEventListener('change', e => applyTheme(e.target.value));
+
+        /**
+         * ============================================================
+         * 4. الإشارات إلى عناصر DOM
+         * ============================================================
+         */
+        const modelList = document.getElementById('modelList');
+        const chatMessages = document.getElementById('chatMessages');
+        const userInput = document.getElementById('userInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const statusText = document.getElementById('statusText');
+        const pingDisplay = document.getElementById('pingDisplay');
+        const focusBtn = document.getElementById('focusBtn');
+        const mainLayout = document.getElementById('mainLayout');
+        const typingIndicator = document.getElementById('typingIndicator');
+        const tokenInput = document.getElementById('tokenInput');
+        const setTokenBtn = document.getElementById('setTokenBtn');
+        const recreateBtn = document.getElementById('recreateBtn');
+        const systemPromptInput = document.getElementById('systemPromptInput');
+        const speedSelector = document.getElementById('speedSelector');
+        const applyPromptsBtn = document.getElementById('applyPromptsBtn');
+        const exportChatBtn = document.getElementById('exportChatBtn');
+
+        let selectedModelKey = localStorage.getItem('rewind_model') || '1';
+        let accountData = null;
+        let isProcessing = false;
+        let messagesHistory = [];
+        let focusMode = false;
+        let manualToken = localStorage.getItem('rewind_manual_token') || '';
+        let typingSpeed = 3;
+
+        if (manualToken) tokenInput.value = manualToken;
+
+        /**
+         * ============================================================
+         * 5. وضع التركيز (Focus Mode)
+         * ============================================================
+         */
+        focusBtn.addEventListener('click', () => {
+            focusMode = !focusMode;
+            mainLayout.classList.toggle('focus-mode', focusMode);
+            focusBtn.innerHTML = focusMode ? '<i class="fas fa-compress"></i>' : '<i class="fas fa-expand"></i>';
+        });
+
+        /**
+         * ============================================================
+         * 6. إدارة التوكن
+         * ============================================================
+         */
+        function setToken() {
+            const token = tokenInput.value.trim();
+            if (token) {
+                manualToken = token;
+                localStorage.setItem('rewind_manual_token', token);
+                accountData = null;
+                statusText.textContent = 'توكن يدوي';
+                addSystemMessage('✅ تم تعيين التوكن.');
+            } else {
+                manualToken = '';
+                localStorage.removeItem('rewind_manual_token');
+                accountData = null;
+                statusText.textContent = 'جاهز';
+                addSystemMessage('🔄 تم إلغاء التوكن، سيتم التسجيل تلقائياً.');
+                initAccount();
+            }
+        }
+
+        setTokenBtn.addEventListener('click', setToken);
+        tokenInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') setToken();
+        });
+
+        /**
+         * ============================================================
+         * 7. التحكم بسرعة الرد
+         * ============================================================
+         */
+        speedSelector.addEventListener('change', () => {
+            typingSpeed = parseInt(speedSelector.value);
+        });
+
+        /**
+         * ============================================================
+         * 8. دمج البروميدات (أهم ميزة)
+         * دمج 5 بروميدات مختلفة في برومت واحد شامل.
+         * ============================================================
+         */
+        const PROMPTS_LIST = [
+            'أنت مساعد ذكي ومحترف، أجب بدقة ووضوح.',
+            'أنت مترجم خبير، ترجم النصوص بدقة واحترافية.',
+            'أنت كاتب محتوى مبدع، اكتب نصوصاً جذابة.',
+            'أنت مستشار تقني، قدم حلولاً برمجية متقدمة.',
+            'أنت معلم صبور، اشرح المفاهيم ببساطة.'
+        ];
+
+        function getCombinedPrompt() {
+            // دمج البروميدات في جملة واحدة شاملة
+            const combined = PROMPTS_LIST.join(' و ');
+            return `أنت خبير متعدد المهارات: ${combined}. قدم إجاباتك بأسلوب شامل يجمع بين الدقة والإبداع والوضوح، مع مراعاة السياق وتقديم حلول عملية.`;
+        }
+
+        applyPromptsBtn.addEventListener('click', () => {
+            const combined = getCombinedPrompt();
+            systemPromptInput.value = combined;
+            addSystemMessage('✅ تم دمج جميع البروميدات في برومت واحد شامل.');
+        });
+
+        /**
+         * ============================================================
+         * 9. دوال مساعدة (توليد بيانات عشوائية)
+         * ============================================================
+         */
+        function generateRandomString(l = 8) {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < l; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+        const generateEmail = () => generateRandomString(6) + '@gmail.com';
+        const generatePassword = () => generateRandomString(4) + 'A1' + generateRandomString(4) + 'a';
+
+        /**
+         * ============================================================
+         * 10. إنشاء حساب تلقائي عبر API Rewind
+         * ============================================================
+         */
+        async function createRewindAccount() {
+            const email = generateEmail();
+            const password = generatePassword();
+            const start = performance.now();
+            try {
+                const res = await fetch('https://api.rewind.ai/v1/auth/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const ping = Math.round(performance.now() - start);
+                if (!res.ok) throw new Error(`فشل التسجيل (${res.status})`);
+                const data = await res.json();
+                return { accessToken: data.accessToken, userId: data.user.id, ping };
+            } catch (err) {
+                throw new Error('تعذر إنشاء الحساب. يرجى إدخال التوكن يدوياً.');
+            }
+        }
+
+        async function initAccount() {
+            if (manualToken) {
+                accountData = { accessToken: manualToken, userId: 'manual' };
+                statusText.textContent = 'توكن يدوي';
+                addSystemMessage('✅ باستخدام التوكن اليدوي.');
+                return;
+            }
+            try {
+                statusText.textContent = 'جاري التسجيل...';
+                const result = await createRewindAccount();
+                accountData = result;
+                statusText.textContent = 'متصل';
+                pingDisplay.textContent = `${result.ping}ms`;
+                addSystemMessage('✅ تم إنشاء حساب تلقائي.');
+            } catch (err) {
+                statusText.textContent = 'خطأ';
+                addSystemMessage(`❌ ${err.message}`);
+                addSystemMessage('📌 أدخل التوكن يدوياً في الشريط الجانبي.');
+            }
+        }
+
+        /**
+         * ============================================================
+         * 11. إرسال الرسالة إلى API Rewind (مع تدفق)
+         * ============================================================
+         */
+        async function sendRewindMessage(accessToken, userId, model, messages, onChunk) {
+            const fullModel = model.prefix + model.name;
+            const start = performance.now();
+            const res = await fetch('https://api.rewind.ai/v1/chat/completions/', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                    'x-user-id': userId,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    messages,
+                    model: fullModel,
+                    stream: true,
+                    temperature: 0.7,
+                    max_tokens: 2048
+                })
+            });
+            const ping = Math.round(performance.now() - start);
+            if (!res.ok) throw new Error(`فشل الطلب (${res.status})`);
+
+            const reader = res.body.getReader();
+            const decoder = new TextDecoder('utf-8');
+            let buffer = '',
+                fullResponse = '';
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                buffer += decoder.decode(value, { stream: true });
+                const lines = buffer.split('\n');
+                buffer = lines.pop() || '';
+                for (const line of lines) {
+                    if (!line.trim()) continue;
+                    let dataLine = line;
+                    if (dataLine.startsWith('data: ')) dataLine = dataLine.slice(6);
+                    if (dataLine === '[DONE]') continue;
+                    try {
+                        const parsed = JSON.parse(dataLine);
+                        const content = parsed?.choices?.[0]?.delta?.content;
+                        if (content) {
+                            fullResponse += content;
+                            if (onChunk) onChunk(content);
+                        }
+                    } catch (_) {}
+                }
+            }
+            return { fullResponse, ping };
+        }
+
+        /**
+         * ============================================================
+         * 12. دوال واجهة المستخدم (UI Helpers)
+         * ============================================================
+         */
+        function showTyping() {
+            typingIndicator.style.display = 'flex';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function hideTyping() {
+            typingIndicator.style.display = 'none';
+        }
+
+        function addSystemMessage(text) {
+            const div = document.createElement('div');
+            div.className = 'system-msg';
+            div.textContent = text;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        /**
+         * دالة لإضافة رسالة جديدة (نصية) مع أزرار النسخ والقراءة.
+         */
+        function addMessage(role, content) {
+            const div = document.createElement('div');
+            div.className = `message ${role}`;
+            const avatar = document.createElement('div');
+            avatar.className = 'avatar';
+            avatar.innerHTML = role === 'user' ? '<i class="fas fa-user"></i>' : '<i class="fas fa-robot"></i>';
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+
+            // تنسيق النص مع دعم الكود البرمجي
+            const formatted = formatMessageWithCode(content);
+            bubble.appendChild(formatted);
+
+            // إضافة التوقيت
+            const time = document.createElement('div');
+            time.className = 'time';
+            time.textContent = new Date().toLocaleTimeString();
+            bubble.appendChild(time);
+
+            // أزرار الإجراءات (نسخ وقراءة)
+            const actions = document.createElement('div');
+            actions.className = 'actions';
+
+            // زر النسخ
+            const copyBtn = document.createElement('button');
+            copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
+            copyBtn.title = 'نسخ النص';
+            copyBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(content).then(() => {
+                    copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+                    setTimeout(() => copyBtn.innerHTML = '<i class="fas fa-copy"></i>', 1500);
+                }).catch(() => alert('فشل النسخ'));
+            });
+            actions.appendChild(copyBtn);
+
+            // زر القراءة الصوتية
+            const readBtn = document.createElement('button');
+            readBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+            readBtn.title = 'استماع إلى النص';
+            readBtn.addEventListener('click', () => {
+                if ('speechSynthesis' in window) {
+                    const utterance = new SpeechSynthesisUtterance(content);
+                    utterance.lang = 'ar';
+                    utterance.rate = 0.9;
+                    speechSynthesis.speak(utterance);
+                } else {
+                    alert('متصفحك لا يدعم خاصية القراءة الصوتية.');
+                }
+            });
+            actions.appendChild(readBtn);
+
+            bubble.appendChild(actions);
+            div.appendChild(avatar);
+            div.appendChild(bubble);
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // حفظ الرسالة في التاريخ
+            messagesHistory.push({ role, content, timestamp: Date.now() });
+            return bubble;
+        }
+
+        /**
+         * دالة لتنسيق النص واكتشاف الكتل البرمجية (```).
+         */
+        function formatMessageWithCode(text) {
+            const container = document.createElement('div');
+            const parts = text.split(/(```[\s\S]*?```)/g);
+            for (const part of parts) {
+                if (part.startsWith('```') && part.endsWith('```')) {
+                    // استخراج الكود مع معرفة اللغة
+                    let codeContent = part.slice(3, -3).trim();
+                    let lang = 'code',
+                        code = codeContent;
+                    const lines = codeContent.split('\n');
+                    if (lines.length > 0 && lines[0].match(/^[a-zA-Z]+$/)) {
+                        lang = lines[0];
+                        code = lines.slice(1).join('\n');
+                    }
+                    // إنشاء كتلة الكود
+                    const block = document.createElement('div');
+                    block.className = 'code-block';
+                    const header = document.createElement('div');
+                    header.className = 'code-header';
+                    const langSpan = document.createElement('span');
+                    langSpan.textContent = lang;
+                    header.appendChild(langSpan);
+                    const copyBtn = document.createElement('button');
+                    copyBtn.className = 'copy-code-btn';
+                    copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
+                    copyBtn.addEventListener('click', () => {
+                        navigator.clipboard.writeText(code).then(() => {
+                            copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+                            setTimeout(() => copyBtn.innerHTML = '<i class="fas fa-copy"></i>', 1500);
+                        }).catch(() => alert('فشل النسخ'));
+                    });
+                    header.appendChild(copyBtn);
+                    block.appendChild(header);
+                    const pre = document.createElement('pre');
+                    pre.textContent = code;
+                    block.appendChild(pre);
+                    container.appendChild(block);
+                } else {
+                    // نص عادي
+                    const textNode = document.createElement('span');
+                    textNode.textContent = part;
+                    container.appendChild(textNode);
+                }
+            }
+            return container;
+        }
+
+        /**
+         * دالة لتحديث محتوى الفقاعة أثناء التدفق.
+         */
+        function updateBubbleContent(bubble, newContent) {
+            bubble.innerHTML = '';
+            const formatted = formatMessageWithCode(newContent);
+            bubble.appendChild(formatted);
+            const time = document.createElement('div');
+            time.className = 'time';
+            time.textContent = new Date().toLocaleTimeString();
+            bubble.appendChild(time);
+
+            // إعادة إضافة الأزرار
+            const actions = document.createElement('div');
+            actions.className = 'actions';
+
+            const copyBtn = document.createElement('button');
+            copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
+            copyBtn.title = 'نسخ النص';
+            copyBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(newContent).then(() => {
+                    copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+                    setTimeout(() => copyBtn.innerHTML = '<i class="fas fa-copy"></i>', 1500);
+                }).catch(() => alert('فشل النسخ'));
+            });
+            actions.appendChild(copyBtn);
+
+            const readBtn = document.createElement('button');
+            readBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+            readBtn.title = 'استماع إلى النص';
+            readBtn.addEventListener('click', () => {
+                if ('speechSynthesis' in window) {
+                    const utterance = new SpeechSynthesisUtterance(newContent);
+                    utterance.lang = 'ar';
+                    utterance.rate = 0.9;
+                    speechSynthesis.speak(utterance);
+                } else {
+                    alert('متصفحك لا يدعم خاصية القراءة الصوتية.');
+                }
+            });
+            actions.appendChild(readBtn);
+
+            bubble.appendChild(actions);
+        }
+
+        /**
+         * ============================================================
+         * 13. عرض النماذج في الشريط الجانبي
+         * ============================================================
+         */
+        function renderModels() {
+            // تجميع النماذج حسب البادئة (المزود)
+            const groups = {};
+            Object.keys(MODELS).forEach(key => {
+                const m = MODELS[key];
+                const prefix = m.prefix.replace('/', '');
+                if (!groups[prefix]) groups[prefix] = [];
+                groups[prefix].push({ key, ...m });
+            });
+
+            modelList.innerHTML = '';
+            Object.keys(groups).forEach(groupName => {
+                const groupDiv = document.createElement('div');
+                groupDiv.className = 'model-group';
+                const label = document.createElement('div');
+                label.className = 'group-label';
+                label.textContent = groupName.toUpperCase();
+                groupDiv.appendChild(label);
+
+                groups[groupName].forEach(m => {
+                    const btn = document.createElement('button');
+                    btn.className = 'model-btn';
+                    if (m.key === selectedModelKey) btn.classList.add('active');
+                    btn.dataset.key = m.key;
+                    btn.innerHTML = `${m.name} <span class="badge">${m.prefix}</span>`;
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.model-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        selectedModelKey = m.key;
+                        localStorage.setItem('rewind_model', selectedModelKey);
+                    });
+                    groupDiv.appendChild(btn);
+                });
+                modelList.appendChild(groupDiv);
+            });
+        }
+        renderModels();
+
+        /**
+         * ============================================================
+         * 14. تصدير المحادثة كملف نصي
+         * ============================================================
+         */
+        exportChatBtn.addEventListener('click', () => {
+            if (messagesHistory.length === 0) {
+                alert('لا توجد رسائل لتصديرها.');
+                return;
+            }
+            let text = 'محادثة Rewind AI\n';
+            text += `تاريخ: ${new Date().toLocaleString()}\n`;
+            text += '='.repeat(60) + '\n\n';
+            for (const msg of messagesHistory) {
+                const role = msg.role === 'user' ? 'أنت' : 'الذكاء الاصطناعي';
+                text += `${role} (${new Date(msg.timestamp).toLocaleTimeString()}):\n${msg.content}\n\n`;
+            }
+            const blob = new Blob([text], { type: 'text/plain' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `chat_${new Date().toISOString().slice(0, 10)}.txt`;
+            a.click();
+            URL.revokeObjectURL(a.href);
+        });
+
+        /**
+         * ============================================================
+         * 15. إرسال الرسالة (الدالة الرئيسية)
+         * ============================================================
+         */
+        async function sendMessage() {
+            const text = userInput.value.trim();
+            if (!text || isProcessing) return;
+
+            // التحقق من وجود حساب
+            if (!accountData) {
+                if (manualToken) {
+                    accountData = { accessToken: manualToken, userId: 'manual' };
+                } else {
+                    try {
+                        await initAccount();
+                        if (!accountData) {
+                            addSystemMessage('❌ يرجى إدخال التوكن يدوياً.');
+                            return;
+                        }
+                    } catch (err) {
+                        addSystemMessage(`❌ ${err.message}`);
+                        return;
+                    }
+                }
+            }
+
+            isProcessing = true;
+            sendBtn.disabled = true;
+            sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري...';
+            showTyping();
+
+            // إضافة رسالة المستخدم
+            addMessage('user', text);
+            userInput.value = '';
+            userInput.focus();
+
+            // تحديد البرومت (مدمج أو مخصص)
+            let systemPrompt = systemPromptInput.value.trim();
+            if (!systemPrompt) {
+                systemPrompt = getCombinedPrompt(); // دمج تلقائي
+            }
+
+            const messages = [];
+            if (systemPrompt) messages.push({ role: 'system', content: systemPrompt });
+            messages.push({ role: 'user', content: text });
+
+            // إنشاء فقاعة البوت فارغة
+            const botBubble = addMessage('bot', '...');
+
+            try {
+                const model = MODELS[selectedModelKey];
+                if (!model) throw new Error('النموذج غير موجود');
+
+                let fullReply = '';
+                const { fullResponse, ping } = await sendRewindMessage(
+                    accountData.accessToken,
+                    accountData.userId,
+                    model,
+                    messages,
+                    (chunk) => {
+                        fullReply += chunk;
+                        updateBubbleContent(botBubble, fullReply);
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }
+                );
+
+                pingDisplay.textContent = `${ping}ms`;
+                hideTyping();
+
+                if (!fullReply) {
+                    updateBubbleContent(botBubble, '⚠️ لم يتم استلام رد.');
+                } else {
+                    // تحديث آخر رسالة في التاريخ
+                    const lastMsg = messagesHistory[messagesHistory.length - 1];
+                    if (lastMsg && lastMsg.role === 'bot') {
+                        lastMsg.content = fullReply;
+                        lastMsg.timestamp = Date.now();
+                    }
+                }
+            } catch (err) {
+                hideTyping();
+                updateBubbleContent(botBubble, `❌ خطأ: ${err.message}`);
+            } finally {
+                isProcessing = false;
+                sendBtn.disabled = false;
+                sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال';
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        }
+
+        /**
+         * ============================================================
+         * 16. ربط الأحداث (Event Listeners)
+         * ============================================================
+         */
+        sendBtn.addEventListener('click', sendMessage);
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // إعادة إنشاء الحساب
+        recreateBtn.addEventListener('click', async () => {
+            if (!confirm('إنشاء حساب جديد؟')) return;
+            manualToken = '';
+            tokenInput.value = '';
+            localStorage.removeItem('rewind_manual_token');
+            accountData = null;
+            await initAccount();
+        });
+
+        /**
+         * ============================================================
+         * 17. تهيئة التطبيق (Initialization)
+         * ============================================================
+         */
+        async function initApp() {
+            if (manualToken) {
+                accountData = { accessToken: manualToken, userId: 'manual' };
+                statusText.textContent = 'توكن يدوي';
+                addSystemMessage('✅ باستخدام التوكن اليدوي.');
+            } else {
+                await initAccount();
+            }
+            // تعيين البرومت المدمج افتراضياً
+            systemPromptInput.value = getCombinedPrompt();
+            addSystemMessage('✅ تم دمج جميع البروميدات تلقائياً للحصول على أفضل نتيجة.');
+        }
+
+        initApp();
+
+        // طباعة رسالة تأكيد في وحدة التحكم
+        console.log('🚀 Rewind AI – إصدار متطور مع بروميدات متكاملة');
+        console.log('تم دمج جميع البروميدات في برومت واحد شامل.');
+        console.log('يمكنك الآن اختيار النموذج والبدء في المحادثة.');
+    </script>
+
+</body>
+</html>
