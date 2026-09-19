@@ -1,1555 +1,1915 @@
 <!DOCTYPE html>
-<html lang="ar" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rewind AI – واجهة ذكاء اصطناعي متطورة</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>تيك توك داونلودر - برو</title>
     <style>
-        /* ============================================================ */
-        /* 1. التصميم الأساسي (Root Variables)                         */
-        /* ============================================================ */
-        :root {
-            --bg-primary: #0a0e17;
-            --bg-secondary: #111a28;
-            --bg-card: rgba(255, 255, 255, 0.03);
-            --border-color: rgba(255, 255, 255, 0.06);
-            --text-primary: #e8edf5;
-            --text-secondary: #94a3b8;
-            --accent-1: #60a5fa;
-            --accent-2: #a78bfa;
-            --accent-glow: rgba(96, 165, 250, 0.2);
-            --shadow: rgba(0, 0, 0, 0.6);
-            --radius: 20px;
-            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* ============================================================ */
-        /* 2. إعادة تعيين الأنماط العامة                                */
-        /* ============================================================ */
+        /* ===== RESET & BASE ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
             min-height: 100vh;
+            background: radial-gradient(circle at 10% 20%, #0f0c29 0%, #302b63 50%, #24243e 100%);
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 16px;
-            transition: background var(--transition), color var(--transition);
-            /* خلفية متحركة باستخدام التدرجات */
-            background-image:
-                radial-gradient(ellipse at 20% 50%, rgba(96, 165, 250, 0.08) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 50%, rgba(167, 139, 250, 0.08) 0%, transparent 60%),
-                radial-gradient(ellipse at 50% 0%, rgba(96, 165, 250, 0.04) 0%, transparent 40%);
-            background-attachment: fixed;
+            padding: 20px;
+            direction: rtl;
         }
 
-        /* ============================================================ */
-        /* 3. الحاوية الرئيسية                                           */
-        /* ============================================================ */
-        .container {
-            width: 100%;
-            max-width: 1400px;
-            background: var(--bg-secondary);
-            border-radius: var(--radius);
-            border: 1px solid var(--border-color);
-            box-shadow: 0 30px 80px var(--shadow);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            height: 92vh;
-            max-height: 960px;
-            transition: background var(--transition), border-color var(--transition);
-            backdrop-filter: blur(2px);
+        /* خلفية متحركة أكثر حيوية */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 70% 30%, rgba(255, 0, 150, 0.08) 0%, transparent 60%),
+                radial-gradient(circle at 30% 70%, rgba(0, 200, 255, 0.08) 0%, transparent 60%),
+                radial-gradient(circle at 50% 50%, rgba(255, 200, 0, 0.04) 0%, transparent 50%);
+            animation: aurora 12s ease-in-out infinite alternate;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes aurora {
+            0% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.6;
+            }
+            100% {
+                transform: scale(1.2) rotate(5deg);
+                opacity: 1;
+            }
+        }
+
+        /* ===== الحاوية الرئيسية ===== */
+        .app-wrapper {
             position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 48px;
+            padding: 28px 32px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
         }
 
-        /* ============================================================ */
-        /* 4. رأس الصفحة (Header)                                       */
-        /* ============================================================ */
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 28px;
-            background: var(--bg-card);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
-            flex-shrink: 0;
+        /* ===== شاشة تسجيل الدخول ===== */
+        #loginScreen {
+            animation: fadeSlide 0.6s ease;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 10px 0;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 24px;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+        #loginScreen .brand {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        #loginScreen .brand h1 {
+            font-size: 36px;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        #loginScreen .brand h1 span {
+            background: linear-gradient(135deg, #ff0050, #00d4ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .logo i {
-            -webkit-text-fill-color: var(--accent-1);
-            font-size: 28px;
+        #loginScreen .brand p {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 16px;
+            margin-top: 6px;
         }
 
-        .header-actions {
+        .login-tabs {
             display: flex;
-            gap: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .header-actions button,
-        .header-actions select {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            padding: 6px 16px;
-            border-radius: 40px;
-            cursor: pointer;
-            font-size: 13px;
-            transition: all var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-family: inherit;
-            backdrop-filter: blur(8px);
-        }
-
-        .header-actions button:hover,
-        .header-actions select:hover {
-            background: rgba(255, 255, 255, 0.06);
-            color: #fff;
-            border-color: var(--accent-1);
-        }
-
-        .status-badge {
-            font-size: 13px;
-            color: var(--text-secondary);
-            background: var(--bg-card);
-            padding: 6px 16px;
-            border-radius: 40px;
-            display: flex;
-            align-items: center;
             gap: 8px;
-            border: 1px solid var(--border-color);
-            backdrop-filter: blur(8px);
-        }
-
-        .status-badge .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #4ade80;
-            display: inline-block;
-            animation: pulse-dot 1.5s ease-in-out infinite;
-        }
-
-        @keyframes pulse-dot {
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.5;
-                transform: scale(0.8);
-            }
-        }
-
-        /* ============================================================ */
-        /* 5. التخطيط الرئيسي (Main)                                    */
-        /* ============================================================ */
-        .main {
-            display: flex;
-            flex: 1;
-            overflow: hidden;
-        }
-
-        /* ============================================================ */
-        /* 6. الشريط الجانبي (Sidebar)                                  */
-        /* ============================================================ */
-        .sidebar {
-            width: 260px;
-            background: var(--bg-card);
-            backdrop-filter: blur(12px);
-            border-right: 1px solid var(--border-color);
-            padding: 20px 16px;
-            overflow-y: auto;
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            transition: all var(--transition);
-        }
-
-        .sidebar h3 {
-            font-size: 12px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 6px;
-        }
-
-        .model-group .group-label {
-            font-size: 10px;
-            color: var(--text-secondary);
-            padding: 4px 0;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .model-btn {
-            display: block;
-            width: 100%;
-            text-align: left;
-            background: transparent;
-            border: none;
-            color: var(--text-secondary);
-            padding: 6px 12px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all var(--transition);
-            font-family: inherit;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .model-btn:hover {
-            background: rgba(255, 255, 255, 0.06);
-            color: #fff;
-        }
-
-        .model-btn.active {
-            background: rgba(96, 165, 250, 0.12);
-            color: var(--accent-1);
-            border-left: 3px solid var(--accent-1);
-        }
-
-        .model-btn .badge {
-            font-size: 10px;
-            background: rgba(255, 255, 255, 0.06);
-            padding: 2px 10px;
-            border-radius: 20px;
-            color: var(--text-secondary);
-            margin-left: auto;
-        }
-
-        /* ============================================================ */
-        /* 7. منطقة التوكن (Token)                                      */
-        /* ============================================================ */
-        .token-area {
-            border-top: 1px solid var(--border-color);
-            padding-top: 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .token-area input {
             background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            padding: 8px 14px;
-            border-radius: 30px;
-            font-size: 13px;
-            outline: none;
-            font-family: inherit;
-            transition: all var(--transition);
+            border-radius: 60px;
+            padding: 4px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
 
-        .token-area input:focus {
-            border-color: var(--accent-1);
-        }
-
-        .token-area button {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            padding: 6px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 13px;
-            font-family: inherit;
-            transition: all var(--transition);
-        }
-
-        .token-area button:hover {
-            background: rgba(255, 255, 255, 0.06);
-            color: #fff;
-            border-color: var(--accent-1);
-        }
-
-        .token-area .link-btn {
-            background: transparent;
+        .login-tabs button {
+            flex: 1;
+            padding: 10px 0;
             border: none;
-            color: var(--text-secondary);
-            font-size: 12px;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 40px;
             cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-tabs button.active {
+            background: rgba(255, 0, 80, 0.15);
+            color: #fff;
+            box-shadow: 0 0 20px rgba(255, 0, 80, 0.1);
+        }
+
+        .login-tabs button:hover:not(.active) {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border-radius: 60px;
+            border: none;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 16px;
+            outline: 2px solid transparent;
+            transition: 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .login-form input:focus {
+            outline-color: #ff0050;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 0, 80, 0.2);
+        }
+
+        .login-form input::placeholder {
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+        .login-form .btn-primary {
+            width: 100%;
+            padding: 14px;
+            border-radius: 60px;
+            border: none;
+            background: linear-gradient(135deg, #ff0050, #ff2d75);
+            color: #fff;
+            font-weight: 700;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 8px 30px rgba(255, 0, 80, 0.25);
+            margin-top: 12px;
+        }
+
+        .login-form .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 40px rgba(255, 0, 80, 0.4);
+        }
+
+        .login-form .guest-btn {
+            background: rgba(255, 255, 255, 0.05) !important;
+            color: #aaa !important;
+            box-shadow: none !important;
+            margin-top: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .login-form .guest-btn:hover {
+            background: rgba(255, 255, 255, 0.1) !important;
+        }
+
+        .login-error {
+            color: #e17055;
+            font-size: 14px;
+            margin-top: 8px;
             text-align: center;
         }
 
-        .token-area .link-btn:hover {
-            color: var(--accent-1);
-        }
-
-        /* ============================================================ */
-        /* 8. منطقة المحادثة (Chat Area)                               */
-        /* ============================================================ */
-        .chat-area {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            background: transparent;
-            min-width: 0;
-        }
-
-        /* ============================================================ */
-        /* 9. شريط الإعدادات (Settings Row)                           */
-        /* ============================================================ */
-        .settings-row {
-            display: flex;
-            gap: 12px;
-            padding: 8px 28px;
-            flex-wrap: wrap;
-            align-items: center;
-            background: var(--bg-card);
-            border-bottom: 1px solid var(--border-color);
-            backdrop-filter: blur(8px);
-        }
-
-        .settings-row input {
-            flex: 2;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            padding: 6px 16px;
-            border-radius: 30px;
+        .login-success {
+            color: #00b894;
             font-size: 14px;
-            outline: none;
-            min-width: 150px;
-            transition: all var(--transition);
+            margin-top: 8px;
+            text-align: center;
         }
 
-        .settings-row input:focus {
-            border-color: var(--accent-1);
+        .hidden {
+            display: none !important;
         }
 
-        .settings-row label {
-            font-size: 13px;
-            color: var(--text-secondary);
+        /* ===== القوائم العلوية (أفقي) ===== */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            margin-bottom: 24px;
+        }
+
+        .top-bar .logo {
+            color: #fff;
+            font-size: 24px;
+            font-weight: 700;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .settings-row select {
+        .top-bar .logo span {
+            background: linear-gradient(135deg, #ff0050, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .top-bar .user-badge {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
             background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            padding: 6px 14px;
-            border-radius: 30px;
-            font-size: 13px;
-            outline: none;
+            padding: 6px 18px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .top-bar .nav-tabs {
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 4px;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            flex-wrap: wrap;
+        }
+
+        .top-bar .nav-tabs button {
+            padding: 8px 22px;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 40px;
             cursor: pointer;
-            font-family: inherit;
+            transition: 0.3s;
         }
 
-        .settings-row select:focus {
-            border-color: var(--accent-1);
-        }
-
-        .settings-row button {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            padding: 6px 16px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 13px;
-            font-family: inherit;
-            transition: all var(--transition);
-        }
-
-        .settings-row button:hover {
-            background: rgba(255, 255, 255, 0.06);
+        .top-bar .nav-tabs button.active {
+            background: rgba(255, 0, 80, 0.12);
             color: #fff;
-            border-color: var(--accent-1);
         }
 
-        /* ============================================================ */
-        /* 10. رسائل المحادثة (Messages)                               */
-        /* ============================================================ */
-        .chat-messages {
+        .top-bar .nav-tabs button:hover:not(.active) {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .top-bar .logout-btn {
+            background: rgba(255, 0, 0, 0.15);
+            border: none;
+            color: #fff;
+            padding: 6px 20px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: 0.2s;
+            border: 1px solid rgba(255, 0, 0, 0.1);
+        }
+
+        .top-bar .logout-btn:hover {
+            background: rgba(255, 0, 0, 0.3);
+        }
+
+        /* ===== المحتوى ===== */
+        .tab-content {
+            display: none;
+            animation: fadeSlide 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== تبويب الرئيسية ===== */
+        .stats-grid-horizontal {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 30px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            padding: 16px 24px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .stats-grid-horizontal .stat-item {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stats-grid-horizontal .stat-item strong {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .input-group input {
             flex: 1;
+            min-width: 200px;
+            padding: 14px 24px;
+            border-radius: 60px;
+            border: none;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 16px;
+            outline: 2px solid transparent;
+            transition: 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .input-group input:focus {
+            outline-color: #ff0050;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+        .btn-download {
+            padding: 14px 36px;
+            border-radius: 60px;
+            border: none;
+            background: linear-gradient(135deg, #ff0050, #ff2d75);
+            color: #fff;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 8px 30px rgba(255, 0, 80, 0.2);
+            white-space: nowrap;
+        }
+
+        .btn-download:hover {
+            transform: scale(1.04);
+            box-shadow: 0 12px 40px rgba(255, 0, 80, 0.35);
+        }
+
+        /* ===== نتيجة التحميل ===== */
+        .result-card {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 28px;
+            padding: 24px;
+            margin-top: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            display: none;
+            animation: fadeSlide 0.5s ease;
+        }
+
+        .result-card.active {
+            display: block;
+        }
+
+        .profile-row {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .avatar-frame {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(135deg, #ff0050, #00d4ff);
+            flex-shrink: 0;
+            box-shadow: 0 0 30px rgba(255, 0, 80, 0.15);
+        }
+
+        .avatar-frame img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #1a1a2e;
+            border: 2px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .profile-info h3 {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .profile-info .region {
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 14px;
+        }
+
+        .stats-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 20px;
+            margin: 12px 0;
+        }
+
+        .stats-row .badge {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 4px 18px;
+            border-radius: 40px;
+            color: #ccc;
+            font-size: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .stats-row .badge strong {
+            color: #fff;
+        }
+
+        .video-title {
+            color: #fff;
+            font-size: 17px;
+            font-weight: 400;
+            margin: 14px 0 16px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        /* ===== حاوية الفيديو مع شريط التقدم ===== */
+        .media-box {
+            position: relative;
+            background: #000;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 14px 0;
+            aspect-ratio: 16 / 9;
+            max-height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .media-box video,
+        .media-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .progress-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.12);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+        }
+
+        .progress-overlay.active {
+            opacity: 1;
+        }
+
+        .progress-overlay .fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff0050, #00d4ff);
+            border-radius: 0 0 20px 20px;
+            transition: width 0.25s ease;
+        }
+
+        .progress-text-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 32px;
+            font-weight: 800;
+            text-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.55);
+            padding: 14px 34px;
+            border-radius: 60px;
+            display: none;
+            z-index: 5;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            direction: ltr;
+            letter-spacing: 1px;
+        }
+
+        .progress-text-center.active {
+            display: block;
+            animation: fadeSlide 0.3s ease;
+        }
+
+        /* ===== أزرار التحميل ===== */
+        .download-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 16px 0 10px;
+        }
+
+        .btn-action {
+            flex: 1;
+            min-width: 130px;
+            text-align: center;
+            padding: 12px 16px;
+            border-radius: 60px;
+            border: none;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-action:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #00b894, #00cec9) !important;
+            box-shadow: 0 4px 20px rgba(0, 206, 201, 0.15);
+        }
+
+        .btn-purple {
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe) !important;
+            box-shadow: 0 4px 20px rgba(108, 92, 231, 0.15);
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #fdcb6e, #f39c12) !important;
+            color: #2d3436 !important;
+            box-shadow: 0 4px 20px rgba(243, 156, 18, 0.15);
+        }
+
+        audio {
+            width: 100%;
+            border-radius: 16px;
+            margin-top: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            height: 40px;
+        }
+
+        /* ===== سطر نسخ سريع ===== */
+        .quick-copy {
+            display: flex;
+            gap: 10px;
+            margin-top: 14px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .quick-copy label {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 14px;
+        }
+
+        .quick-copy input {
+            flex: 1;
+            min-width: 140px;
+            padding: 8px 16px;
+            border-radius: 40px;
+            border: none;
+            background: rgba(255, 255, 255, 0.04);
+            color: #ccc;
+            font-size: 13px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .quick-copy button {
+            background: rgba(255, 255, 255, 0.04);
+            border: none;
+            color: #ccc;
+            padding: 6px 18px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .quick-copy button:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* ===== لوحة المشرف ===== */
+        .admin-panel {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 28px;
+            padding: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .admin-panel h2 {
+            color: #fff;
+            font-weight: 400;
+            font-size: 24px;
+            margin-bottom: 24px;
+        }
+
+        .admin-panel .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 18px;
+            align-items: center;
+        }
+
+        .admin-panel input,
+        .admin-panel textarea {
+            flex: 1;
+            min-width: 160px;
+            padding: 10px 18px;
+            border-radius: 40px;
+            border: none;
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
+            outline: 1px solid rgba(255, 255, 255, 0.03);
+            transition: 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .admin-panel input:focus,
+        .admin-panel textarea:focus {
+            outline-color: #00d4ff;
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .admin-panel textarea {
+            border-radius: 16px;
+            resize: vertical;
+        }
+
+        .btn-sm {
+            padding: 8px 22px;
+            border-radius: 40px;
+            border: none;
+            background: #6c5ce7;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 13px;
+        }
+
+        .btn-sm:hover {
+            transform: scale(1.03);
+            filter: brightness(1.1);
+        }
+
+        .btn-danger {
+            background: #e17055;
+        }
+
+        .admin-panel .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 6px 0;
+        }
+
+        .admin-panel .tag {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            color: #ccc;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .admin-panel .user-entry {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 8px 14px;
+            border-radius: 12px;
+            margin: 4px 0;
+            color: #ddd;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .admin-panel .user-entry .meta {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .admin-panel .scroll-list {
+            max-height: 180px;
             overflow-y: auto;
-            padding: 20px 28px;
+            margin-top: 6px;
+            border-radius: 16px;
+            padding: 4px;
+        }
+
+        .admin-panel .text-muted {
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+        .admin-panel hr {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            margin: 20px 0;
+        }
+
+        /* ===== المطور ===== */
+        .footer-bar {
+            margin-top: 30px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 13px;
+        }
+
+        .footer-bar a {
+            color: #00d4ff;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .footer-bar a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== الإشعارات (Toast) ===== */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 10px;
+            pointer-events: none;
+            width: 90%;
+            max-width: 480px;
         }
 
-        .message {
+        .toast {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(16px);
+            color: #fff;
+            padding: 14px 24px;
+            border-radius: 60px;
+            border-right: 4px solid #ff0050;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            font-size: 15px;
+            font-weight: 500;
+            pointer-events: auto;
+            animation: slideDown 0.4s ease forwards;
             display: flex;
-            gap: 14px;
-            align-items: flex-start;
-            opacity: 0;
-            animation: slideUp 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            align-items: center;
+            gap: 12px;
         }
 
-        .message.user {
-            flex-direction: row-reverse;
+        .toast.success {
+            border-right-color: #00b894;
         }
 
-        @keyframes slideUp {
-            0% {
+        .toast.error {
+            border-right-color: #e17055;
+        }
+
+        .toast.info {
+            border-right-color: #00d4ff;
+        }
+
+        @keyframes slideDown {
+            from {
                 opacity: 0;
-                transform: translateY(12px) scale(0.97);
+                transform: translateY(-30px) scale(0.95);
             }
-            100% {
+            to {
                 opacity: 1;
                 transform: translateY(0) scale(1);
             }
         }
 
-        .message .avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            color: var(--text-primary);
-            font-size: 16px;
-            backdrop-filter: blur(8px);
+        .toast-out {
+            animation: slideUp 0.3s ease forwards;
         }
 
-        .message.user .avatar {
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-            border: none;
-            color: #fff;
-        }
-
-        .message .bubble {
-            background: var(--bg-card);
-            backdrop-filter: blur(12px);
-            padding: 12px 18px;
-            border-radius: 18px;
-            max-width: 80%;
-            line-height: 1.6;
-            word-break: break-word;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-            transition: all var(--transition);
-        }
-
-        .message.user .bubble {
-            background: rgba(96, 165, 250, 0.08);
-            border-color: rgba(96, 165, 250, 0.2);
-        }
-
-        .message .bubble .time {
-            font-size: 11px;
-            color: var(--text-secondary);
-            margin-top: 4px;
-            text-align: right;
-        }
-
-        .message .bubble .actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 6px;
-            justify-content: flex-end;
-        }
-
-        .message .bubble .actions button {
-            background: transparent;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-size: 14px;
-            padding: 2px 8px;
-            border-radius: 20px;
-            transition: all var(--transition);
-        }
-
-        .message .bubble .actions button:hover {
-            background: rgba(255, 255, 255, 0.06);
-            color: #fff;
-        }
-
-        /* ============================================================ */
-        /* 11. عرض الكود البرمجي (Code Block)                         */
-        /* ============================================================ */
-        .code-block {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 12px;
-            margin: 6px 0;
-            padding: 10px 14px 8px 14px;
-            border: 1px solid var(--border-color);
-            overflow-x: auto;
-            backdrop-filter: blur(8px);
-        }
-
-        .code-block pre {
-            font-family: 'Fira Code', monospace;
-            font-size: 13px;
-            color: #c9d1d9;
-            white-space: pre-wrap;
-            word-break: break-all;
-            margin: 0;
-        }
-
-        .code-block .code-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 4px;
-        }
-
-        .code-block .code-header span {
-            font-size: 11px;
-            color: var(--text-secondary);
-            background: rgba(255, 255, 255, 0.04);
-            padding: 1px 10px;
-            border-radius: 20px;
-        }
-
-        .code-block .copy-code-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-size: 13px;
-            padding: 2px 6px;
-            border-radius: 4px;
-            transition: all var(--transition);
-        }
-
-        .code-block .copy-code-btn:hover {
-            background: rgba(255, 255, 255, 0.06);
-            color: #fff;
-        }
-
-        /* ============================================================ */
-        /* 12. رسائل النظام (System Messages)                         */
-        /* ============================================================ */
-        .system-msg {
-            background: var(--bg-card);
-            color: var(--text-secondary);
-            padding: 4px 18px;
-            border-radius: 30px;
-            font-size: 13px;
-            align-self: center;
-            text-align: center;
-            max-width: 90%;
-            margin: 4px 0;
-            border: 1px solid var(--border-color);
-            backdrop-filter: blur(8px);
-            opacity: 0;
-            animation: slideUp 0.35s ease forwards;
-        }
-
-        /* ============================================================ */
-        /* 13. مؤشر الكتابة (Typing Indicator)                        */
-        /* ============================================================ */
-        .typing-indicator {
-            display: none;
-            align-self: flex-start;
-            padding: 8px 18px;
-            background: var(--bg-card);
-            border-radius: 18px;
-            border: 1px solid var(--border-color);
-            gap: 8px;
-            align-items: center;
-            margin-top: 4px;
-            backdrop-filter: blur(8px);
-            animation: typingPulse 1.2s ease-in-out infinite;
-        }
-
-        .typing-indicator .text {
-            font-size: 14px;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        .typing-indicator .dots span {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--accent-1);
-            margin: 0 2px;
-            animation: dotBounce 1.4s infinite both;
-        }
-
-        .typing-indicator .dots span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .typing-indicator .dots span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes dotBounce {
-            0%,
-            60%,
-            100% {
-                transform: translateY(0);
-                opacity: 0.4;
-            }
-            30% {
-                transform: translateY(-8px);
-                opacity: 1;
+        @keyframes slideUp {
+            to {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.95);
             }
         }
 
-        @keyframes typingPulse {
-            0%,
-            100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.7;
-            }
-        }
-
-        /* ============================================================ */
-        /* 14. منطقة الإدخال (Input Area)                             */
-        /* ============================================================ */
-        .input-area {
-            padding: 10px 28px 14px;
-            background: var(--bg-card);
-            border-top: 1px solid var(--border-color);
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            flex-wrap: wrap;
-            backdrop-filter: blur(8px);
-        }
-
-        .input-area input[type="text"] {
-            flex: 1;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            padding: 12px 20px;
-            border-radius: 40px;
-            font-size: 16px;
-            outline: none;
-            transition: all var(--transition);
-            min-width: 160px;
-        }
-
-        .input-area input:focus {
-            border-color: var(--accent-1);
-            box-shadow: 0 0 30px var(--accent-glow);
-        }
-
-        .input-area button {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 40px;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-            color: #fff;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            white-space: nowrap;
-            box-shadow: 0 0 30px var(--accent-glow);
-        }
-
-        .input-area button:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 40px var(--accent-glow);
-        }
-
-        .input-area button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        /* ============================================================ */
-        /* 15. شريط التمرير (Scrollbar)                               */
-        /* ============================================================ */
-        .chat-messages::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .chat-messages::-webkit-scrollbar-thumb {
-            background: var(--accent-1);
-            border-radius: 10px;
-        }
-
-        /* ============================================================ */
-        /* 16. التوافق مع الأجهزة الصغيرة (Responsive)                */
-        /* ============================================================ */
+        /* ===== التجاوب مع الشاشات الصغيرة ===== */
         @media (max-width: 768px) {
-            .sidebar {
-                display: none;
+            .app-wrapper {
+                padding: 18px 16px;
+                border-radius: 32px;
             }
 
-            .header {
+            .top-bar {
                 flex-direction: column;
                 align-items: stretch;
-                gap: 6px;
+                gap: 12px;
             }
 
-            .input-area {
-                flex-direction: column;
+            .top-bar .logo {
+                justify-content: center;
             }
 
-            .input-area button {
+            .top-bar .nav-tabs {
+                justify-content: center;
+            }
+
+            .top-bar .user-badge {
+                text-align: center;
+            }
+
+            .top-bar .logout-btn {
+                width: 100%;
+            }
+
+            .stats-grid-horizontal {
+                justify-content: center;
+                gap: 12px 20px;
+                padding: 14px;
+            }
+
+            .input-group input {
+                min-width: 100%;
+            }
+
+            .btn-download {
                 width: 100%;
                 justify-content: center;
             }
 
-            .chat-messages {
-                padding: 16px;
+            .profile-row {
+                justify-content: center;
+                text-align: center;
             }
 
-            .settings-row {
+            .stats-row {
+                justify-content: center;
+            }
+
+            .media-box {
+                aspect-ratio: 16 / 9;
+            }
+
+            .download-actions .btn-action {
+                min-width: 100px;
+                font-size: 13px;
+                padding: 10px 12px;
+            }
+
+            .admin-panel {
+                padding: 18px;
+            }
+
+            .admin-panel .form-row {
+                flex-direction: column;
+            }
+
+            .admin-panel input,
+            .admin-panel textarea {
+                width: 100%;
+                min-width: unset;
+            }
+
+            .admin-panel .form-row .btn-sm {
+                width: 100%;
+            }
+
+            .quick-copy {
                 flex-direction: column;
                 align-items: stretch;
             }
+
+            .footer-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .app-wrapper {
+                padding: 14px 12px;
+                border-radius: 24px;
+            }
+
+            #loginScreen .brand h1 {
+                font-size: 28px;
+            }
+
+            .login-tabs button {
+                font-size: 13px;
+                padding: 8px 0;
+            }
+
+            .top-bar .logo {
+                font-size: 20px;
+            }
+
+            .top-bar .nav-tabs button {
+                font-size: 13px;
+                padding: 6px 16px;
+            }
+
+            .stats-grid-horizontal .stat-item {
+                font-size: 13px;
+            }
+
+            .stats-grid-horizontal .stat-item strong {
+                font-size: 17px;
+            }
+
+            .result-card {
+                padding: 16px;
+            }
+
+            .avatar-frame {
+                width: 60px;
+                height: 60px;
+            }
+
+            .profile-info h3 {
+                font-size: 17px;
+            }
+
+            .video-title {
+                font-size: 15px;
+            }
+        }
+
+        /* تحسين التمرير */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ff0050;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
 
-    <!-- ============================================================ -->
-    <!-- 17. هيكل الصفحة (HTML)                                      -->
-    <!-- ============================================================ -->
+    <!-- حاوية الإشعارات -->
+    <div class="toast-container" id="toastContainer"></div>
 
-    <div class="container">
-        <!-- رأس الصفحة -->
-        <header class="header">
-            <div class="logo">
-                <i class="fas fa-brain"></i>
-                <span>Rewind AI</span>
+    <div class="app-wrapper">
+
+        <!-- ===== شاشة تسجيل الدخول ===== -->
+        <div id="loginScreen">
+            <div class="brand">
+                <h1>🎥 <span>Downloader</span></h1>
+                <p>تيك توك بلا علامات مائية</p>
             </div>
-            <div class="header-actions">
-                <span class="status-badge">
-                    <span class="dot"></span>
-                    <span id="statusText">جاهز</span>
-                    <span id="pingDisplay" style="font-size:11px;color:var(--text-secondary);"></span>
-                </span>
-                <select id="themeSelector">
-                    <option value="dark">🌙 داكن</option>
-                    <option value="light">☀️ فاتح</option>
-                    <option value="blue">🔵 أزرق</option>
-                    <option value="green">🟢 أخضر</option>
-                    <option value="purple">🟣 بنفسجي</option>
-                </select>
-                <button id="focusBtn"><i class="fas fa-expand"></i></button>
-                <button id="exportChatBtn"><i class="fas fa-download"></i></button>
+
+            <div class="login-tabs">
+                <button class="active" data-login-tab="login">تسجيل دخول</button>
+                <button data-login-tab="register">إنشاء حساب</button>
             </div>
-        </header>
 
-        <!-- المحتوى الرئيسي -->
-        <div class="main" id="mainLayout">
-            <!-- الشريط الجانبي -->
-            <aside class="sidebar" id="sidebar">
-                <div>
-                    <h3><i class="fas fa-cubes"></i> النماذج</h3>
-                    <div id="modelList"></div>
-                </div>
-                <div class="token-area">
-                    <h3><i class="fas fa-key"></i> التوكن</h3>
-                    <input type="text" id="tokenInput" placeholder="أدخل التوكن (اختياري)">
-                    <button id="setTokenBtn">تعيين التوكن</button>
-                    <button class="link-btn" id="recreateBtn">إنشاء حساب جديد</button>
-                </div>
-            </aside>
-
-            <!-- منطقة المحادثة -->
-            <section class="chat-area">
-                <!-- شريط الإعدادات (البرومت والسرعة) -->
-                <div class="settings-row">
-                    <input type="text" id="systemPromptInput" placeholder="برومت مخصص (اختياري)" />
-                    <label>
-                        <i class="fas fa-tachometer-alt"></i> السرعة
-                        <select id="speedSelector">
-                            <option value="1">1x</option>
-                            <option value="2">2x</option>
-                            <option value="3" selected>3x</option>
-                            <option value="4">4x</option>
-                            <option value="5">5x</option>
-                        </select>
-                    </label>
-                    <button id="applyPromptsBtn"><i class="fas fa-sync-alt"></i> دمج البروميدات</button>
+            <form class="login-form" id="loginForm">
+                <!-- نموذج الدخول -->
+                <div id="loginFormFields">
+                    <input type="text" id="usernameInput" placeholder="اسم المستخدم" required>
+                    <input type="password" id="passwordInput" placeholder="كلمة المرور" required>
+                    <button type="submit" class="btn-primary">🚀 دخول</button>
+                    <div id="loginError" class="login-error hidden"></div>
+                    <div id="loginSuccess" class="login-success hidden"></div>
+                    <button type="button" class="btn-primary guest-btn" id="guestLoginBtn">👤 دخول كضيف</button>
                 </div>
 
-                <!-- عرض الرسائل -->
-                <div class="chat-messages" id="chatMessages">
-                    <div class="system-msg">👋 مرحباً! اختر نموذجاً، وسيتم دمج جميع البروميدات للحصول على أفضل إجابة.</div>
+                <!-- نموذج التسجيل -->
+                <div id="registerFormFields" class="hidden">
+                    <input type="text" id="regUsername" placeholder="اسم المستخدم الجديد" required>
+                    <input type="password" id="regPassword" placeholder="كلمة المرور" required>
+                    <input type="password" id="regPasswordConfirm" placeholder="تأكيد كلمة المرور" required>
+                    <button type="button" class="btn-primary" id="registerBtn">📝 إنشاء حساب</button>
+                    <div id="registerError" class="login-error hidden"></div>
+                    <div id="registerSuccess" class="login-success hidden"></div>
                 </div>
-
-                <!-- مؤشر الكتابة -->
-                <div class="typing-indicator" id="typingIndicator">
-                    <span class="text">يكتب</span>
-                    <span class="dots"><span></span><span></span><span></span></span>
-                </div>
-
-                <!-- حقل الإدخال والأزرار -->
-                <div class="input-area">
-                    <input type="text" id="userInput" placeholder="اكتب رسالتك..." />
-                    <button id="sendBtn"><i class="fas fa-paper-plane"></i> إرسال</button>
-                </div>
-            </section>
+            </form>
         </div>
-    </div>
 
-    <!-- ============================================================ -->
-    <!-- 18. المنطق البرمجي (JavaScript)                              -->
-    <!-- ============================================================ -->
+        <!-- ===== الواجهة الرئيسية ===== -->
+        <div id="mainApp" class="hidden">
+
+            <!-- القائمة العلوية الأفقية -->
+            <div class="top-bar">
+                <div class="logo">🎥 <span>Downloader</span></div>
+
+                <div class="user-badge" id="userBadge">👤 ضيف</div>
+
+                <div class="nav-tabs">
+                    <button class="active" data-tab="home">🏠 الرئيسية</button>
+                    <button data-tab="admin" id="adminTabBtn">⚙️ المشرف</button>
+                </div>
+
+                <button class="logout-btn" id="logoutBtn">🚪 خروج</button>
+            </div>
+
+            <!-- ===== تبويب الرئيسية ===== -->
+            <div id="tab-home" class="tab-content active">
+
+                <!-- الإحصائيات -->
+                <div class="stats-grid-horizontal">
+                    <div class="stat-item">👥 المستخدمون: <strong id="userCount">0</strong></div>
+                    <div class="stat-item">📥 إجمالي التحميلات: <strong id="totalDownloads">0</strong></div>
+                    <div class="stat-item">📂 تحميلاتي: <strong id="myDownloadsCount">0</strong></div>
+                </div>
+
+                <!-- حقل الرابط -->
+                <div class="input-group">
+                    <input type="text" id="urlInput" placeholder="ألصق رابط تيك توك هنا ..." dir="ltr">
+                    <button class="btn-download" id="downloadBtn">🔍 تحميل</button>
+                </div>
+
+                <!-- بطاقة النتيجة -->
+                <div class="result-card" id="resultCard">
+                    <div class="profile-row">
+                        <div class="avatar-frame"><img id="avatarImg" src="" alt="Avatar"></div>
+                        <div class="profile-info">
+                            <h3 id="authorName">---</h3>
+                            <div class="region" id="regionInfo">📍 غير معروف</div>
+                        </div>
+                    </div>
+
+                    <div class="stats-row">
+                        <span class="badge">👁️ <strong id="viewsCount">0</strong></span>
+                        <span class="badge">💬 <strong id="commentsCount">0</strong></span>
+                        <span class="badge">🔁 <strong id="sharesCount">0</strong></span>
+                        <span class="badge">⏱️ <strong id="durationSec">0</strong> ث</span>
+                    </div>
+
+                    <div class="video-title" id="videoTitle">عنوان الفيديو</div>
+
+                    <!-- حاوية الفيديو مع شريط التقدم -->
+                    <div class="media-box" id="mediaBox">
+                        <video id="videoPlayer" controls preload="metadata"></video>
+                        <div class="progress-overlay" id="progressOverlay">
+                            <div class="fill" id="progressFill"></div>
+                        </div>
+                        <div class="progress-text-center" id="progressText">0%</div>
+                    </div>
+
+                    <!-- أزرار التحميل -->
+                    <div class="download-actions" id="downloadActions"></div>
+
+                    <!-- مشغل الصوت -->
+                    <audio id="audioPlayer" controls></audio>
+                </div>
+
+                <!-- نسخ سريع -->
+                <div class="quick-copy">
+                    <label>📋 نسخ الرابط:</label>
+                    <input type="text" id="quickCopyInput" readonly>
+                    <button id="quickCopyBtn">نسخ</button>
+                </div>
+            </div>
+
+            <!-- ===== تبويب المشرف ===== -->
+            <div id="tab-admin" class="tab-content">
+                <div class="admin-panel">
+                    <h2>⚙️ لوحة المشرف</h2>
+
+                    <!-- إذاعة -->
+                    <div>
+                        <h4 style="color:#fff; font-weight:400; margin-bottom:10px;">📢 إذاعة</h4>
+                        <div class="form-row">
+                            <textarea id="broadcastMsg" rows="2" placeholder="نص الرسالة للجميع"></textarea>
+                            <button class="btn-sm" onclick="broadcast()">إرسال</button>
+                        </div>
+                        <span id="broadcastStatus" style="color:#00b894;font-size:13px;"></span>
+                    </div>
+
+                    <hr>
+
+                    <!-- قنوات إجبارية -->
+                    <div>
+                        <h4 style="color:#fff; font-weight:400; margin-bottom:10px;">🔗 الاشتراك الإجباري</h4>
+                        <div class="form-row">
+                            <input type="text" id="newChannel" placeholder="معرف القناة (بدون @)">
+                            <button class="btn-sm" onclick="addChannel()">➕ إضافة</button>
+                        </div>
+                        <div class="form-row">
+                            <input type="text" id="removeChannel" placeholder="المعرف للحذف">
+                            <button class="btn-sm btn-danger" onclick="removeChannel()">➖ حذف</button>
+                        </div>
+                        <div><span class="text-muted">القنوات:</span> <span id="currentChannels" class="text-muted"></span></div>
+                    </div>
+
+                    <hr>
+
+                    <!-- رسالة الاشتراك -->
+                    <div>
+                        <h4 style="color:#fff; font-weight:400; margin-bottom:10px;">📝 كليشة الاشتراك</h4>
+                        <div class="form-row">
+                            <input type="text" id="subMsgInput" placeholder="نص الرسالة">
+                            <button class="btn-sm" onclick="setSubMessage()">تحديث</button>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- إضافة مشرف -->
+                    <div>
+                        <h4 style="color:#fff; font-weight:400; margin-bottom:10px;">➕ إضافة مشرف</h4>
+                        <div class="form-row">
+                            <input type="text" id="newAdminId" placeholder="اسم المستخدم">
+                            <button class="btn-sm" onclick="addAdmin()">إضافة</button>
+                        </div>
+                        <div><span class="text-muted">المشرفون:</span> <span id="currentAdmins" class="text-muted"></span></div>
+                    </div>
+
+                    <hr>
+
+                    <!-- المستخدمين المسجلين -->
+                    <div>
+                        <h4 style="color:#fff; font-weight:400; margin-bottom:10px;">👥 المستخدمون المسجلون (<span id="registeredCount">0</span>)</h4>
+                        <div class="scroll-list" id="registeredUsersList"></div>
+                    </div>
+
+                    <hr>
+
+                    <!-- الضيوف -->
+                    <div>
+                        <h4 style="color:#fff; font-weight:400; margin-bottom:10px;">👤 الضيوف الحاليون (<span id="guestCount">0</span>)</h4>
+                        <div class="scroll-list" id="guestUsersList"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- المطور -->
+            <div class="footer-bar">
+                <span>👨‍💻 المطور: <strong style="color:#fff;">rp01</strong> | <a href="https://t.me/lIIHII" target="_blank">تواصل عبر تليجرام</a></span>
+                <span style="direction:ltr;">v3.0</span>
+            </div>
+
+        </div><!-- end mainApp -->
+
+    </div><!-- end app-wrapper -->
 
     <script>
-        /**
-         * ============================================================
-         * 1. تعريف النماذج (MODELS)
-         * تحتوي على جميع النماذج المتاحة مع أسمائها والبادئة الخاصة
-         * بكل مزود خدمة.
-         * ============================================================
-         */
-        const MODELS = {
-            '1': { name: 'deepseek-v4-flash', prefix: 'deepseek/' },
-            '2': { name: 'deepseek-v4-pro', prefix: 'deepseek/' },
-            '3': { name: 'deepseek-r1', prefix: 'deepseek/' },
-            '4': { name: 'deepseek-v3.2', prefix: 'deepseek/' },
-            '5': { name: 'kimi-k2.5', prefix: 'moonshotai/' },
-            '6': { name: 'kimi-k2.6', prefix: 'moonshotai/' },
-            '7': { name: 'gemini-3-flash-preview', prefix: 'google/' },
-            '8': { name: 'gemini-3.1-flash-lite', prefix: 'google/' },
-            '9': { name: 'gemini-2.5-pro', prefix: 'google/' },
-            '10': { name: 'qwen3-235b-a22b', prefix: 'qwen/' },
-            '11': { name: 'qwen3-coder-480b-a35b', prefix: 'qwen/' },
-            '12': { name: 'qwen3-vl-235b-a22b-instruct', prefix: 'qwen/' },
-            '13': { name: 'grok-4.3', prefix: 'xai/' }
-        };
+        // ================================================================
+        //  الإعدادات الأساسية
+        // ================================================================
+        const ADMIN_USERNAME = 'rp01';
+        const ADMIN_PASSWORD = '200786';
 
-        /**
-         * ============================================================
-         * 2. تعريف الثيمات (THEMES)
-         * تحتوي على 5 أنماط ألوان مختلفة مع إمكانية التبديل بينها.
-         * ============================================================
-         */
-        const THEMES = {
-            dark: {
-                '--bg-primary': '#0a0e17',
-                '--bg-secondary': '#111a28',
-                '--bg-card': 'rgba(255,255,255,0.03)',
-                '--border-color': 'rgba(255,255,255,0.06)',
-                '--text-primary': '#e8edf5',
-                '--text-secondary': '#94a3b8',
-                '--accent-1': '#60a5fa',
-                '--accent-2': '#a78bfa',
-                '--accent-glow': 'rgba(96,165,250,0.2)',
-                '--shadow': 'rgba(0,0,0,0.6)'
-            },
-            light: {
-                '--bg-primary': '#f1f5f9',
-                '--bg-secondary': '#ffffff',
-                '--bg-card': 'rgba(0,0,0,0.02)',
-                '--border-color': 'rgba(0,0,0,0.08)',
-                '--text-primary': '#0f172a',
-                '--text-secondary': '#334155',
-                '--accent-1': '#3b82f6',
-                '--accent-2': '#8b5cf6',
-                '--accent-glow': 'rgba(59,130,246,0.15)',
-                '--shadow': 'rgba(0,0,0,0.08)'
-            },
-            blue: {
-                '--bg-primary': '#0a1628',
-                '--bg-secondary': '#0f1f36',
-                '--bg-card': 'rgba(59,130,246,0.04)',
-                '--border-color': 'rgba(59,130,246,0.10)',
-                '--text-primary': '#d0e4ff',
-                '--text-secondary': '#90b4e0',
-                '--accent-1': '#3b82f6',
-                '--accent-2': '#60a5fa',
-                '--accent-glow': 'rgba(59,130,246,0.25)',
-                '--shadow': 'rgba(0,20,40,0.8)'
-            },
-            green: {
-                '--bg-primary': '#0a1a0a',
-                '--bg-secondary': '#0f240f',
-                '--bg-card': 'rgba(74,222,128,0.04)',
-                '--border-color': 'rgba(74,222,128,0.10)',
-                '--text-primary': '#d0e8d0',
-                '--text-secondary': '#90b890',
-                '--accent-1': '#4ade80',
-                '--accent-2': '#34d399',
-                '--accent-glow': 'rgba(74,222,128,0.25)',
-                '--shadow': 'rgba(0,20,0,0.8)'
-            },
-            purple: {
-                '--bg-primary': '#150a1a',
-                '--bg-secondary': '#1f0f28',
-                '--bg-card': 'rgba(167,139,250,0.04)',
-                '--border-color': 'rgba(167,139,250,0.10)',
-                '--text-primary': '#e8d0f0',
-                '--text-secondary': '#b890c8',
-                '--accent-1': '#a78bfa',
-                '--accent-2': '#c084fc',
-                '--accent-glow': 'rgba(167,139,250,0.25)',
-                '--shadow': 'rgba(30,0,40,0.8)'
-            }
-        };
-
-        /**
-         * ============================================================
-         * 3. دوال التحكم بالثيمات
-         * ============================================================
-         */
-        function applyTheme(name) {
-            const t = THEMES[name];
-            if (!t) return;
-            const root = document.documentElement;
-            for (const [key, val] of Object.entries(t)) {
-                root.style.setProperty(key, val);
-            }
-            localStorage.setItem('rewind_theme', name);
+        // ================================================================
+        //  إدارة التخزين (localStorage)
+        // ================================================================
+        function loadData(key, defaultVal) {
+            try {
+                const data = localStorage.getItem(key);
+                if (data) return JSON.parse(data);
+            } catch (e) {}
+            return defaultVal;
         }
 
-        // تحميل الثيم المحفوظ مسبقاً
-        const savedTheme = localStorage.getItem('rewind_theme') || 'dark';
-        document.getElementById('themeSelector').value = savedTheme;
-        applyTheme(savedTheme);
-        document.getElementById('themeSelector').addEventListener('change', e => applyTheme(e.target.value));
+        function saveData(key, value) {
+            localStorage.setItem(key, JSON.stringify(value));
+        }
 
-        /**
-         * ============================================================
-         * 4. الإشارات إلى عناصر DOM
-         * ============================================================
-         */
-        const modelList = document.getElementById('modelList');
-        const chatMessages = document.getElementById('chatMessages');
-        const userInput = document.getElementById('userInput');
-        const sendBtn = document.getElementById('sendBtn');
-        const statusText = document.getElementById('statusText');
-        const pingDisplay = document.getElementById('pingDisplay');
-        const focusBtn = document.getElementById('focusBtn');
-        const mainLayout = document.getElementById('mainLayout');
-        const typingIndicator = document.getElementById('typingIndicator');
-        const tokenInput = document.getElementById('tokenInput');
-        const setTokenBtn = document.getElementById('setTokenBtn');
-        const recreateBtn = document.getElementById('recreateBtn');
-        const systemPromptInput = document.getElementById('systemPromptInput');
-        const speedSelector = document.getElementById('speedSelector');
-        const applyPromptsBtn = document.getElementById('applyPromptsBtn');
-        const exportChatBtn = document.getElementById('exportChatBtn');
-
-        let selectedModelKey = localStorage.getItem('rewind_model') || '1';
-        let accountData = null;
-        let isProcessing = false;
-        let messagesHistory = [];
-        let focusMode = false;
-        let manualToken = localStorage.getItem('rewind_manual_token') || '';
-        let typingSpeed = 3;
-
-        if (manualToken) tokenInput.value = manualToken;
-
-        /**
-         * ============================================================
-         * 5. وضع التركيز (Focus Mode)
-         * ============================================================
-         */
-        focusBtn.addEventListener('click', () => {
-            focusMode = !focusMode;
-            mainLayout.classList.toggle('focus-mode', focusMode);
-            focusBtn.innerHTML = focusMode ? '<i class="fas fa-compress"></i>' : '<i class="fas fa-expand"></i>';
+        // بنية البيانات
+        let users = loadData('tiktok_users', []);
+        let guests = loadData('tiktok_guests', []);
+        let adminData = loadData('tiktok_admin_data', {
+            required_channels: [],
+            admin_ids: [ADMIN_USERNAME],
+            subscription_message: "🚫 يجب الاشتراك في القنوات المطلوبة أولاً."
         });
+        let stats = loadData('tiktok_stats', { users: 0, downloads: 0 });
+        let userDownloads = loadData('tiktok_user_downloads', {});
 
-        /**
-         * ============================================================
-         * 6. إدارة التوكن
-         * ============================================================
-         */
-        function setToken() {
-            const token = tokenInput.value.trim();
-            if (token) {
-                manualToken = token;
-                localStorage.setItem('rewind_manual_token', token);
-                accountData = null;
-                statusText.textContent = 'توكن يدوي';
-                addSystemMessage('✅ تم تعيين التوكن.');
+        function saveAll() {
+            saveData('tiktok_users', users);
+            saveData('tiktok_guests', guests);
+            saveData('tiktok_admin_data', adminData);
+            saveData('tiktok_stats', stats);
+            saveData('tiktok_user_downloads', userDownloads);
+        }
+
+        // ================================================================
+        //  الإشعارات
+        // ================================================================
+        function showToast(message, type = 'info', duration = 4000) {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            const icons = { success: '✅', error: '❌', info: 'ℹ️' };
+            toast.innerHTML = `<span>${icons[type] || 'ℹ️'}</span> ${message}`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.add('toast-out');
+                setTimeout(() => toast.remove(), 400);
+            }, duration);
+        }
+
+        // ================================================================
+        //  إدارة الجلسة
+        // ================================================================
+        let currentUser = null;
+
+        function setSession(user) {
+            currentUser = user;
+            if (user) {
+                localStorage.setItem('tiktok_session', JSON.stringify(user));
             } else {
-                manualToken = '';
-                localStorage.removeItem('rewind_manual_token');
-                accountData = null;
-                statusText.textContent = 'جاهز';
-                addSystemMessage('🔄 تم إلغاء التوكن، سيتم التسجيل تلقائياً.');
-                initAccount();
+                localStorage.removeItem('tiktok_session');
             }
+            updateUIAfterLogin();
         }
 
-        setTokenBtn.addEventListener('click', setToken);
-        tokenInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') setToken();
-        });
-
-        /**
-         * ============================================================
-         * 7. التحكم بسرعة الرد
-         * ============================================================
-         */
-        speedSelector.addEventListener('change', () => {
-            typingSpeed = parseInt(speedSelector.value);
-        });
-
-        /**
-         * ============================================================
-         * 8. دمج البروميدات (أهم ميزة)
-         * دمج 5 بروميدات مختلفة في برومت واحد شامل.
-         * ============================================================
-         */
-        const PROMPTS_LIST = [
-            'أنت مساعد ذكي ومحترف، أجب بدقة ووضوح.',
-            'أنت مترجم خبير، ترجم النصوص بدقة واحترافية.',
-            'أنت كاتب محتوى مبدع، اكتب نصوصاً جذابة.',
-            'أنت مستشار تقني، قدم حلولاً برمجية متقدمة.',
-            'أنت معلم صبور، اشرح المفاهيم ببساطة.'
-        ];
-
-        function getCombinedPrompt() {
-            // دمج البروميدات في جملة واحدة شاملة
-            const combined = PROMPTS_LIST.join(' و ');
-            return `أنت خبير متعدد المهارات: ${combined}. قدم إجاباتك بأسلوب شامل يجمع بين الدقة والإبداع والوضوح، مع مراعاة السياق وتقديم حلول عملية.`;
-        }
-
-        applyPromptsBtn.addEventListener('click', () => {
-            const combined = getCombinedPrompt();
-            systemPromptInput.value = combined;
-            addSystemMessage('✅ تم دمج جميع البروميدات في برومت واحد شامل.');
-        });
-
-        /**
-         * ============================================================
-         * 9. دوال مساعدة (توليد بيانات عشوائية)
-         * ============================================================
-         */
-        function generateRandomString(l = 8) {
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            let result = '';
-            for (let i = 0; i < l; i++) {
-                result += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            return result;
-        }
-        const generateEmail = () => generateRandomString(6) + '@gmail.com';
-        const generatePassword = () => generateRandomString(4) + 'A1' + generateRandomString(4) + 'a';
-
-        /**
-         * ============================================================
-         * 10. إنشاء حساب تلقائي عبر API Rewind
-         * ============================================================
-         */
-        async function createRewindAccount() {
-            const email = generateEmail();
-            const password = generatePassword();
-            const start = performance.now();
+        function loadSession() {
             try {
-                const res = await fetch('https://api.rewind.ai/v1/auth/signup', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password })
-                });
-                const ping = Math.round(performance.now() - start);
-                if (!res.ok) throw new Error(`فشل التسجيل (${res.status})`);
-                const data = await res.json();
-                return { accessToken: data.accessToken, userId: data.user.id, ping };
-            } catch (err) {
-                throw new Error('تعذر إنشاء الحساب. يرجى إدخال التوكن يدوياً.');
-            }
+                const data = localStorage.getItem('tiktok_session');
+                if (data) {
+                    const parsed = JSON.parse(data);
+                    if (parsed.type === 'admin' && parsed.username === ADMIN_USERNAME) {
+                        currentUser = parsed;
+                        return true;
+                    } else if (parsed.type === 'user') {
+                        if (users.some(u => u.username === parsed.username)) {
+                            currentUser = parsed;
+                            return true;
+                        }
+                    } else if (parsed.type === 'guest') {
+                        if (guests.some(g => g.id === parsed.id)) {
+                            currentUser = parsed;
+                            return true;
+                        }
+                    }
+                }
+            } catch (e) {}
+            return false;
         }
 
-        async function initAccount() {
-            if (manualToken) {
-                accountData = { accessToken: manualToken, userId: 'manual' };
-                statusText.textContent = 'توكن يدوي';
-                addSystemMessage('✅ باستخدام التوكن اليدوي.');
-                return;
-            }
-            try {
-                statusText.textContent = 'جاري التسجيل...';
-                const result = await createRewindAccount();
-                accountData = result;
-                statusText.textContent = 'متصل';
-                pingDisplay.textContent = `${result.ping}ms`;
-                addSystemMessage('✅ تم إنشاء حساب تلقائي.');
-            } catch (err) {
-                statusText.textContent = 'خطأ';
-                addSystemMessage(`❌ ${err.message}`);
-                addSystemMessage('📌 أدخل التوكن يدوياً في الشريط الجانبي.');
-            }
+        function clearSession() {
+            localStorage.removeItem('tiktok_session');
+            currentUser = null;
         }
 
-        /**
-         * ============================================================
-         * 11. إرسال الرسالة إلى API Rewind (مع تدفق)
-         * ============================================================
-         */
-        async function sendRewindMessage(accessToken, userId, model, messages, onChunk) {
-            const fullModel = model.prefix + model.name;
-            const start = performance.now();
-            const res = await fetch('https://api.rewind.ai/v1/chat/completions/', {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${accessToken}`,
-                    'x-user-id': userId,
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    messages,
-                    model: fullModel,
-                    stream: true,
-                    temperature: 0.7,
-                    max_tokens: 2048
-                })
+        // ================================================================
+        //  دوال الدخول والتسجيل والضيف
+        // ================================================================
+        function loginUser(username, password) {
+            if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+                setSession({ type: 'admin', username: ADMIN_USERNAME });
+                showToast('مرحباً مشرف', 'success');
+                return true;
+            }
+            const user = users.find(u => u.username === username && u.password === password);
+            if (user) {
+                setSession({ type: 'user', username: username });
+                showToast(`مرحباً ${username}`, 'success');
+                return true;
+            }
+            return false;
+        }
+
+        function registerUser(username, password, confirm) {
+            if (password !== confirm) {
+                showToast('كلمة المرور غير متطابقة', 'error');
+                return false;
+            }
+            if (username.length < 3) {
+                showToast('اسم المستخدم قصير جداً (3 أحرف على الأقل)', 'error');
+                return false;
+            }
+            if (users.some(u => u.username === username) || username === ADMIN_USERNAME) {
+                showToast('اسم المستخدم موجود بالفعل', 'error');
+                return false;
+            }
+            users.push({
+                username,
+                password,
+                registeredAt: new Date().toISOString(),
+                downloads: 0
             });
-            const ping = Math.round(performance.now() - start);
-            if (!res.ok) throw new Error(`فشل الطلب (${res.status})`);
+            userDownloads[username] = [];
+            stats.users = users.length + guests.length;
+            saveAll();
+            showToast('تم إنشاء الحساب بنجاح، يمكنك تسجيل الدخول الآن', 'success');
+            return true;
+        }
 
-            const reader = res.body.getReader();
-            const decoder = new TextDecoder('utf-8');
-            let buffer = '',
-                fullResponse = '';
+        function loginAsGuest() {
+            const guestId = 'guest_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
+            guests.push({
+                id: guestId,
+                joinedAt: new Date().toISOString(),
+                downloads: 0
+            });
+            userDownloads[guestId] = [];
+            stats.users = users.length + guests.length;
+            saveAll();
+            setSession({ type: 'guest', id: guestId });
+            showToast('تم الدخول كضيف', 'info');
+            return true;
+        }
+
+        // ================================================================
+        //  تحديث الواجهة بعد الدخول
+        // ================================================================
+        function updateUIAfterLogin() {
+            if (!currentUser) return;
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('mainApp').classList.remove('hidden');
+
+            let displayName = '';
+            if (currentUser.type === 'admin') displayName = '👑 مشرف';
+            else if (currentUser.type === 'user') displayName = '👤 ' + currentUser.username;
+            else displayName = '👤 ضيف (' + currentUser.id.slice(-6) + ')';
+            document.getElementById('userBadge').textContent = displayName;
+
+            const adminTabBtn = document.getElementById('adminTabBtn');
+            if (currentUser.type === 'admin') {
+                adminTabBtn.style.display = 'inline-block';
+            } else {
+                adminTabBtn.style.display = 'none';
+                if (document.getElementById('tab-admin').classList.contains('active')) {
+                    switchTab('home');
+                }
+            }
+
+            updateStats();
+            if (currentUser.type === 'admin') {
+                renderAdminUsers();
+                renderAdminData();
+            }
+        }
+
+        // ================================================================
+        //  تحديث الإحصائيات
+        // ================================================================
+        function updateStats() {
+            const total = users.length + guests.length;
+            document.getElementById('userCount').textContent = total;
+            document.getElementById('totalDownloads').textContent = stats.downloads || 0;
+
+            let myDownloads = 0;
+            if (currentUser) {
+                const key = currentUser.type === 'user' ? currentUser.username :
+                    (currentUser.type === 'guest' ? currentUser.id : null);
+                if (key && userDownloads[key]) {
+                    myDownloads = userDownloads[key].length;
+                }
+            }
+            document.getElementById('myDownloadsCount').textContent = myDownloads;
+        }
+
+        // ================================================================
+        //  عرض قوائم المستخدمين للمشرف
+        // ================================================================
+        function renderAdminUsers() {
+            const regList = document.getElementById('registeredUsersList');
+            if (users.length === 0) {
+                regList.innerHTML = '<div class="text-muted">لا يوجد مستخدمون مسجلون</div>';
+            } else {
+                regList.innerHTML = users.map(u =>
+                    `<div class="user-entry">
+                        <span>${u.username}</span>
+                        <span class="meta">📅 ${new Date(u.registeredAt).toLocaleDateString('ar-EG')} | تحميلات: ${userDownloads[u.username]?.length || 0}</span>
+                    </div>`
+                ).join('');
+            }
+            document.getElementById('registeredCount').textContent = users.length;
+
+            const guestList = document.getElementById('guestUsersList');
+            if (guests.length === 0) {
+                guestList.innerHTML = '<div class="text-muted">لا يوجد ضيوف حالياً</div>';
+            } else {
+                guestList.innerHTML = guests.map(g =>
+                    `<div class="user-entry">
+                        <span>🆔 ${g.id}</span>
+                        <span class="meta">📅 ${new Date(g.joinedAt).toLocaleDateString('ar-EG')} | تحميلات: ${userDownloads[g.id]?.length || 0}</span>
+                    </div>`
+                ).join('');
+            }
+            document.getElementById('guestCount').textContent = guests.length;
+        }
+
+        // ================================================================
+        //  دوال المشرف
+        // ================================================================
+        function renderAdminData() {
+            document.getElementById('currentChannels').textContent =
+                adminData.required_channels.map(ch => `@${ch}`).join('، ') || 'لا يوجد';
+            document.getElementById('currentAdmins').textContent =
+                adminData.admin_ids.join('، ') || 'لا يوجد';
+            document.getElementById('subMsgInput').value = adminData.subscription_message;
+        }
+
+        function addChannel() {
+            const ch = document.getElementById('newChannel').value.trim();
+            if (!ch) return showToast('أدخل معرف القناة', 'error');
+            if (adminData.required_channels.includes(ch)) return showToast('القناة موجودة', 'error');
+            adminData.required_channels.push(ch);
+            saveAll();
+            renderAdminData();
+            document.getElementById('newChannel').value = '';
+            showToast(`تمت إضافة @${ch}`, 'success');
+        }
+
+        function removeChannel() {
+            const ch = document.getElementById('removeChannel').value.trim();
+            if (!ch) return showToast('أدخل المعرف', 'error');
+            const idx = adminData.required_channels.indexOf(ch);
+            if (idx === -1) return showToast('القناة غير موجودة', 'error');
+            adminData.required_channels.splice(idx, 1);
+            saveAll();
+            renderAdminData();
+            document.getElementById('removeChannel').value = '';
+            showToast(`تم حذف @${ch}`, 'info');
+        }
+
+        function setSubMessage() {
+            const msg = document.getElementById('subMsgInput').value.trim();
+            if (!msg) return showToast('الرسالة فارغة', 'error');
+            adminData.subscription_message = msg;
+            saveAll();
+            renderAdminData();
+            showToast('تم تحديث الرسالة', 'success');
+        }
+
+        function addAdmin() {
+            const username = document.getElementById('newAdminId').value.trim();
+            if (!username) return showToast('أدخل اسم مستخدم', 'error');
+            if (adminData.admin_ids.includes(username)) return showToast('موجود بالفعل', 'error');
+            adminData.admin_ids.push(username);
+            saveAll();
+            renderAdminData();
+            document.getElementById('newAdminId').value = '';
+            showToast(`تم إضافة ${username} كمشرف`, 'success');
+        }
+
+        function broadcast() {
+            const msg = document.getElementById('broadcastMsg').value.trim();
+            if (!msg) return showToast('اكتب رسالة', 'error');
+            const total = users.length + guests.length;
+            showToast(`✅ تم إرسال الرسالة إلى ${total} مستخدم (محاكاة)`, 'success');
+            document.getElementById('broadcastMsg').value = '';
+            document.getElementById('broadcastStatus').textContent = `أرسلت لـ ${total} مستخدم`;
+            setTimeout(() => document.getElementById('broadcastStatus').textContent = '', 3000);
+        }
+
+        // ================================================================
+        //  تحميل الملفات مع شريط تقدم (بدون علامة مائية)
+        //  نستخدم رابط الفيديو المباشر من API، وهو خالي من العلامات المائية
+        // ================================================================
+        async function downloadFileWithProgress(url, filename, onProgress) {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error('فشل جلب الملف');
+            const contentLength = response.headers.get('content-length');
+            const total = parseInt(contentLength, 10);
+            const reader = response.body.getReader();
+            const chunks = [];
+            let loaded = 0;
+
             while (true) {
                 const { done, value } = await reader.read();
                 if (done) break;
-                buffer += decoder.decode(value, { stream: true });
-                const lines = buffer.split('\n');
-                buffer = lines.pop() || '';
-                for (const line of lines) {
-                    if (!line.trim()) continue;
-                    let dataLine = line;
-                    if (dataLine.startsWith('data: ')) dataLine = dataLine.slice(6);
-                    if (dataLine === '[DONE]') continue;
-                    try {
-                        const parsed = JSON.parse(dataLine);
-                        const content = parsed?.choices?.[0]?.delta?.content;
-                        if (content) {
-                            fullResponse += content;
-                            if (onChunk) onChunk(content);
-                        }
-                    } catch (_) {}
+                chunks.push(value);
+                loaded += value.length;
+                if (total) {
+                    const percent = Math.round((loaded / total) * 100);
+                    onProgress(percent, loaded, total);
+                } else {
+                    onProgress(null, loaded, null);
                 }
             }
-            return { fullResponse, ping };
+
+            const blob = new Blob(chunks);
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            setTimeout(() => URL.revokeObjectURL(link.href), 10000);
+            return blob;
         }
 
-        /**
-         * ============================================================
-         * 12. دوال واجهة المستخدم (UI Helpers)
-         * ============================================================
-         */
-        function showTyping() {
-            typingIndicator.style.display = 'flex';
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        function hideTyping() {
-            typingIndicator.style.display = 'none';
-        }
-
-        function addSystemMessage(text) {
-            const div = document.createElement('div');
-            div.className = 'system-msg';
-            div.textContent = text;
-            chatMessages.appendChild(div);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        /**
-         * دالة لإضافة رسالة جديدة (نصية) مع أزرار النسخ والقراءة.
-         */
-        function addMessage(role, content) {
-            const div = document.createElement('div');
-            div.className = `message ${role}`;
-            const avatar = document.createElement('div');
-            avatar.className = 'avatar';
-            avatar.innerHTML = role === 'user' ? '<i class="fas fa-user"></i>' : '<i class="fas fa-robot"></i>';
-            const bubble = document.createElement('div');
-            bubble.className = 'bubble';
-
-            // تنسيق النص مع دعم الكود البرمجي
-            const formatted = formatMessageWithCode(content);
-            bubble.appendChild(formatted);
-
-            // إضافة التوقيت
-            const time = document.createElement('div');
-            time.className = 'time';
-            time.textContent = new Date().toLocaleTimeString();
-            bubble.appendChild(time);
-
-            // أزرار الإجراءات (نسخ وقراءة)
-            const actions = document.createElement('div');
-            actions.className = 'actions';
-
-            // زر النسخ
-            const copyBtn = document.createElement('button');
-            copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
-            copyBtn.title = 'نسخ النص';
-            copyBtn.addEventListener('click', () => {
-                navigator.clipboard.writeText(content).then(() => {
-                    copyBtn.innerHTML = '<i class="fas fa-check"></i>';
-                    setTimeout(() => copyBtn.innerHTML = '<i class="fas fa-copy"></i>', 1500);
-                }).catch(() => alert('فشل النسخ'));
-            });
-            actions.appendChild(copyBtn);
-
-            // زر القراءة الصوتية
-            const readBtn = document.createElement('button');
-            readBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-            readBtn.title = 'استماع إلى النص';
-            readBtn.addEventListener('click', () => {
-                if ('speechSynthesis' in window) {
-                    const utterance = new SpeechSynthesisUtterance(content);
-                    utterance.lang = 'ar';
-                    utterance.rate = 0.9;
-                    speechSynthesis.speak(utterance);
-                } else {
-                    alert('متصفحك لا يدعم خاصية القراءة الصوتية.');
-                }
-            });
-            actions.appendChild(readBtn);
-
-            bubble.appendChild(actions);
-            div.appendChild(avatar);
-            div.appendChild(bubble);
-            chatMessages.appendChild(div);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-
-            // حفظ الرسالة في التاريخ
-            messagesHistory.push({ role, content, timestamp: Date.now() });
-            return bubble;
-        }
-
-        /**
-         * دالة لتنسيق النص واكتشاف الكتل البرمجية (```).
-         */
-        function formatMessageWithCode(text) {
-            const container = document.createElement('div');
-            const parts = text.split(/(```[\s\S]*?```)/g);
-            for (const part of parts) {
-                if (part.startsWith('```') && part.endsWith('```')) {
-                    // استخراج الكود مع معرفة اللغة
-                    let codeContent = part.slice(3, -3).trim();
-                    let lang = 'code',
-                        code = codeContent;
-                    const lines = codeContent.split('\n');
-                    if (lines.length > 0 && lines[0].match(/^[a-zA-Z]+$/)) {
-                        lang = lines[0];
-                        code = lines.slice(1).join('\n');
-                    }
-                    // إنشاء كتلة الكود
-                    const block = document.createElement('div');
-                    block.className = 'code-block';
-                    const header = document.createElement('div');
-                    header.className = 'code-header';
-                    const langSpan = document.createElement('span');
-                    langSpan.textContent = lang;
-                    header.appendChild(langSpan);
-                    const copyBtn = document.createElement('button');
-                    copyBtn.className = 'copy-code-btn';
-                    copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
-                    copyBtn.addEventListener('click', () => {
-                        navigator.clipboard.writeText(code).then(() => {
-                            copyBtn.innerHTML = '<i class="fas fa-check"></i>';
-                            setTimeout(() => copyBtn.innerHTML = '<i class="fas fa-copy"></i>', 1500);
-                        }).catch(() => alert('فشل النسخ'));
-                    });
-                    header.appendChild(copyBtn);
-                    block.appendChild(header);
-                    const pre = document.createElement('pre');
-                    pre.textContent = code;
-                    block.appendChild(pre);
-                    container.appendChild(block);
-                } else {
-                    // نص عادي
-                    const textNode = document.createElement('span');
-                    textNode.textContent = part;
-                    container.appendChild(textNode);
-                }
-            }
-            return container;
-        }
-
-        /**
-         * دالة لتحديث محتوى الفقاعة أثناء التدفق.
-         */
-        function updateBubbleContent(bubble, newContent) {
-            bubble.innerHTML = '';
-            const formatted = formatMessageWithCode(newContent);
-            bubble.appendChild(formatted);
-            const time = document.createElement('div');
-            time.className = 'time';
-            time.textContent = new Date().toLocaleTimeString();
-            bubble.appendChild(time);
-
-            // إعادة إضافة الأزرار
-            const actions = document.createElement('div');
-            actions.className = 'actions';
-
-            const copyBtn = document.createElement('button');
-            copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
-            copyBtn.title = 'نسخ النص';
-            copyBtn.addEventListener('click', () => {
-                navigator.clipboard.writeText(newContent).then(() => {
-                    copyBtn.innerHTML = '<i class="fas fa-check"></i>';
-                    setTimeout(() => copyBtn.innerHTML = '<i class="fas fa-copy"></i>', 1500);
-                }).catch(() => alert('فشل النسخ'));
-            });
-            actions.appendChild(copyBtn);
-
-            const readBtn = document.createElement('button');
-            readBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-            readBtn.title = 'استماع إلى النص';
-            readBtn.addEventListener('click', () => {
-                if ('speechSynthesis' in window) {
-                    const utterance = new SpeechSynthesisUtterance(newContent);
-                    utterance.lang = 'ar';
-                    utterance.rate = 0.9;
-                    speechSynthesis.speak(utterance);
-                } else {
-                    alert('متصفحك لا يدعم خاصية القراءة الصوتية.');
-                }
-            });
-            actions.appendChild(readBtn);
-
-            bubble.appendChild(actions);
-        }
-
-        /**
-         * ============================================================
-         * 13. عرض النماذج في الشريط الجانبي
-         * ============================================================
-         */
-        function renderModels() {
-            // تجميع النماذج حسب البادئة (المزود)
-            const groups = {};
-            Object.keys(MODELS).forEach(key => {
-                const m = MODELS[key];
-                const prefix = m.prefix.replace('/', '');
-                if (!groups[prefix]) groups[prefix] = [];
-                groups[prefix].push({ key, ...m });
-            });
-
-            modelList.innerHTML = '';
-            Object.keys(groups).forEach(groupName => {
-                const groupDiv = document.createElement('div');
-                groupDiv.className = 'model-group';
-                const label = document.createElement('div');
-                label.className = 'group-label';
-                label.textContent = groupName.toUpperCase();
-                groupDiv.appendChild(label);
-
-                groups[groupName].forEach(m => {
-                    const btn = document.createElement('button');
-                    btn.className = 'model-btn';
-                    if (m.key === selectedModelKey) btn.classList.add('active');
-                    btn.dataset.key = m.key;
-                    btn.innerHTML = `${m.name} <span class="badge">${m.prefix}</span>`;
-                    btn.addEventListener('click', () => {
-                        document.querySelectorAll('.model-btn').forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        selectedModelKey = m.key;
-                        localStorage.setItem('rewind_model', selectedModelKey);
-                    });
-                    groupDiv.appendChild(btn);
-                });
-                modelList.appendChild(groupDiv);
-            });
-        }
-        renderModels();
-
-        /**
-         * ============================================================
-         * 14. تصدير المحادثة كملف نصي
-         * ============================================================
-         */
-        exportChatBtn.addEventListener('click', () => {
-            if (messagesHistory.length === 0) {
-                alert('لا توجد رسائل لتصديرها.');
+        // ================================================================
+        //  معالجة تحميل الفيديو (بدون علامة مائية)
+        // ================================================================
+        document.getElementById('downloadBtn').addEventListener('click', async function(e) {
+            e.preventDefault();
+            if (!currentUser) {
+                showToast('يرجى تسجيل الدخول أولاً', 'error');
                 return;
             }
-            let text = 'محادثة Rewind AI\n';
-            text += `تاريخ: ${new Date().toLocaleString()}\n`;
-            text += '='.repeat(60) + '\n\n';
-            for (const msg of messagesHistory) {
-                const role = msg.role === 'user' ? 'أنت' : 'الذكاء الاصطناعي';
-                text += `${role} (${new Date(msg.timestamp).toLocaleTimeString()}):\n${msg.content}\n\n`;
-            }
-            const blob = new Blob([text], { type: 'text/plain' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = `chat_${new Date().toISOString().slice(0, 10)}.txt`;
-            a.click();
-            URL.revokeObjectURL(a.href);
-        });
 
-        /**
-         * ============================================================
-         * 15. إرسال الرسالة (الدالة الرئيسية)
-         * ============================================================
-         */
-        async function sendMessage() {
-            const text = userInput.value.trim();
-            if (!text || isProcessing) return;
-
-            // التحقق من وجود حساب
-            if (!accountData) {
-                if (manualToken) {
-                    accountData = { accessToken: manualToken, userId: 'manual' };
-                } else {
-                    try {
-                        await initAccount();
-                        if (!accountData) {
-                            addSystemMessage('❌ يرجى إدخال التوكن يدوياً.');
-                            return;
-                        }
-                    } catch (err) {
-                        addSystemMessage(`❌ ${err.message}`);
-                        return;
-                    }
-                }
+            const url = document.getElementById('urlInput').value.trim();
+            if (!url) {
+                showToast('ألصق رابط الفيديو أولاً', 'error');
+                return;
             }
 
-            isProcessing = true;
-            sendBtn.disabled = true;
-            sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري...';
-            showTyping();
+            const resultCard = document.getElementById('resultCard');
+            resultCard.classList.remove('active');
 
-            // إضافة رسالة المستخدم
-            addMessage('user', text);
-            userInput.value = '';
-            userInput.focus();
-
-            // تحديد البرومت (مدمج أو مخصص)
-            let systemPrompt = systemPromptInput.value.trim();
-            if (!systemPrompt) {
-                systemPrompt = getCombinedPrompt(); // دمج تلقائي
-            }
-
-            const messages = [];
-            if (systemPrompt) messages.push({ role: 'system', content: systemPrompt });
-            messages.push({ role: 'user', content: text });
-
-            // إنشاء فقاعة البوت فارغة
-            const botBubble = addMessage('bot', '...');
+            const overlay = document.getElementById('progressOverlay');
+            const fill = document.getElementById('progressFill');
+            const text = document.getElementById('progressText');
+            overlay.classList.remove('active');
+            text.classList.remove('active');
 
             try {
-                const model = MODELS[selectedModelKey];
-                if (!model) throw new Error('النموذج غير موجود');
+                // استخدام API تيك توك (بدون علامة مائية)
+                const apiUrl = `https://tikwm.com/api/?url=${encodeURIComponent(url)}`;
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error('فشل الاتصال بخادم التحميل');
+                const data = await response.json();
+                if (!data || !data.data) throw new Error('الرابط غير صالح');
 
-                let fullReply = '';
-                const { fullResponse, ping } = await sendRewindMessage(
-                    accountData.accessToken,
-                    accountData.userId,
-                    model,
-                    messages,
-                    (chunk) => {
-                        fullReply += chunk;
-                        updateBubbleContent(botBubble, fullReply);
-                        chatMessages.scrollTop = chatMessages.scrollHeight;
-                    }
-                );
+                const d = data.data;
+                const images = d.images;
+                const videoUrl = d.play || ''; // رابط الفيديو مباشرة بدون علامة مائية
+                const musicUrl = d.music || '';
+                const isImage = images && images.length > 0;
 
-                pingDisplay.textContent = `${ping}ms`;
-                hideTyping();
+                // تعبئة البيانات
+                document.getElementById('avatarImg').src = d.author?.avatar || '';
+                document.getElementById('authorName').textContent = d.author?.unique_id || 'غير معروف';
+                document.getElementById('regionInfo').textContent = '📍 ' + (d.region || 'غير معروف');
+                document.getElementById('viewsCount').textContent = d.play_count || 0;
+                document.getElementById('commentsCount').textContent = d.comment_count || 0;
+                document.getElementById('sharesCount').textContent = d.share_count || 0;
+                document.getElementById('durationSec').textContent = d.duration || 0;
+                document.getElementById('videoTitle').textContent = d.title || 'بدون عنوان';
 
-                if (!fullReply) {
-                    updateBubbleContent(botBubble, '⚠️ لم يتم استلام رد.');
+                const mediaBox = document.getElementById('mediaBox');
+                const videoPlayer = document.getElementById('videoPlayer');
+                const audioPlayer = document.getElementById('audioPlayer');
+
+                // إعادة ضبط حاوية الفيديو
+                mediaBox.innerHTML = '';
+
+                if (isImage) {
+                    const img = document.createElement('img');
+                    img.src = images[0];
+                    img.alt = 'صورة تيك توك';
+                    mediaBox.appendChild(img);
+                } else if (videoUrl) {
+                    const vid = document.createElement('video');
+                    vid.src = videoUrl;
+                    vid.controls = true;
+                    vid.preload = 'metadata';
+                    vid.style.width = '100%';
+                    vid.style.height = '100%';
+                    vid.style.objectFit = 'contain';
+                    mediaBox.appendChild(vid);
+                    // إعادة إنشاء شريط التقدم
+                    const newOverlay = document.createElement('div');
+                    newOverlay.className = 'progress-overlay';
+                    newOverlay.id = 'progressOverlay';
+                    newOverlay.innerHTML = `<div class="fill" id="progressFill"></div>`;
+                    mediaBox.appendChild(newOverlay);
+                    const newText = document.createElement('div');
+                    newText.className = 'progress-text-center';
+                    newText.id = 'progressText';
+                    newText.textContent = '0%';
+                    mediaBox.appendChild(newText);
                 } else {
-                    // تحديث آخر رسالة في التاريخ
-                    const lastMsg = messagesHistory[messagesHistory.length - 1];
-                    if (lastMsg && lastMsg.role === 'bot') {
-                        lastMsg.content = fullReply;
-                        lastMsg.timestamp = Date.now();
-                    }
+                    mediaBox.innerHTML = '<div style="color:#888;padding:20px;">لا يوجد محتوى مرئي</div>';
                 }
-            } catch (err) {
-                hideTyping();
-                updateBubbleContent(botBubble, `❌ خطأ: ${err.message}`);
-            } finally {
-                isProcessing = false;
-                sendBtn.disabled = false;
-                sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال';
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-        }
 
-        /**
-         * ============================================================
-         * 16. ربط الأحداث (Event Listeners)
-         * ============================================================
-         */
-        sendBtn.addEventListener('click', sendMessage);
-        userInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                sendMessage();
+                // إعادة تعريف المتغيرات بعد التغيير
+                const overlayNew = document.getElementById('progressOverlay');
+                const fillNew = document.getElementById('progressFill');
+                const textNew = document.getElementById('progressText');
+
+                const actionsDiv = document.getElementById('downloadActions');
+                actionsDiv.innerHTML = '';
+
+                // دالة التحميل مع شريط التقدم
+                const downloadWithProgress = async (fileUrl, filename, typeLabel) => {
+                    if (overlayNew) {
+                        overlayNew.classList.add('active');
+                        fillNew.style.width = '0%';
+                    }
+                    if (textNew) {
+                        textNew.classList.add('active');
+                        textNew.textContent = '0%';
+                    }
+
+                    try {
+                        await downloadFileWithProgress(fileUrl, filename, (percent, loaded, total) => {
+                            if (percent !== null) {
+                                if (fillNew) fillNew.style.width = percent + '%';
+                                if (textNew) textNew.textContent = percent + '%';
+                            } else {
+                                const loadedMB = (loaded / (1024 * 1024)).toFixed(1);
+                                if (fillNew) fillNew.style.width = '100%';
+                                if (textNew) textNew.textContent = `${loadedMB} MB`;
+                            }
+                        });
+                        // تسجيل التحميل
+                        const userKey = currentUser.type === 'user' ? currentUser.username :
+                            (currentUser.type === 'guest' ? currentUser.id : null);
+                        if (userKey) {
+                            if (!userDownloads[userKey]) userDownloads[userKey] = [];
+                            userDownloads[userKey].push({ url, title: d.title || 'بدون عنوان', date: new Date()
+                                    .toISOString() });
+                            stats.downloads = (stats.downloads || 0) + 1;
+                            if (currentUser.type === 'user') {
+                                const uObj = users.find(u => u.username === currentUser.username);
+                                if (uObj) uObj.downloads = (uObj.downloads || 0) + 1;
+                            } else if (currentUser.type === 'guest') {
+                                const gObj = guests.find(g => g.id === currentUser.id);
+                                if (gObj) gObj.downloads = (gObj.downloads || 0) + 1;
+                            }
+                            saveAll();
+                            updateStats();
+                        }
+                        showToast(`تم تحميل ${filename} بنجاح`, 'success');
+                    } catch (err) {
+                        showToast('فشل التحميل، سيتم فتح الرابط في تبويب جديد.', 'error');
+                        window.open(fileUrl, '_blank');
+                    } finally {
+                        if (overlayNew) overlayNew.classList.remove('active');
+                        if (textNew) textNew.classList.remove('active');
+                    }
+                };
+
+                // أزرار التحميل
+                if (isImage) {
+                    const btn = document.createElement('button');
+                    btn.className = 'btn-action btn-success';
+                    btn.innerHTML = '🖼️ تحميل الصورة';
+                    btn.onclick = () => downloadWithProgress(images[0], `tiktok_image_${d.author?.unique_id || 'img'}.jpg`,
+                        'الصورة');
+                    actionsDiv.appendChild(btn);
+                } else if (videoUrl) {
+                    const btn = document.createElement('button');
+                    btn.className = 'btn-action btn-success';
+                    btn.innerHTML = '📥 تحميل الفيديو HD';
+                    btn.onclick = () => downloadWithProgress(videoUrl, `tiktok_${d.author?.unique_id || 'video'}.mp4`,
+                        'الفيديو');
+                    actionsDiv.appendChild(btn);
+                }
+
+                if (musicUrl) {
+                    const btn = document.createElement('button');
+                    btn.className = 'btn-action btn-purple';
+                    btn.innerHTML = '🎵 تحميل الصوت';
+                    btn.onclick = () => downloadWithProgress(musicUrl, `tiktok_audio_${d.author?.unique_id || 'song'}.mp3`,
+                        'الصوت');
+                    actionsDiv.appendChild(btn);
+                }
+
+                // زر نسخ الرابط
+                const copyBtn = document.createElement('button');
+                copyBtn.className = 'btn-action btn-gold';
+                copyBtn.innerHTML = '📋 نسخ الرابط';
+                copyBtn.onclick = () => {
+                    const link = isImage ? images[0] : videoUrl;
+                    if (link) {
+                        navigator.clipboard.writeText(link).then(() => showToast('تم نسخ الرابط', 'success'))
+                            .catch(() => {
+                                const ta = document.createElement('textarea');
+                                ta.value = link;
+                                document.body.appendChild(ta);
+                                ta.select();
+                                document.execCommand('copy');
+                                document.body.removeChild(ta);
+                                showToast('تم نسخ الرابط', 'success');
+                            });
+                    } else {
+                        showToast('لا يوجد رابط', 'error');
+                    }
+                };
+                actionsDiv.appendChild(copyBtn);
+
+                // زر فتح الرابط
+                const openBtn = document.createElement('button');
+                openBtn.className = 'btn-action';
+                openBtn.innerHTML = '🔗 فتح الرابط';
+                openBtn.onclick = () => {
+                    const link = isImage ? images[0] : videoUrl;
+                    if (link) window.open(link, '_blank');
+                    else showToast('لا يوجد رابط', 'error');
+                };
+                actionsDiv.appendChild(openBtn);
+
+                // مشغل الصوت
+                audioPlayer.src = musicUrl || '';
+                audioPlayer.load();
+
+                resultCard.classList.add('active');
+                showToast('تم جلب المحتوى بنجاح', 'success');
+                document.getElementById('quickCopyInput').value = url;
+
+            } catch (error) {
+                showToast('❌ خطأ: ' + error.message, 'error');
             }
         });
 
-        // إعادة إنشاء الحساب
-        recreateBtn.addEventListener('click', async () => {
-            if (!confirm('إنشاء حساب جديد؟')) return;
-            manualToken = '';
-            tokenInput.value = '';
-            localStorage.removeItem('rewind_manual_token');
-            accountData = null;
-            await initAccount();
-        });
-
-        /**
-         * ============================================================
-         * 17. تهيئة التطبيق (Initialization)
-         * ============================================================
-         */
-        async function initApp() {
-            if (manualToken) {
-                accountData = { accessToken: manualToken, userId: 'manual' };
-                statusText.textContent = 'توكن يدوي';
-                addSystemMessage('✅ باستخدام التوكن اليدوي.');
+        // ================================================================
+        //  نسخ الرابط السريع
+        // ================================================================
+        document.getElementById('quickCopyBtn').addEventListener('click', function() {
+            const input = document.getElementById('quickCopyInput');
+            if (input.value.trim()) {
+                navigator.clipboard.writeText(input.value.trim()).then(() => showToast('تم نسخ الرابط', 'success'))
+                    .catch(() => {
+                        input.select();
+                        document.execCommand('copy');
+                        showToast('تم نسخ الرابط', 'success');
+                    });
             } else {
-                await initAccount();
+                showToast('لا يوجد رابط', 'error');
             }
-            // تعيين البرومت المدمج افتراضياً
-            systemPromptInput.value = getCombinedPrompt();
-            addSystemMessage('✅ تم دمج جميع البروميدات تلقائياً للحصول على أفضل نتيجة.');
+        });
+
+        // ================================================================
+        //  دعم Enter في حقل الرابط
+        // ================================================================
+        document.getElementById('urlInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') document.getElementById('downloadBtn').click();
+        });
+
+        // ================================================================
+        //  التنقل بين التبويبات
+        // ================================================================
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.top-bar .nav-tabs button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+            const btn = document.querySelector(`.top-bar .nav-tabs button[data-tab="${tabId}"]`);
+            if (btn) btn.classList.add('active');
+            if (tabId === 'admin' && currentUser && currentUser.type === 'admin') {
+                renderAdminData();
+                renderAdminUsers();
+            }
         }
 
-        initApp();
+        document.querySelectorAll('.top-bar .nav-tabs button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                switchTab(this.dataset.tab);
+            });
+        });
 
-        // طباعة رسالة تأكيد في وحدة التحكم
-        console.log('🚀 Rewind AI – إصدار متطور مع بروميدات متكاملة');
-        console.log('تم دمج جميع البروميدات في برومت واحد شامل.');
-        console.log('يمكنك الآن اختيار النموذج والبدء في المحادثة.');
+        // ================================================================
+        //  تبديل نماذج الدخول
+        // ================================================================
+        document.querySelectorAll('[data-login-tab]').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('[data-login-tab]').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                const mode = this.dataset.loginTab;
+                document.getElementById('loginFormFields').classList.toggle('hidden', mode !== 'login');
+                document.getElementById('registerFormFields').classList.toggle('hidden', mode !== 'register');
+                document.getElementById('loginError').classList.add('hidden');
+                document.getElementById('registerError').classList.add('hidden');
+                document.getElementById('loginSuccess').classList.add('hidden');
+                document.getElementById('registerSuccess').classList.add('hidden');
+            });
+        });
+
+        // ================================================================
+        //  معالجة الدخول والتسجيل
+        // ================================================================
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('usernameInput').value.trim();
+            const password = document.getElementById('passwordInput').value.trim();
+            const errorEl = document.getElementById('loginError');
+            const successEl = document.getElementById('loginSuccess');
+            errorEl.classList.add('hidden');
+            successEl.classList.add('hidden');
+
+            if (loginUser(username, password)) {
+                successEl.textContent = 'تم تسجيل الدخول بنجاح';
+                successEl.classList.remove('hidden');
+            } else {
+                errorEl.textContent = '❌ اسم المستخدم أو كلمة المرور غير صحيحة';
+                errorEl.classList.remove('hidden');
+                showToast('بيانات الدخول غير صحيحة', 'error');
+            }
+        });
+
+        document.getElementById('registerBtn').addEventListener('click', function() {
+            const username = document.getElementById('regUsername').value.trim();
+            const password = document.getElementById('regPassword').value.trim();
+            const confirm = document.getElementById('regPasswordConfirm').value.trim();
+            const errorEl = document.getElementById('registerError');
+            const successEl = document.getElementById('registerSuccess');
+            errorEl.classList.add('hidden');
+            successEl.classList.add('hidden');
+
+            if (registerUser(username, password, confirm)) {
+                successEl.textContent = 'تم إنشاء الحساب، يمكنك تسجيل الدخول الآن';
+                successEl.classList.remove('hidden');
+                document.querySelector('[data-login-tab="login"]').click();
+                document.getElementById('usernameInput').value = username;
+                document.getElementById('passwordInput').value = password;
+                showToast('تم إنشاء الحساب بنجاح', 'success');
+            }
+        });
+
+        document.getElementById('guestLoginBtn').addEventListener('click', function() {
+            loginAsGuest();
+        });
+
+        // ================================================================
+        //  تسجيل الخروج
+        // ================================================================
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            clearSession();
+            location.reload();
+        });
+
+        // ================================================================
+        //  تهيئة الصفحة
+        // ================================================================
+        (function init() {
+            if (loadSession()) {
+                updateUIAfterLogin();
+                if (currentUser.type === 'admin') {
+                    renderAdminData();
+                    renderAdminUsers();
+                }
+                switchTab('home');
+            } else {
+                document.getElementById('loginScreen').classList.remove('hidden');
+                document.getElementById('mainApp').classList.add('hidden');
+            }
+        })();
+
+        // ================================================================
+        //  تحديث دوري للإحصائيات
+        // ================================================================
+        setInterval(() => {
+            if (currentUser) {
+                users = loadData('tiktok_users', []);
+                guests = loadData('tiktok_guests', []);
+                stats = loadData('tiktok_stats', { users: 0, downloads: 0 });
+                userDownloads = loadData('tiktok_user_downloads', {});
+                updateStats();
+                if (currentUser.type === 'admin') {
+                    renderAdminUsers();
+                }
+            }
+        }, 30000);
     </script>
 
 </body>
