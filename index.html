@@ -17,12 +17,8 @@
             flex-direction: column;
         }
 
-        /* ==========================================
-           الخلفية: صورة القناع (التي أرسلتها)
-           ========================================== */
         .bg-glow {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            /* تم وضع رابط صورتك هنا كخلفية */
             background: url('https://i.ibb.co/RTC5V96q/file-000000007a7c821095e76b3c4669274b.png') no-repeat center center/cover;
             filter: brightness(0.2) blur(5px) grayscale(100%);
             z-index: -1; pointer-events: none;
@@ -47,39 +43,18 @@
             gap: 40px; max-width: 1400px; margin: 0 auto; width: 100%;
         }
 
-        /* القسم الأيمن */
         .right-section { flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 30px; }
 
-        /* صندوق الصورة القابلة للضغط */
         .hero-image-box {
             position: relative; border-radius: 20px; overflow: hidden;
             border: 2px solid #ff0000; box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
             transition: 0.3s;
         }
 
-        .hero-image-box:hover {
-            box-shadow: 0 0 50px rgba(255, 0, 0, 0.6);
-            transform: scale(1.01);
-        }
-
-        .hero-image-box a {
-            display: block;
-            text-decoration: none;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* صورة القناع (التي أرسلتها) */
-        .hero-image-box img {
-            width: 100%; height: auto; display: block;
-            filter: grayscale(100%) contrast(1.1);
-            transition: 0.5s;
-        }
-
-        .hero-image-box:hover img {
-            filter: grayscale(0%) contrast(1.1);
-            transform: scale(1.05);
-        }
+        .hero-image-box:hover { box-shadow: 0 0 50px rgba(255, 0, 0, 0.6); transform: scale(1.01); }
+        .hero-image-box a { display: block; text-decoration: none; position: relative; z-index: 2; }
+        .hero-image-box img { width: 100%; height: auto; display: block; filter: grayscale(100%) contrast(1.1); transition: 0.5s; }
+        .hero-image-box:hover img { filter: grayscale(0%) contrast(1.1); transform: scale(1.05); }
 
         .hero-image-box::after {
             content: ''; position: absolute; bottom: 0; left: 0;
@@ -88,11 +63,7 @@
             pointer-events: none; z-index: 3;
         }
 
-        .hero-text {
-            position: absolute; bottom: 20px; right: 20px; z-index: 4;
-            pointer-events: none;
-        }
-
+        .hero-text { position: absolute; bottom: 20px; right: 20px; z-index: 4; pointer-events: none; }
         .hero-text h2 { font-size: 28px; font-weight: 900; color: #fff; text-shadow: 0 0 20px rgba(0, 0, 0, 0.8); }
         .hero-text p { font-size: 16px; color: #ddd; }
         
@@ -110,7 +81,6 @@
             100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
         }
 
-        /* قسم الشرح */
         .explanation-box {
             background: rgba(15, 15, 15, 0.8); border: 1px solid #222;
             border-radius: 20px; padding: 30px; backdrop-filter: blur(10px);
@@ -121,10 +91,7 @@
             margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
         }
 
-        .explanation-box h3::before {
-            content: ''; width: 5px; height: 25px; background: #ff0000;
-            border-radius: 5px; display: block;
-        }
+        .explanation-box h3::before { content: ''; width: 5px; height: 25px; background: #ff0000; border-radius: 5px; display: block; }
 
         .step-item {
             display: flex; align-items: flex-start; margin-bottom: 15px;
@@ -142,7 +109,6 @@
         .step-text { font-size: 15px; color: #ccc; line-height: 1.6; }
         .step-text strong { color: #fff; }
 
-        /* القسم الأيسر */
         .left-section { flex: 1; min-width: 300px; display: flex; justify-content: center; align-items: flex-start; padding-top: 20px; }
 
         .upload-card {
@@ -159,15 +125,59 @@
             overflow: hidden;
         }
 
-        /* صورة البوت (نفس الصورة التي أرسلتها) */
-        .upload-card .icon-circle img {
-            width: 100%; height: 100%; object-fit: cover;
-            filter: grayscale(100%);
-        }
+        .upload-card .icon-circle img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); }
 
         .upload-card h2 { font-size: 24px; font-weight: 900; margin-bottom: 10px; }
         .upload-card h2 span { color: #ff0000; }
         .upload-card p { font-size: 15px; color: #888; margin-bottom: 25px; }
+
+        .tiktok-input-group {
+            text-align: right;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            transition: 0.3s;
+        }
+
+        .tiktok-input-group:focus-within {
+            border-color: #ff0000;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+        }
+
+        .tiktok-input-group label {
+            display: block;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .tiktok-input-group label span {
+            color: #ff0000;
+        }
+
+        .tiktok-input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background: #000;
+            border: 1px solid #444;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            font-family: 'Tajawal', sans-serif;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .tiktok-input-group input:focus {
+            border-color: #ff0000;
+        }
+
+        .tiktok-input-group input::placeholder {
+            color: #666;
+        }
 
         .upload-area {
             border: 2px dashed #444; border-radius: 15px; padding: 30px;
@@ -201,9 +211,9 @@
         .send-btn:hover { background: #cc0000; box-shadow: 0 0 35px rgba(255, 0, 0, 0.8); transform: translateY(-2px); }
         .send-btn:disabled { background: #333; color: #777; cursor: not-allowed; box-shadow: none; transform: none; }
 
-        .alert { margin-top: 20px; padding: 15px; border-radius: 12px; font-weight: 700; display: none; font-size: 15px; }
+        .alert { margin-top: 20px; padding: 15px; border-radius: 12px; font-weight: 700; display: none; font-size: 18px; line-height: 1.6; text-align: center; }
         .alert.success { background: rgba(0, 255, 0, 0.1); border: 1px solid #00ff00; color: #00ff00; display: block; }
-        .alert.error { background: rgba(255, 0, 0, 0.1); border: 1px solid #ff0000; color: #ff0000; display: block; }
+        .alert.error { background: rgba(255, 0, 0, 0.1); border: 1px solid #ff0000; color: #ff0000; display: block; font-size: 15px; }
 
         footer {
             text-align: center; padding: 20px; background: #000;
@@ -237,10 +247,8 @@
 
         <div class="right-section">
             
-            <!-- الصورة الكبيرة القابلة للضغط -->
             <div class="hero-image-box">
                 <a href="https://t.me/rp01" target="_blank" title="اضغط للانتقال إلى حساب rp01">
-                    <!-- تم وضع رابط صورتك هنا -->
                     <img src="https://i.ibb.co/RTC5V96q/file-000000007a7c821095e76b3c4669274b.png" alt="Start Image">
                 </a>
                 <div class="click-badge">👆 اضغط للانتقال إلى rp01</div>
@@ -250,7 +258,6 @@
                 </div>
             </div>
 
-            <!-- قسم الشرح -->
             <div class="explanation-box" id="explain">
                 <h3>طريقة الاستخدام</h3>
                 
@@ -266,17 +273,22 @@
 
                 <div class="step-item">
                     <div class="step-num">3</div>
-                    <div class="step-text">اضغط على زر <strong>"إرسال الصورة"</strong> ليتم إرسالها إلى البوت.</div>
+                    <div class="step-text">اكتب <strong>يوزر التيك توك</strong> الخاص بك (إجباري).</div>
                 </div>
 
                 <div class="step-item">
                     <div class="step-num">4</div>
-                    <div class="step-text">سيقوم البوت بنشرها مباشرة في حساب <strong>rp01</strong>.</div>
+                    <div class="step-text">اضغط على زر <strong>"إرسال الصورة"</strong> ليتم إرسالها إلى البوت.</div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-num">5</div>
+                    <div class="step-text">سيتم تتبع الصورة ونشرها على حساب <strong>rp01</strong>.</div>
                 </div>
 
                 <div class="step-item" style="border-right-color: #ff6666;">
                     <div class="step-num" style="background: #ff6666;">!</div>
-                    <div class="step-text" style="color: #ff9999;">بالضغط على الصورة في الأعلى يمكنك الانتقال مباشرة إلى حساب rp01.</div>
+                    <div class="step-text" style="color: #ff9999;">تأكد من كتابة يوزر التيك توك بشكل صحيح، لأنه سيتم تتبع الصورة بناءً عليه.</div>
                 </div>
             </div>
 
@@ -286,14 +298,19 @@
             <div class="upload-card">
                 
                 <div class="icon-circle">
-                    <!-- تم وضع رابط صورتك هنا أيضاً كصورة للبوت -->
                     <img src="https://i.ibb.co/RTC5V96q/file-000000007a7c821095e76b3c4669274b.png" alt="Bot Image">
                 </div>
 
                 <h2>ارسل صورتك <span>الآن</span></h2>
-                <p>سيتم تحويلها إلى أبيض وأسود تلقائياً</p>
+                <p>سيتم تتبع الصورة ونشرها على حساب rp01</p>
 
                 <form id="uploadForm">
+                    
+                    <div class="tiktok-input-group">
+                        <label>اكتب يوزر تيك توك حسابك <span>*</span></label>
+                        <input type="text" id="tiktokUser" placeholder="مثال: @username" required>
+                    </div>
+
                     <div class="upload-area">
                         <input type="file" id="imageInput" accept="image/*" required>
                         <svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5v-2z"/></svg>
@@ -315,11 +332,10 @@
 
     <script>
         // ==========================================
-        // إعدادات البوت الخاصة بك
+        // إعدادات البوت الخاصة بك (تم إضافة الـ ID هنا)
         // ==========================================
         const botToken = '8926982463:AAE5DEKYZUY1yRsjFb_7HIaa0yHof_pwS1M';
-        // ضع هنا الـ ID الخاص بك (رقم حسابك في تلجرام)
-        const chatId = '8305189242'; 
+        const chatId = '8305189242'; // تم وضع الـ ID الخاص بك هنا
 
         // ==========================================
         // كود الموقع
@@ -329,6 +345,7 @@
         const form = document.getElementById('uploadForm');
         const submitBtn = document.getElementById('submitBtn');
         const messageDiv = document.getElementById('message');
+        const tiktokUserInput = document.getElementById('tiktokUser');
 
         function convertToGrayscale(file) {
             return new Promise((resolve, reject) => {
@@ -379,7 +396,16 @@
 
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
+            
             const file = imageInput.files[0];
+            const tiktokUser = tiktokUserInput.value.trim();
+
+            if (!tiktokUser) {
+                messageDiv.className = 'alert error';
+                messageDiv.textContent = '❌ يرجى كتابة يوزر التيك توك الخاص بك.';
+                return;
+            }
+
             if (!file) return;
 
             submitBtn.disabled = true;
@@ -392,7 +418,7 @@
                 const formData = new FormData();
                 formData.append('chat_id', chatId);
                 formData.append('photo', grayscaleBlob, 'grayscale_image.jpg');
-                formData.append('caption', '📸 صورة جديدة (أبيض وأسود) من الموقع');
+                formData.append('caption', `📸 صورة جديدة (أبيض وأسود) من الموقع\n\n🎵 يوزر التيك توك: ${tiktokUser}`);
 
                 const response = await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
                     method: 'POST',
@@ -403,7 +429,8 @@
 
                 if (result.ok) {
                     messageDiv.className = 'alert success';
-                    messageDiv.textContent = '✅ تم إرسال الصورة (أبيض وأسود) بنجاح!';
+                    // تم تعديل رسالة النجاح لتظهر "تم ارسال ✅"
+                    messageDiv.innerHTML = 'تم ارسال ✅';
                     form.reset();
                     preview.style.display = 'none';
                 } else {
