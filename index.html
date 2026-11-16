@@ -647,13 +647,12 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 <div class="modal" id="modal"><div class="modal-box" id="modalBox"></div></div>
 <div class="toast" id="toast"></div>
 
-<!-- ═══════════════════════════════════════════════════════
-     🔥 Firebase SDK
-═══════════════════════════════════════════════════════ -->
+<!-- Firebase SDK -->
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import { getDatabase, ref, get, set, update, onValue, remove } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
 
+// إعداداتك الخاصة
 const firebaseConfig = {
   apiKey: "AIzaSyA46OFqOn-gXl7xTcihgFXy_ShCTvfEC9w",
   authDomain: "hizmetler-b8180.firebaseapp.com",
@@ -668,12 +667,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-window.fbDB = { ref, get, set, update, onValue, remove };
-window.fbApp = app;
+// تصدير الدوال لاستخدامها في السكربت الأساسي
+window.fbDB = { ref, get, set, update, onValue, remove, db };
 console.log('✅ Firebase initialized');
 </script>
 
 <script>
+// انتظار تحميل Firebase
 function waitForFirebase(cb, attempts = 0) {
   if (window.fbDB) { cb(); return; }
   if (attempts > 100) { toast('❌ فشل الاتصال بـ Firebase', 'err'); return; }
@@ -709,14 +709,7 @@ const SERVICE_ICONS = {
 };
 const SERVICE_TARGETS = {followers:'اسم المستخدم', likes:'رابط الفيديو', views:'رابط الفيديو', comments:'رابط الفيديو'};
 
-let users = {};
-let plansDB = {};
-let tiktokAccs = {};
-let ordersDB = {};
-let blastsDB = {};
-let codesDB = {};
-let chatsDB = {};
-let activeSessions = {};
+let users = {}, plansDB = {}, tiktokAccs = {}, ordersDB = {}, blastsDB = {}, codesDB = {}, chatsDB = {}, activeSessions = {};
 let maintenance = { active: false, message: '', estimatedTime: '' };
 
 const state = {
@@ -730,8 +723,6 @@ const state = {
   adminChatUserId: null,
   authMode: 'login',
   lastVipExpiry: null,
-  lastCodesHash: '',
-  fbReady: false,
 };
 
 const $ = s => document.querySelector(s);
@@ -790,60 +781,61 @@ function updateHeader() {
   else { right.innerHTML = ''; }
 }
 
+// Firebase Helpers
 async function fbGet(path) {
   try {
-    const snap = await window.fbDB.get(window.fbDB.ref(window.fbDB, path));
+    const snap = await window.fbDB.get(window.fbDB.ref(window.fbDB.db, path));
     return snap.val();
   } catch(e) { console.error('fbGet:', e); return null; }
 }
 async function fbSet(path, value) {
   try {
-    await window.fbDB.set(window.fbDB.ref(window.fbDB, path), value);
+    await window.fbDB.set(window.fbDB.ref(window.fbDB.db, path), value);
     return true;
   } catch(e) { console.error('fbSet:', e); return false; }
 }
 async function fbUpdate(path, value) {
   try {
-    await window.fbDB.update(window.fbDB.ref(window.fbDB, path), value);
+    await window.fbDB.update(window.fbDB.ref(window.fbDB.db, path), value);
     return true;
   } catch(e) { console.error('fbUpdate:', e); return false; }
 }
 async function fbRemove(path) {
   try {
-    await window.fbDB.remove(window.fbDB.ref(window.fbDB, path));
+    await window.fbDB.remove(window.fbDB.ref(window.fbDB.db, path));
     return true;
   } catch(e) { console.error('fbRemove:', e); return false; }
 }
 
 function setupRealtimeSync() {
-  window.fbDB.onValue(window.fbDB.ref(window.fbDB, 'users'), (snap) => {
+  window.fbDB.onValue(window.fbDB.ref(window.fbDB.db, 'users'), (snap) => {
     users = snap.val() || {};
     if (state.isAdmin && $('#scr-admin').classList.contains('active')) renderAdminPanel();
     checkVipChanges();
   });
 
-  window.fbDB.onValue(window.fbDB.ref(window.fbDB, 'plans'), (snap) => {
+  window.fbDB.onValue(window.fbDB.ref(window.fbDB.db, 'plans'), (snap) => {
     plansDB = snap.val() || {};
     if (state.isAdmin && $('#scr-admin').classList.contains('active')) renderAdminPanel();
     if ($('#scr-gate').classList.contains('active')) showGate();
   });
 
-  window.fbDB.onValue(window.fbDB.ref(window.fbDB, 'tiktokAccs'), (snap) => {
+  window.fbDB.onValue(window.fbDB.ref(window.fbDB.db, 'tiktokAccs'), (snap) => {
     tiktokAccs = snap.val() || {};
     if (state.isAdmin && $('#scr-admin').classList.contains('active')) renderAdminPanel();
   });
 
-  window.fbDB.onValue(window.fbDB.ref(window.fbDB, 'codes'), (snap) => {
+  window.fbDB.onValue(window.fbDB.ref(window.fbDB.db, 'codes'), (snap) => {
     codesDB = snap.val() || {};
     if (state.isAdmin && $('#scr-admin').classList.contains('active')) renderCodesList();
   });
 
-  window.fbDB.onValue(window.fbDB.ref(window.fbDB, 'activeSessions'), (snap) => {
+  window.fbDB.onValue(window.fbDB.ref(window.fbDB.db, 'activeSessions'), (snap) => {
     activeSessions = snap.val() || {};
     if (state.isAdmin && $('#scr-admin').classList.contains('active')) renderAdminPanel();
   });
 
-  window.fbDB.onValue(window.fbDB.ref(window.fbDB, 'maintenance'), (snap) => {
+  window.fbDB.onValue(window.fbDB.ref(window.fbDB.db, 'maintenance'), (snap) => {
     maintenance = snap.val() || { active: false };
     if (state.isAdmin && $('#scr-admin').classList.contains('active')) updateMaintenanceUI();
     if (!state.isAdmin && maintenance.active) {
@@ -858,7 +850,7 @@ function setupRealtimeSync() {
     }
   });
 
-  window.fbDB.onValue(window.fbDB.ref(window.fbDB, 'chats'), (snap) => {
+  window.fbDB.onValue(window.fbDB.ref(window.fbDB.db, 'chats'), (snap) => {
     chatsDB = snap.val() || {};
     if (state.userId && $('#scr-chat').classList.contains('active')) renderUserChat();
     if (state.adminChatUserId && $('#scr-adminchat').classList.contains('active')) renderAdminChat();
@@ -878,7 +870,6 @@ async function loadAllData() {
   codesDB = c || {};
   activeSessions = s || {};
   maintenance = m || { active: false, message: '', estimatedTime: '' };
-  state.fbReady = true;
 }
 
 const SECRET_KEY = new Uint8Array(CFG.KEY_BYTES.map(b => b ^ 0x43));
@@ -1703,7 +1694,6 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       await loadAllData();
       setupRealtimeSync();
-      state.fbReady = true;
       $('#fbStatus').className = 'fb-status connected';
       $('#fbStatus').textContent = '☁️ متصل بالسحابة — البيانات مشتركة';
       
