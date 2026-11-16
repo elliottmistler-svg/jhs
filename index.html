@@ -55,6 +55,23 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 .maint-banner.show{display:flex}
 @keyframes maintPulse{0%,100%{background:linear-gradient(135deg,#f59e0b,#d97706)}50%{background:linear-gradient(135deg,#eab308,#f59e0b)}}
 
+/* إشعار التفعيل */
+.activation-banner{
+  background:linear-gradient(135deg,#22c55e,#059669);color:#fff;
+  padding:14px 16px;text-align:center;font-weight:900;font-size:13px;
+  display:none;align-items:center;justify-content:center;gap:10px;
+  box-shadow:0 4px 20px rgba(34,197,94,.5);animation:bounceIn .5s ease;
+  border-radius:14px;margin-bottom:12px;position:relative;
+}
+.activation-banner.show{display:flex}
+.activation-banner .icon{font-size:24px;animation:floatY 2s infinite}
+.activation-banner .close-banner{
+  position:absolute;left:10px;top:50%;transform:translateY(-50%);
+  background:rgba(255,255,255,.2);border:none;color:#fff;
+  width:28px;height:28px;border-radius:50%;cursor:pointer;
+  font-size:14px;display:flex;align-items:center;justify-content:center;
+}
+
 .screen{display:none;padding:16px;flex:1;animation:fadeIn .35s ease}
 .screen.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
@@ -87,7 +104,6 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 .btn-ghost{background:var(--card2);border:1px solid var(--border);color:var(--text)}
 .btn-row{display:flex;gap:8px}
 .btn-row .btn{margin-bottom:0}
-.btn-sm{padding:8px 12px;font-size:12px;width:auto;margin:0}
 
 .inp{width:100%;padding:13px 16px;border-radius:14px;border:1px solid var(--border);background:var(--bg2);
   color:var(--text);font-family:'Cairo',sans-serif;font-size:14px;outline:none;
@@ -175,6 +191,7 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 .badge.err{background:rgba(239,68,68,.15);color:var(--danger);border:1px solid rgba(239,68,68,.3)}
 .badge.wait{background:rgba(245,158,11,.15);color:var(--warning);border:1px solid rgba(245,158,11,.3)}
 .badge.run{background:rgba(79,140,255,.15);color:var(--primary);border:1px solid rgba(79,140,255,.3)}
+.badge.new{background:linear-gradient(135deg,#22c55e,#059669);color:#fff;animation:pulse 1.5s infinite}
 .loader{width:20px;height:20px;border:2px solid rgba(255,255,255,.2);
   border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;display:inline-block}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -304,6 +321,20 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 .acc-card .acc-points{background:var(--grad-gold);color:#000;
   padding:4px 10px;border-radius:20px;font-size:11px;font-weight:900;flex-shrink:0}
 
+/* ═══ حالة الحساب (مستخدم/متاح) ═══ */
+.acc-status{
+  padding:3px 10px;border-radius:20px;font-size:10px;font-weight:900;
+  flex-shrink:0;
+}
+.acc-status.in-use{
+  background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;
+  animation:pulse 2s infinite;
+}
+.acc-status.available{
+  background:rgba(34,197,94,.15);color:var(--success);
+  border:1px solid rgba(34,197,94,.3);
+}
+
 .maint-icon{font-size:90px;margin-bottom:20px;animation:floatY 2s infinite;text-align:center}
 .maint-title{font-size:26px;font-weight:900;margin-bottom:12px;text-align:center;
   background:linear-gradient(135deg,#fbbf24,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
@@ -322,55 +353,6 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
   background:linear-gradient(135deg,rgba(239,68,68,.25),rgba(220,38,38,.2));
   transform:scale(1.02);
 }
-
-/* ═══ بطاقة التجميع لكل حساب ═══ */
-.farm-acc-card{
-  background:linear-gradient(135deg,rgba(34,197,94,.08),rgba(5,150,105,.08));
-  border:1px solid rgba(34,197,94,.3);border-radius:14px;padding:12px 14px;margin-bottom:10px;
-  transition:.2s;
-}
-.farm-acc-card.farming{
-  border-color:rgba(34,197,94,.7);
-  background:linear-gradient(135deg,rgba(34,197,94,.18),rgba(5,150,105,.15));
-  box-shadow:0 0 25px rgba(34,197,94,.3);
-  animation:farmGlow 2s infinite;
-}
-@keyframes farmGlow{
-  0%,100%{box-shadow:0 0 25px rgba(34,197,94,.3)}
-  50%{box-shadow:0 0 40px rgba(34,197,94,.6)}
-}
-.farm-acc-card .fa-header{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:8px;gap:10px;
-}
-.farm-acc-card .fa-name{
-  font-weight:900;font-size:14px;flex:1;min-width:0;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
-.farm-acc-card .fa-points{
-  background:var(--grad-gold);color:#000;
-  padding:4px 12px;border-radius:20px;font-size:12px;font-weight:900;flex-shrink:0;
-}
-.farm-acc-card .fa-stats{
-  display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;
-}
-.farm-acc-card .fa-stat{
-  background:rgba(0,0,0,.3);border-radius:8px;padding:6px;text-align:center;
-}
-.farm-acc-card .fa-stat .v{font-size:14px;font-weight:900;color:var(--success)}
-.farm-acc-card .fa-stat .l{font-size:9px;color:var(--muted);font-weight:700}
-.farm-acc-card .fa-btn{
-  width:100%;padding:8px;border:none;border-radius:10px;
-  font-family:'Cairo',sans-serif;font-weight:900;font-size:12px;
-  cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:6px;
-}
-.farm-acc-card .fa-btn.start{
-  background:var(--grad3);color:#fff;box-shadow:0 4px 15px rgba(34,197,94,.3);
-}
-.farm-acc-card .fa-btn.stop{
-  background:var(--grad2);color:#fff;box-shadow:0 4px 15px rgba(239,68,68,.3);
-}
-.farm-acc-card .fa-btn:active{transform:scale(.97)}
 </style>
 </head>
 <body>
@@ -378,7 +360,7 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 <div class="splash" id="splash">
   <div class="logo-big">⚡</div>
   <h1>VIP Services</h1>
-  <div class="tag">PRO EDITION · v16.0</div>
+  <div class="tag">PRO EDITION · v17.0</div>
   <div class="loader-big"></div>
 </div>
 
@@ -418,7 +400,7 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
     <div class="hero">
       <div class="logo"><svg><use href="#ic-rocket"/></svg></div>
       <h1>خدمات احترافية</h1>
-      <div class="ver">PRO EDITION · v16.0</div>
+      <div class="ver">PRO EDITION · v17.0</div>
       <div class="sub">🚀 منصة عالمية للخدمات الاحترافية<br>💎 اشترك VIP · واحصل على كل الميزات</div>
     </div>
     <div class="card">
@@ -465,6 +447,15 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 
   <!-- ═══ VIP GATE ═══ -->
   <div class="screen" id="scr-gate">
+    <div id="activationBanner" class="activation-banner">
+      <div class="icon">🎉</div>
+      <div style="flex:1;text-align:right">
+        <div style="font-size:11px;opacity:.9">تم تفعيل باقتك بنجاح!</div>
+        <div id="activationDetails" style="font-size:13px;font-weight:900"></div>
+      </div>
+      <button class="close-banner" onclick="document.getElementById('activationBanner').classList.remove('show')">✖</button>
+    </div>
+
     <div class="card vip-gate">
       <div class="icon">💎</div>
       <h2 id="gateTitle">مرحباً</h2>
@@ -503,6 +494,15 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 
   <!-- ═══ VIP MAIN ═══ -->
   <div class="screen" id="scr-vip">
+    <div id="vipActivationBanner" class="activation-banner">
+      <div class="icon">🎉</div>
+      <div style="flex:1;text-align:right">
+        <div style="font-size:11px;opacity:.9">تم تفعيل باقتك!</div>
+        <div id="vipActivationDetails" style="font-size:13px;font-weight:900"></div>
+      </div>
+      <button class="close-banner" onclick="document.getElementById('vipActivationBanner').classList.remove('show')">✖</button>
+    </div>
+
     <div class="card" style="position:relative">
       <span class="card-vip-tag">💎 VIP</span>
       <div class="card-title" style="margin-top:20px">👤 لوحة التحكم</div>
@@ -640,81 +640,51 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
     <div class="section-title admin">🛠️ وضع الصيانة</div>
     <div class="card" style="border-color:rgba(251,191,36,.4);background:linear-gradient(135deg,rgba(251,191,36,.05),var(--card))">
       <div class="card-title" style="color:var(--gold)">🛠️ التحكم بالصيانة</div>
-      <div class="muted" style="margin-bottom:12px;font-size:11px">
-        💡 عند التفعيل — الأعضاء يشوفون شاشة صيانة فقط بدون أزرار
-      </div>
       <div id="maintStatus" style="padding:10px 14px;border-radius:12px;margin-bottom:12px;
         background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);font-weight:800;
         font-size:13px;text-align:center;color:var(--success)">
-        🟢 الموقع يعمل بشكل طبيعي
+        🟢 الموقع يعمل
       </div>
       <input class="inp" id="maintMessageInput" placeholder="رسالة تظهر للأعضاء (اختياري)">
-      <input class="inp" id="maintTimeInput" placeholder="الوقت المتوقع (مثال: 3 ساعات)">
-      <button class="btn btn-warning" id="maintEnableBtn">🛠️ تفعيل وضع الصيانة</button>
+      <input class="inp" id="maintTimeInput" placeholder="الوقت المتوقع">
+      <button class="btn btn-warning" id="maintEnableBtn">🛠️ تفعيل الصيانة</button>
       <button class="btn btn-success" id="maintDisableBtn" style="display:none">✅ تعطيل الصيانة</button>
     </div>
 
     <div class="section-title admin">🔐 زر دخول المطور المخفي</div>
     <div class="card" style="border-color:rgba(239,68,68,.4);background:linear-gradient(135deg,rgba(239,68,68,.05),var(--card))">
-      <div class="card-title" style="color:var(--danger)">🔐 زر الدخول السري</div>
-      <div class="muted" style="margin-bottom:12px;font-size:11px">
-        💡 يظهر في شاشة الصيانة فقط — لو نسيت بياناتك أو خرجت من حسابك
-      </div>
       <div id="devBtnStatus" style="padding:10px 14px;border-radius:12px;margin-bottom:12px;
         background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);font-weight:800;
         font-size:13px;text-align:center;color:var(--success)">
-        🟢 الزر مخفي (الأعضاء ما يشوفونه)
+        🟢 الزر مخفي
       </div>
-      <button class="btn btn-success" id="showDevBtn">✅ إظهار الزر في الصيانة</button>
+      <button class="btn btn-success" id="showDevBtn">✅ إظهار الزر</button>
       <button class="btn btn-danger" id="hideDevBtn" style="display:none">🚫 إخفاء الزر</button>
     </div>
 
-    <!-- ═══ 🟢 التجميع — نسخة محسّنة ═══ -->
+    <!-- 🟢 التجميع -->
     <div class="section-title admin">🟢 التجميع</div>
     <div class="card" style="border-color:rgba(34,197,94,.4);background:linear-gradient(135deg,rgba(34,197,94,.05),var(--card))">
-      <div class="card-title" style="color:var(--success)">🟢 تجميع النقاط</div>
-      
-      <!-- إحصائيات إجمالية -->
       <div class="grid2" style="margin-bottom:12px">
         <div class="stat"><div class="v" id="adFarmScore">0</div><div class="l">⭐ جمعت</div></div>
         <div class="stat"><div class="v" id="adFarmTasks">0</div><div class="l">✅ المهام</div></div>
       </div>
-
-      <!-- حالة التجميع -->
       <div id="farmStatus" style="padding:10px 14px;border-radius:12px;margin-bottom:12px;
         background:rgba(148,163,184,.1);border:1px solid rgba(148,163,184,.3);
         font-weight:800;font-size:12px;text-align:center;color:var(--muted)">
         ⚪ لا يوجد تجميع نشط
       </div>
-
-      <div class="muted" style="margin-bottom:10px;font-size:11px;text-align:center">
-        ⚡ اختر طريقة التجميع
-      </div>
-
-      <!-- زر تجميع الكل -->
-      <button class="btn btn-success" id="adStartFarmAll" style="background:linear-gradient(135deg,#22c55e,#059669);margin-bottom:14px">
-        🟢 تجميع الكل (كل الحسابات معاً)
-      </button>
-
-      <!-- زر إيقاف الكل -->
-      <button class="btn btn-danger" id="adStopFarmAll" style="display:none;margin-bottom:14px">
-        ⏹ إيقاف تجميع الكل
-      </button>
-
+      <button class="btn btn-success" id="adStartFarmAll" style="margin-bottom:14px">🟢 تجميع الكل</button>
+      <button class="btn btn-danger" id="adStopFarmAll" style="display:none;margin-bottom:14px">⏹ إيقاف التجميع</button>
       <div class="divider"></div>
-
-      <div class="muted" style="margin-bottom:10px;font-size:11px;text-align:center">
-        🔵 أو اختر حساباً محدداً
-      </div>
-
-      <!-- قائمة الحسابات -->
+      <div class="muted" style="margin-bottom:10px;font-size:11px;text-align:center">🔵 أو اختر حساباً محدداً</div>
       <div id="adFarmAccList"></div>
     </div>
 
+    <!-- 💎 الباقات -->
     <div class="section-title admin">💎 الباقات</div>
     <div class="card">
-      <div class="card-title">➕ إضافة باقة</div>
-      <input class="inp" id="adPlanName" placeholder="اسم الباقة (مثلاً: ساعة واحدة)">
+      <input class="inp" id="adPlanName" placeholder="اسم الباقة">
       <div class="btn-row" style="margin-bottom:8px">
         <button class="btn btn-ghost" data-unit="hours">⏱ ساعات</button>
         <button class="btn btn-ghost" data-unit="days">📅 أيام</button>
@@ -723,27 +693,29 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
       <input class="inp" id="adPlanPrice" placeholder="السعر">
       <button class="btn btn-success" id="adAddPlan">➕ إضافة</button>
       <div class="divider"></div>
-      <div class="muted" style="margin-bottom:8px">📋 الباقات الحالية:</div>
+      <div class="muted" style="margin-bottom:8px">📋 الباقات:</div>
       <div id="adPlansList"></div>
     </div>
 
-    <div class="section-title admin">👥 الحسابات</div>
+    <!-- 👥 الحسابات -->
+    <div class="section-title admin">👥 الحسابات (محفوظة دائمياً)</div>
     <div class="card">
-      <div class="card-title">➕ إضافة حساب TikTok</div>
-      <div class="muted" style="margin-bottom:10px;font-size:11px">
-        💡 العضو لا يختار — النظام يوزع تلقائياً
-      </div>
       <input class="inp" id="adAccUser" placeholder="👤 اسم المستخدم TikTok">
       <input class="inp" id="adAccPass" type="password" placeholder="🔒 كلمة المرور">
       <button class="btn btn-success" id="adAddAcc">➕ إضافة حساب</button>
       <div class="divider"></div>
-      <div class="muted" style="margin-bottom:8px">📋 الحسابات الحالية:</div>
+      <div class="muted" style="margin-bottom:8px">📋 الحسابات (💾 محفوظة):</div>
       <div id="adAccsList"><div class="muted">لا توجد حسابات</div></div>
     </div>
 
-    <div class="section-title admin">🎟️ الأكواد</div>
+    <!-- 🎟️ الأكواد -->
+    <div class="section-title admin">🎟️ الأكواد (تتحدث تلقائياً)</div>
     <div class="card" style="border-color:rgba(251,191,36,.4)">
-      <div class="card-title" style="color:var(--gold)">توليد كود جديد</div>
+      <div id="codeAutoUpdate" style="padding:8px 12px;border-radius:10px;margin-bottom:10px;
+        background:rgba(79,140,255,.1);border:1px solid rgba(79,140,255,.3);
+        font-size:11px;font-weight:800;text-align:center;color:var(--primary)">
+        🔄 يتحدث تلقائياً كل 3 ثواني
+      </div>
       <div class="muted" style="margin-bottom:6px;font-size:11px">اختر الباقة:</div>
       <div id="adCodePlanPicker"></div>
       <div class="muted" style="margin:10px 0 6px;font-size:11px">عدد الاستخدامات:</div>
@@ -759,6 +731,7 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
       <div id="adCodesList"></div>
     </div>
 
+    <!-- 💎 تفعيل يدوي -->
     <div class="section-title admin">💎 تفعيل يدوي</div>
     <div class="card">
       <input class="inp" id="adVipUserId" placeholder="User ID أو اسم المستخدم">
@@ -768,22 +741,21 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
       <button class="btn btn-danger" id="adCancelVip">❌ إلغاء VIP</button>
     </div>
 
+    <!-- 💌 المحادثات -->
     <div class="section-title admin">💌 المحادثات</div>
     <div class="card" style="border-color:rgba(79,140,255,.4)">
-      <div class="muted" style="margin-bottom:10px;font-size:11px">اضغط على أي عضو لفتح المحادثة</div>
       <div id="adChatList"><div class="muted">لا توجد محادثات</div></div>
     </div>
 
-    <div class="section-title admin">👥 الأعضاء والحظر</div>
+    <!-- 👥 الأعضاء -->
+    <div class="section-title admin">👥 الأعضاء</div>
     <div class="card">
-      <div class="card-title">🚫 حظر / فك</div>
       <input class="inp" id="adBanUserId" placeholder="User ID">
       <div class="btn-row">
         <button class="btn btn-danger" id="adBan">🚫 حظر</button>
         <button class="btn btn-success" id="adUnban">✅ فك</button>
       </div>
       <div class="divider"></div>
-      <div class="muted" style="margin-bottom:8px">📋 الأعضاء:</div>
       <div id="adUsersList"></div>
     </div>
 
@@ -863,23 +835,21 @@ let ordersDB = DB.get('orders', {});
 let blastsDB = DB.get('blasts', {});
 let codesDB = DB.get('codes', {});
 let chatsDB = DB.get('chats', {});
+// ═══ جلسات الحسابات النشطة (من في الحساب الآن) ═══
+let activeSessions = DB.get('activeSessions', {}); // {accId: userId}
 
 const state = {
   userId: null, isAdmin: false, isVIP: false,
-  // نظام التجميع
-  farming: false,
-  farmingMode: null,      // 'all' أو 'single'
-  farmingAccId: null,     // لو الوضع 'single' — الحساب المختار
-  farmingAccStats: {},    // {accId: {tasks, score, bad}}
-  farmTimer: null,
-  farmStats: {tasks:0, score:0, bad:0},  // إجمالي
-  // باقي الحالة
+  farming: false, farmingMode: null, farmingAccId: null,
+  farmingAccStats: {}, farmTimer: null,
+  farmStats: {tasks:0, score:0, bad:0},
   blastTimers: {}, orderSvc: null, blastSvc: null, blastHours: 1,
   adminSelectedPlan: null, planUnit: 'days',
   adminCodePlan: null, adminCodeUses: 1,
   adminChatUserId: null,
   authMode: 'login',
   chatSource: 'vip',
+  lastCodesHash: '',
 };
 
 const $ = s => document.querySelector(s);
@@ -938,6 +908,26 @@ function updateHeader() {
   else { right.innerHTML = ''; }
 }
 
+/* ═══ إشعار التفعيل — يظهر عند العضو بعد تفعيل الباقة ═══ */
+function showActivationBanner(planName, duration, unit) {
+  const details = `💎 ${planName} — ${duration} ${unit === 'hours' ? 'ساعة' : 'يوم'}`;
+  const banner = $('#activationBanner');
+  const vipBanner = $('#vipActivationBanner');
+  if (banner) {
+    $('#activationDetails').textContent = details;
+    banner.classList.add('show');
+    setTimeout(() => banner.classList.remove('show'), 10000);
+  }
+  if (vipBanner) {
+    $('#vipActivationDetails').textContent = details;
+    vipBanner.classList.add('show');
+    setTimeout(() => vipBanner.classList.remove('show'), 10000);
+  }
+  // اهتزاز خفيف
+  if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+}
+
+/* ═══ Crypto/API ═══ */
 const SECRET_KEY = new Uint8Array(CFG.KEY_BYTES.map(b => b ^ 0x43));
 async function hmacSha256(keyBytes, msg) {
   const key = await crypto.subtle.importKey('raw', keyBytes, {name:'HMAC', hash:'SHA-256'}, false, ['sign']);
@@ -1036,6 +1026,25 @@ function getTiktokAccounts() {
   return Object.entries(tiktokAccs).map(([id, a]) => ({id, ...a}));
 }
 
+/* ═══ جلسات نشطة — من في الحساب الآن ═══ */
+function isAccountInUse(accId) {
+  return !!activeSessions[accId];
+}
+function getAccountUser(accId) {
+  const uid = activeSessions[accId];
+  if (!uid) return null;
+  return users[uid] || {username: uid};
+}
+function markAccountInUse(accId, userId) {
+  activeSessions[accId] = userId;
+  DB.set('activeSessions', activeSessions);
+}
+function releaseAccount(accId) {
+  delete activeSessions[accId];
+  DB.set('activeSessions', activeSessions);
+}
+
+/* ═══ Fallback — العضو ما يختار، النظام يختار ═══ */
 async function tryCreateOrderWithFallback(svc, amount, target) {
   const allAccs = getTiktokAccounts().filter(a => a.linked && a.token);
   if (!allAccs.length) throw new Error('لا توجد حسابات متاحة');
@@ -1044,6 +1053,8 @@ async function tryCreateOrderWithFallback(svc, amount, target) {
     try {
       const data = await apiCreateOrder(svc, amount, target, acc.token, acc.csrf);
       if (data.data?.createOrder) {
+        // علّم الحساب أنه قيد الاستخدام
+        markAccountInUse(acc.id, state.userId);
         return { success: true, order: data.data.createOrder, account: acc };
       }
       lastError = data.errors?.[0]?.message || 'فشل';
@@ -1052,226 +1063,6 @@ async function tryCreateOrderWithFallback(svc, amount, target) {
     }
   }
   throw new Error(lastError || 'كل الحسابات فشلت');
-}
-
-/* ═══════════════════════════════════════════════════════
-   🟢 نظام التجميع الجديد — وضعين:
-   - 'all': يجمع على كل الحسابات بالتوازي
-   - 'single': يجمع على حساب واحد فقط
-═══════════════════════════════════════════════════════ */
-
-function updateFarmUI() {
-  const status = $('#farmStatus');
-  const startAllBtn = $('#adStartFarmAll');
-  const stopAllBtn = $('#adStopFarmAll');
-  if (!status) return;
-  
-  if (!state.farming) {
-    status.style.background = 'rgba(148,163,184,.1)';
-    status.style.borderColor = 'rgba(148,163,184,.3)';
-    status.style.color = 'var(--muted)';
-    status.textContent = '⚪ لا يوجد تجميع نشط';
-    if (startAllBtn) startAllBtn.style.display = 'flex';
-    if (stopAllBtn) stopAllBtn.style.display = 'none';
-  } else {
-    status.style.background = 'rgba(34,197,94,.15)';
-    status.style.borderColor = 'rgba(34,197,94,.5)';
-    status.style.color = 'var(--success)';
-    if (state.farmingMode === 'all') {
-      const count = getTiktokAccounts().filter(a => a.linked && a.token).length;
-      status.textContent = `🟢 تجميع تلقائي — ${count} حساب`;
-    } else {
-      const acc = tiktokAccs[state.farmingAccId];
-      status.textContent = `🟢 تجميع على: ${acc?.username || '—'}`;
-    }
-    if (startAllBtn) startAllBtn.style.display = 'none';
-    if (stopAllBtn) stopAllBtn.style.display = 'flex';
-  }
-  
-  renderFarmAccList();
-}
-
-function renderFarmAccList() {
-  const list = $('#adFarmAccList');
-  if (!list) return;
-  const accs = Object.entries(tiktokAccs).filter(([id, a]) => a.linked && a.token);
-  
-  if (!accs.length) {
-    list.innerHTML = '<div class="muted" style="text-align:center;padding:16px">لا توجد حسابات — أضف حساباً أولاً</div>';
-    return;
-  }
-  
-  list.innerHTML = accs.map(([id, a]) => {
-    const points = a.userData?.score ?? '?';
-    const stats = state.farmingAccStats[id] || {tasks: 0, score: 0};
-    const isFarming = state.farming && state.farmingMode === 'single' && state.farmingAccId === id;
-    const isFarmingAll = state.farming && state.farmingMode === 'all';
-    const isActive = isFarming || isFarmingAll;
-    
-    return `<div class="farm-acc-card ${isActive ? 'farming' : ''}">
-      <div class="fa-header">
-        <div class="fa-name">👤 ${a.username}</div>
-        <div class="fa-points">⭐ ${points}</div>
-      </div>
-      <div class="fa-stats">
-        <div class="fa-stat"><div class="v">${stats.tasks}</div><div class="l">✅ المهام</div></div>
-        <div class="fa-stat"><div class="v">${stats.score}</div><div class="l">⭐ جمعت</div></div>
-      </div>
-      ${isFarming ?
-        `<button class="fa-btn stop" data-farm-stop="${id}">⏹ إيقاف</button>` :
-        isFarmingAll ?
-        `<div class="muted" style="text-align:center;font-size:11px;padding:6px">🟢 يعمل ضمن تجميع الكل</div>` :
-        `<button class="fa-btn start" data-farm-start="${id}">🟢 تجميع هذا الحساب</button>`
-      }
-    </div>`;
-  }).join('');
-  
-  // ربط الأزرار
-  list.querySelectorAll('[data-farm-start]').forEach(el => {
-    el.onclick = () => adminStartFarmSingle(el.dataset.farmStart);
-  });
-  list.querySelectorAll('[data-farm-stop]').forEach(el => {
-    el.onclick = () => adminStopFarm();
-  });
-}
-
-/* ─── تجميع الكل (كل الحسابات) ─── */
-function adminStartFarmAll() {
-  const accs = Object.entries(tiktokAccs).filter(([id, a]) => a.linked && a.token);
-  if (!accs.length) return toast('❌ أضف حساب TikTok أولاً', 'err');
-  
-  if (state.farming) adminStopFarm();
-  
-  state.farming = true;
-  state.farmingMode = 'all';
-  state.farmingAccId = null;
-  state.farmingAccStats = {};
-  state.farmStats = {tasks:0, score:0, bad:0};
-  
-  accs.forEach(([id]) => { state.farmingAccStats[id] = {tasks:0, score:0, bad:0}; });
-  
-  $('#adFarmScore').textContent = '0';
-  $('#adFarmTasks').textContent = '0';
-  
-  updateFarmUI();
-  toast(`🟢 بدأ تجميع الكل على ${accs.length} حساب`, 'ok');
-  adminFarmLoop();
-}
-
-/* ─── تجميع حساب واحد ─── */
-function adminStartFarmSingle(accId) {
-  const acc = tiktokAccs[accId];
-  if (!acc || !acc.linked || !acc.token) return toast('❌ الحساب غير جاهز', 'err');
-  
-  if (state.farming) adminStopFarm();
-  
-  state.farming = true;
-  state.farmingMode = 'single';
-  state.farmingAccId = accId;
-  state.farmingAccStats = {};
-  state.farmingAccStats[accId] = {tasks:0, score:0, bad:0};
-  state.farmStats = {tasks:0, score:0, bad:0};
-  
-  $('#adFarmScore').textContent = '0';
-  $('#adFarmTasks').textContent = '0';
-  
-  updateFarmUI();
-  toast(`🟢 بدأ التجميع على: ${acc.username}`, 'ok');
-  adminFarmLoop();
-}
-
-/* ─── إيقاف التجميع ─── */
-function adminStopFarm() {
-  state.farming = false;
-  state.farmingMode = null;
-  state.farmingAccId = null;
-  if (state.farmTimer) clearTimeout(state.farmTimer);
-  state.farmTimer = null;
-  updateFarmUI();
-  toast('⏹ تم إيقاف التجميع', 'ok');
-}
-
-/* ─── حلقة التجميع الرئيسية ─── */
-async function adminFarmLoop() {
-  if (!state.farming) return;
-  
-  const accs = getTiktokAccounts().filter(a => a.linked && a.token);
-  if (!accs.length) { adminStopFarm(); return; }
-  
-  // تحديد الحسابات المستهدفة
-  let targetAccs = accs;
-  if (state.farmingMode === 'single') {
-    const single = accs.find(a => a.id === state.farmingAccId);
-    if (!single) { adminStopFarm(); return; }
-    targetAccs = [single];
-  }
-  
-  try {
-    // لكل حساب: احصل على قائمة الطلبات المعلقة
-    for (const acc of targetAccs) {
-      if (!state.farming) return;
-      
-      const apiOrders = await apiGetOrders(acc.token, acc.csrf);
-      const pend = apiOrders.filter(o => o.status === 'pending');
-      
-      if (!pend.length) continue;
-      
-      // نفذ أول 3 طلبات لكل حساب
-      const toProcess = pend.slice(0, 3);
-      
-      for (const o of toProcess) {
-        if (!state.farming) return;
-        
-        try {
-          const result = await apiActionOrder(o._id, acc.token, acc.csrf);
-          
-          // تحديث إحصائيات الحساب
-          if (!state.farmingAccStats[acc.id]) {
-            state.farmingAccStats[acc.id] = {tasks:0, score:0, bad:0};
-          }
-          state.farmingAccStats[acc.id].tasks++;
-          
-          const gained = Number(result.data?.actionOrder?.score || 0);
-          
-          if (gained > 0) {
-            state.farmingAccStats[acc.id].score += gained;
-            // تحديث نقاط الحساب
-            if (tiktokAccs[acc.id] && tiktokAccs[acc.id].userData) {
-              tiktokAccs[acc.id].userData.score = (tiktokAccs[acc.id].userData.score || 0) + gained;
-              DB.set('tiktokAccs', tiktokAccs);
-            }
-          } else {
-            state.farmingAccStats[acc.id].bad++;
-          }
-          
-          // تحديث الإجمالي
-          state.farmStats.tasks++;
-          state.farmStats.score += gained;
-          
-          // تحديث UI
-          $('#adFarmScore').textContent = state.farmStats.score;
-          $('#adFarmTasks').textContent = state.farmStats.tasks;
-          updateFarmUI();
-          
-        } catch(e) {
-          console.warn(`خطأ على ${acc.username}:`, e);
-        }
-        
-        await new Promise(r => setTimeout(r, 100 + Math.random()*150));
-      }
-    }
-    
-    // فحص حد النقاط
-    if (state.farmStats.score >= CFG.FARM_POINTS_LIMIT) {
-      toast(`🎯 جمعت ${CFG.FARM_POINTS_LIMIT} نقطة!`, 'ok');
-      adminStopFarm(); renderAdminPanel(); return;
-    }
-    
-  } catch(e) {
-    console.warn('خطأ في التجميع:', e);
-  }
-  
-  if (state.farming) state.farmTimer = setTimeout(adminFarmLoop, 2000);
 }
 
 /* ═══ Auth ═══ */
@@ -1303,9 +1094,9 @@ function doAuth() {
   
   if (state.authMode === 'register') {
     if (un.length < 3) return toast('❌ اسم المستخدم قصير', 'err');
-    if (pw.length < 5) return toast('❌ كلمة المرور قصيرة (5+)', 'err');
+    if (pw.length < 5) return toast('❌ كلمة المرور قصيرة', 'err');
     if (!/^[a-zA-Z0-9_]+$/.test(un)) return toast('❌ حروف إنجليزية وأرقام فقط', 'err');
-    if (un === DEV_CREDS.username) return toast('❌ هذا الاسم محجوز', 'err');
+    if (un === DEV_CREDS.username) return toast('❌ محجوز', 'err');
     if (getUserByUsername(un)) return toast('❌ الاسم مستخدم', 'err');
     const userId = genUserId();
     users[userId] = {
@@ -1350,9 +1141,7 @@ function showMaintenanceScreen() {
     $('#maintTimeCard').style.display = 'none';
   }
   const devBtn = $('#hiddenDevLoginBtn');
-  if (devBtn) {
-    devBtn.style.display = devBtnDB.get() ? 'flex' : 'none';
-  }
+  if (devBtn) devBtn.style.display = devBtnDB.get() ? 'flex' : 'none';
   showScreen('scr-maintenance');
 }
 
@@ -1368,7 +1157,7 @@ function showGate() {
   const list = Object.entries(plansDB);
   const box = $('#gatePlans');
   if (!list.length) {
-    box.innerHTML = '<div class="muted center" style="padding:20px">لا توجد باقات — تواصل مع المطور</div>';
+    box.innerHTML = '<div class="muted center" style="padding:20px">لا توجد باقات</div>';
   } else {
     box.innerHTML = list.map(([k, p]) => `
       <div class="plan-card">
@@ -1382,8 +1171,23 @@ function showGate() {
   showScreen('scr-gate');
 }
 
+/* ═══ الخروج — يحرر الحسابات اللي يستخدمها العضو ═══ */
+function releaseMyAccounts(userId) {
+  for (const [accId, uid] of Object.entries(activeSessions)) {
+    if (uid === userId) {
+      delete activeSessions[accId];
+    }
+  }
+  DB.set('activeSessions', activeSessions);
+}
+
 function fullLogout() {
   if (state.farming) adminStopFarm();
+  
+  // حرر الحسابات
+  if (state.userId && state.userId !== 'DEV') {
+    releaseMyAccounts(state.userId);
+  }
   
   if (state.isAdmin) {
     state.userId = null; state.isAdmin = false; state.isVIP = false; state.adminChatUserId = null;
@@ -1435,6 +1239,10 @@ function activateCode() {
   DB.set('codes', codesDB);
   state.isVIP = true;
   $('#gateActivationCode').value = '';
+  
+  // ✅ إشعار التفعيل
+  showActivationBanner(p.name, p.duration, p.unit);
+  
   const remaining = entry.maxUses - entry.uses;
   toast(`🎉 تم تفعيل ${p.name}!`, 'ok');
   setTimeout(() => { $('#tabbar').style.display = 'grid'; renderVIPMain(); showScreen('scr-vip'); }, 800);
@@ -1578,7 +1386,7 @@ async function runBlastTask(tid) {
       toast(`🚀 رشقة ${b.run_count+1}`, 'ok');
     }
   } catch(e) {
-    toast(`⏹ فشلت كل الحسابات — تم إيقاف الرشق`, 'err');
+    toast(`⏹ فشلت كل الحسابات`, 'err');
     updateBlast(state.userId, tid, { status: 'stopped' });
     if (state.blastTimers[tid]) { clearInterval(state.blastTimers[tid]); delete state.blastTimers[tid]; }
   }
@@ -1625,7 +1433,7 @@ function renderUserChat() {
   const msgs = getChat(state.userId);
   const body = $('#chatBody');
   if (!msgs.length) {
-    body.innerHTML = `<div class="chat-empty"><div class="icon">💬</div><div>لا توجد رسائل بعد</div><div style="margin-top:8px;font-size:11px">اكتب رسالتك وسيرد عليك المطور قريباً</div></div>`;
+    body.innerHTML = `<div class="chat-empty"><div class="icon">💬</div><div>لا توجد رسائل</div></div>`;
     return;
   }
   body.innerHTML = msgs.map(m => `
@@ -1728,16 +1536,23 @@ function renderAdminPanel() {
   updateDevBtnUI();
   updateFarmUI();
 
+  // ═══ الحسابات + حالة الاستخدام ═══
   const al = $('#adAccsList');
   const accs = Object.entries(tiktokAccs);
   al.innerHTML = accs.length ? accs.map(([id, a]) => {
     const points = a.userData?.score ?? '?';
+    const inUse = isAccountInUse(id);
+    const userUsing = inUse ? getAccountUser(id) : null;
     return `<div class="acc-card">
       <div class="acc-info">
         <div class="acc-name">👤 ${a.username}</div>
         <div class="acc-sub">${a.linked ? '✅ جاهز' : '⚠️ غير مربوط'}</div>
       </div>
       <span class="acc-points">⭐ ${points}</span>
+      ${inUse ? 
+        `<span class="acc-status in-use">🔒 ${userUsing?.username || 'مستخدم'}</span>` :
+        `<span class="acc-status available">✅ متاح</span>`
+      }
       <button class="btn btn-danger" style="width:auto;padding:4px 10px;margin:0;font-size:11px" data-acc-del="${id}">🗑</button>
     </div>`;
   }).join('') : '<div class="muted">لا توجد حسابات</div>';
@@ -1747,6 +1562,7 @@ function renderAdminPanel() {
     renderAdminPanel(); toast('🗑 حُذف', 'ok');
   });
 
+  // الباقات
   const pb = $('#adPlansList');
   const plist = Object.entries(plansDB);
   pb.innerHTML = plist.length ? plist.map(([k, p]) =>
@@ -1794,6 +1610,7 @@ function renderAdminPanel() {
     </div>`).join('') : '<div class="muted">لا يوجد أعضاء</div>';
 }
 
+/* ═══ الأكواد — تتحدث تلقائياً ═══ */
 function renderCodesList() {
   const list = $('#adCodesList');
   const codes = Object.entries(codesDB).sort((a, b) => new Date(b[1].createdAt) - new Date(a[1].createdAt));
@@ -1864,7 +1681,7 @@ function adminAddAccount() {
     DB.set('tiktokAccs', tiktokAccs);
     $('#adAccUser').value = ''; $('#adAccPass').value = '';
     renderAdminPanel();
-    toast('✅ تم إضافة الحساب', 'ok');
+    toast('✅ تم إضافة الحساب (💾 محفوظ دائمياً)', 'ok');
   }).catch(e => toast('❌ ' + (e.message || 'فشل'), 'err'))
     .finally(() => { btn.disabled = false; btn.textContent = '➕ إضافة حساب'; });
 }
@@ -1937,11 +1754,16 @@ function adminActivateVIP() {
   if (!state.adminSelectedPlan || !plansDB[state.adminSelectedPlan]) return toast('❌ اختر الباقة', 'err');
   const p = plansDB[state.adminSelectedPlan];
   const ms = p.unit === 'hours' ? p.duration * 3600000 : p.duration * 86400000;
+  const wasVIP = isVIPUser(targetId);
   users[targetId].vip = {
     expiry: new Date(Date.now() + ms).toISOString(),
     planId: state.adminSelectedPlan, planName: p.name,
   };
   DB.set('users', users);
+  
+  // ✅ إذا العضو كان مسجل دخول في نافذة أخرى → يشوف الإشعار فوراً
+  // (عبر setInterval اللي يفحص)
+  
   toast(`💎 تم تفعيل VIP لـ ${users[targetId].username}`, 'ok');
   renderAdminPanel();
 }
@@ -1958,6 +1780,163 @@ function adminCancelVIP() {
   toast('✅ تم الإلغاء', 'ok'); renderAdminPanel();
 }
 
+/* ═══════════════════════════════════════════════════════
+   🟢 التجميع
+═══════════════════════════════════════════════════════ */
+function updateFarmUI() {
+  const status = $('#farmStatus');
+  const startAllBtn = $('#adStartFarmAll');
+  const stopAllBtn = $('#adStopFarmAll');
+  if (!status) return;
+  
+  if (!state.farming) {
+    status.style.background = 'rgba(148,163,184,.1)';
+    status.style.borderColor = 'rgba(148,163,184,.3)';
+    status.style.color = 'var(--muted)';
+    status.textContent = '⚪ لا يوجد تجميع نشط';
+    if (startAllBtn) startAllBtn.style.display = 'flex';
+    if (stopAllBtn) stopAllBtn.style.display = 'none';
+  } else {
+    status.style.background = 'rgba(34,197,94,.15)';
+    status.style.borderColor = 'rgba(34,197,94,.5)';
+    status.style.color = 'var(--success)';
+    if (state.farmingMode === 'all') {
+      const count = getTiktokAccounts().filter(a => a.linked && a.token).length;
+      status.textContent = `🟢 تجميع تلقائي — ${count} حساب`;
+    } else {
+      const acc = tiktokAccs[state.farmingAccId];
+      status.textContent = `🟢 تجميع على: ${acc?.username || '—'}`;
+    }
+    if (startAllBtn) startAllBtn.style.display = 'none';
+    if (stopAllBtn) stopAllBtn.style.display = 'flex';
+  }
+  renderFarmAccList();
+}
+
+function renderFarmAccList() {
+  const list = $('#adFarmAccList');
+  if (!list) return;
+  const accs = Object.entries(tiktokAccs).filter(([id, a]) => a.linked && a.token);
+  if (!accs.length) {
+    list.innerHTML = '<div class="muted" style="text-align:center;padding:16px">لا توجد حسابات</div>';
+    return;
+  }
+  list.innerHTML = accs.map(([id, a]) => {
+    const points = a.userData?.score ?? '?';
+    const stats = state.farmingAccStats[id] || {tasks: 0, score: 0};
+    const isFarming = state.farming && state.farmingMode === 'single' && state.farmingAccId === id;
+    const isFarmingAll = state.farming && state.farmingMode === 'all';
+    const isActive = isFarming || isFarmingAll;
+    return `<div class="acc-card ${isActive ? '' : ''}" style="${isActive ? 'border-color:rgba(34,197,94,.7);background:linear-gradient(135deg,rgba(34,197,94,.18),rgba(5,150,105,.15));' : ''}">
+      <div class="acc-info">
+        <div class="acc-name">👤 ${a.username}</div>
+        <div class="acc-sub">⭐ ${points} | ✅ ${stats.tasks} | 📈 ${stats.score}</div>
+      </div>
+      ${isFarming ?
+        `<button class="btn btn-danger" style="width:auto;padding:4px 10px;margin:0;font-size:11px" data-farm-stop="${id}">⏹</button>` :
+        isFarmingAll ?
+        `<span class="badge ok">🟢 يجمع</span>` :
+        `<button class="btn btn-success" style="width:auto;padding:4px 10px;margin:0;font-size:11px" data-farm-start="${id}">🟢 تجميع</button>`
+      }
+    </div>`;
+  }).join('');
+  list.querySelectorAll('[data-farm-start]').forEach(el => el.onclick = () => adminStartFarmSingle(el.dataset.farmStart));
+  list.querySelectorAll('[data-farm-stop]').forEach(el => el.onclick = () => adminStopFarm());
+}
+
+function adminStartFarmAll() {
+  const accs = Object.entries(tiktokAccs).filter(([id, a]) => a.linked && a.token);
+  if (!accs.length) return toast('❌ أضف حساب', 'err');
+  if (state.farming) adminStopFarm();
+  state.farming = true;
+  state.farmingMode = 'all';
+  state.farmingAccId = null;
+  state.farmingAccStats = {};
+  state.farmStats = {tasks:0, score:0, bad:0};
+  accs.forEach(([id]) => { state.farmingAccStats[id] = {tasks:0, score:0, bad:0}; });
+  $('#adFarmScore').textContent = '0';
+  $('#adFarmTasks').textContent = '0';
+  updateFarmUI();
+  toast(`🟢 بدأ تجميع الكل على ${accs.length} حساب`, 'ok');
+  adminFarmLoop();
+}
+
+function adminStartFarmSingle(accId) {
+  const acc = tiktokAccs[accId];
+  if (!acc || !acc.linked || !acc.token) return toast('❌ غير جاهز', 'err');
+  if (state.farming) adminStopFarm();
+  state.farming = true;
+  state.farmingMode = 'single';
+  state.farmingAccId = accId;
+  state.farmingAccStats = {};
+  state.farmingAccStats[accId] = {tasks:0, score:0, bad:0};
+  state.farmStats = {tasks:0, score:0, bad:0};
+  $('#adFarmScore').textContent = '0';
+  $('#adFarmTasks').textContent = '0';
+  updateFarmUI();
+  toast(`🟢 بدأ التجميع على: ${acc.username}`, 'ok');
+  adminFarmLoop();
+}
+
+function adminStopFarm() {
+  state.farming = false;
+  state.farmingMode = null;
+  state.farmingAccId = null;
+  if (state.farmTimer) clearTimeout(state.farmTimer);
+  state.farmTimer = null;
+  updateFarmUI();
+  toast('⏹ تم إيقاف التجميع', 'ok');
+}
+
+async function adminFarmLoop() {
+  if (!state.farming) return;
+  const accs = getTiktokAccounts().filter(a => a.linked && a.token);
+  if (!accs.length) { adminStopFarm(); return; }
+  let targetAccs = accs;
+  if (state.farmingMode === 'single') {
+    const single = accs.find(a => a.id === state.farmingAccId);
+    if (!single) { adminStopFarm(); return; }
+    targetAccs = [single];
+  }
+  try {
+    for (const acc of targetAccs) {
+      if (!state.farming) return;
+      const apiOrders = await apiGetOrders(acc.token, acc.csrf);
+      const pend = apiOrders.filter(o => o.status === 'pending');
+      if (!pend.length) continue;
+      const toProcess = pend.slice(0, 3);
+      for (const o of toProcess) {
+        if (!state.farming) return;
+        try {
+          const result = await apiActionOrder(o._id, acc.token, acc.csrf);
+          if (!state.farmingAccStats[acc.id]) state.farmingAccStats[acc.id] = {tasks:0, score:0, bad:0};
+          state.farmingAccStats[acc.id].tasks++;
+          const gained = Number(result.data?.actionOrder?.score || 0);
+          if (gained > 0) {
+            state.farmingAccStats[acc.id].score += gained;
+            if (tiktokAccs[acc.id] && tiktokAccs[acc.id].userData) {
+              tiktokAccs[acc.id].userData.score = (tiktokAccs[acc.id].userData.score || 0) + gained;
+              DB.set('tiktokAccs', tiktokAccs);
+            }
+          } else state.farmingAccStats[acc.id].bad++;
+          state.farmStats.tasks++;
+          state.farmStats.score += gained;
+          $('#adFarmScore').textContent = state.farmStats.score;
+          $('#adFarmTasks').textContent = state.farmStats.tasks;
+          updateFarmUI();
+        } catch(e) { console.warn(e); }
+        await new Promise(r => setTimeout(r, 100 + Math.random()*150));
+      }
+    }
+    if (state.farmStats.score >= CFG.FARM_POINTS_LIMIT) {
+      toast(`🎯 جمعت ${CFG.FARM_POINTS_LIMIT} نقطة!`, 'ok');
+      adminStopFarm(); renderAdminPanel(); return;
+    }
+  } catch(e) { console.warn(e); }
+  if (state.farming) state.farmTimer = setTimeout(adminFarmLoop, 2000);
+}
+
+/* ═══ الصيانة ═══ */
 function updateMaintenanceUI() {
   const status = $('#maintStatus');
   const enableBtn = $('#maintEnableBtn');
@@ -1967,7 +1946,7 @@ function updateMaintenanceUI() {
     status.style.background = 'rgba(239,68,68,.1)';
     status.style.borderColor = 'rgba(239,68,68,.3)';
     status.style.color = 'var(--danger)';
-    status.textContent = '🔴 وضع الصيانة مُفعّل — الأعضاء محجوبون';
+    status.textContent = '🔴 وضع الصيانة مُفعّل';
     enableBtn.style.display = 'none';
     disableBtn.style.display = 'flex';
     $('#maintMessageInput').value = maintenance.message || '';
@@ -1976,7 +1955,7 @@ function updateMaintenanceUI() {
     status.style.background = 'rgba(34,197,94,.1)';
     status.style.borderColor = 'rgba(34,197,94,.3)';
     status.style.color = 'var(--success)';
-    status.textContent = '🟢 الموقع يعمل بشكل طبيعي';
+    status.textContent = '🟢 الموقع يعمل';
     enableBtn.style.display = 'flex';
     disableBtn.style.display = 'none';
   }
@@ -1988,14 +1967,14 @@ function updateDevBtnUI() {
   const hideDevBtn = $('#hideDevBtn');
   if (!devBtnStatus) return;
   if (devBtnDB.get()) {
-    devBtnStatus.textContent = '🔴 الزر ظاهر — يظهر في شاشة الصيانة';
+    devBtnStatus.textContent = '🔴 الزر ظاهر في شاشة الصيانة';
     devBtnStatus.style.background = 'rgba(239,68,68,.1)';
     devBtnStatus.style.borderColor = 'rgba(239,68,68,.3)';
     devBtnStatus.style.color = 'var(--danger)';
     if (showDevBtn) showDevBtn.style.display = 'none';
     if (hideDevBtn) hideDevBtn.style.display = 'flex';
   } else {
-    devBtnStatus.textContent = '🟢 الزر مخفي (الأعضاء ما يشوفونه)';
+    devBtnStatus.textContent = '🟢 الزر مخفي';
     devBtnStatus.style.background = 'rgba(34,197,94,.1)';
     devBtnStatus.style.borderColor = 'rgba(34,197,94,.3)';
     devBtnStatus.style.color = 'var(--success)';
@@ -2014,7 +1993,7 @@ function enableMaintenance() {
   };
   maintDB.set(maintenance);
   updateMaintenanceUI();
-  toast('🛠️ تم تفعيل وضع الصيانة', 'ok');
+  toast('🛠️ تم تفعيل الصيانة', 'ok');
 }
 
 function disableMaintenance() {
@@ -2022,6 +2001,36 @@ function disableMaintenance() {
   maintDB.set(maintenance);
   updateMaintenanceUI();
   toast('✅ تم تعطيل الصيانة', 'ok');
+}
+
+/* ═══ التحقق من التفعيل الجديد — للعضو ═══ */
+let lastVipState = {};
+function checkVipChanges() {
+  if (!state.userId || state.isAdmin) return;
+  const u = users[state.userId];
+  if (!u) return;
+  
+  const currentVIP = u.vip?.expiry || null;
+  const lastVIP = lastVipState[state.userId] || null;
+  
+  if (currentVIP && currentVIP !== lastVIP && !isNaN(new Date(currentVIP))) {
+    // تم تفعيل جديد
+    if (u.vip?.planName) {
+      const plan = plansDB[u.vip.planId];
+      if (plan) {
+        showActivationBanner(plan.name, plan.duration, plan.unit);
+      }
+    }
+    // انقل للـ VIP
+    if (!state.isVIP || $('#scr-gate').classList.contains('active')) {
+      state.isVIP = true;
+      $('#tabbar').style.display = 'grid';
+      renderVIPMain();
+      showScreen('scr-vip');
+    }
+  }
+  
+  lastVipState[state.userId] = currentVIP;
 }
 
 function createStars() {
@@ -2037,10 +2046,10 @@ function createStars() {
   }
 }
 
+/* ═══ Init ═══ */
 document.addEventListener('DOMContentLoaded', () => {
   createStars();
   setTimeout(() => $('#splash')?.classList.add('hide'), 1800);
-  $('#mainLogo').style.cursor = 'default';
 
   $('#btnLogin').onclick = doAuth;
   $('#toggleAuth').onclick = switchAuthMode;
@@ -2091,8 +2100,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if ($('#maintEnableBtn')) $('#maintEnableBtn').onclick = enableMaintenance;
   if ($('#maintDisableBtn')) $('#maintDisableBtn').onclick = disableMaintenance;
-
-  // ═══ أزرار التجميع الجديدة ═══
   if ($('#adStartFarmAll')) $('#adStartFarmAll').onclick = adminStartFarmAll;
   if ($('#adStopFarmAll')) $('#adStopFarmAll').onclick = adminStopFarm;
 
@@ -2173,23 +2180,36 @@ document.addEventListener('DOMContentLoaded', () => {
     state.isAdmin = false;
     state.isVIP = isVIPUser(saved);
     updateHeader();
-    if (maintenance.active) {
-      showMaintenanceScreen();
-    } else {
-      routeAfterLogin();
-    }
+    if (maintenance.active) showMaintenanceScreen();
+    else routeAfterLogin();
     updateSupportBadge();
+    lastVipState[saved] = users[saved].vip?.expiry || null;
   } else if (maintenance.active) {
     showMaintenanceScreen();
   } else {
     updateHeader();
   }
 
+  // ═══ تحديث دوري كل 3 ثواني ═══
   setInterval(() => {
     if ($('#scr-chat').classList.contains('active') && state.userId) renderUserChat();
     if ($('#scr-adminchat').classList.contains('active') && state.adminChatUserId) renderAdminChat();
     updateSupportBadge();
     if (state.isVIP && $('#scr-vip').classList.contains('active')) renderVIPMain();
+    
+    // التحقق من التفعيل الجديد
+    checkVipChanges();
+    
+    // الأكواد تتحدث تلقائياً في لوحة المطور
+    if (state.isAdmin && $('#scr-admin').classList.contains('active')) {
+      const codesHash = JSON.stringify(codesDB);
+      if (codesHash !== state.lastCodesHash) {
+        state.lastCodesHash = codesHash;
+        renderCodesList();
+      }
+      // أيضاً حدّث الحسابات (حالة الاستخدام)
+      renderAdminPanel();
+    }
     
     const prevMaint = maintenance.active;
     maintenance = maintDB.get();
@@ -2207,6 +2227,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }, 3000);
+
+  window.addEventListener('beforeunload', () => {
+    if (state.userId && state.userId !== 'DEV') releaseMyAccounts(state.userId);
+  });
 });
 
 window.copyCode = copyCode;
