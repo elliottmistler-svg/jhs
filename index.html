@@ -21,8 +21,7 @@ html,body{overflow-x:hidden}
 body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;
   background-image:
     radial-gradient(circle at 15% 5%,rgba(79,140,255,.15) 0%,transparent 35%),
-    radial-gradient(circle at 85% 95%,rgba(168,85,247,.12) 0%,transparent 40%),
-    radial-gradient(circle at 50% 50%,rgba(34,197,94,.04) 0%,transparent 60%);
+    radial-gradient(circle at 85% 95%,rgba(168,85,247,.12) 0%,transparent 40%);
   background-attachment:fixed;position:relative}
 .stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;
@@ -45,32 +44,11 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 .hdr-pill.vip{background:var(--grad1);color:#fff;box-shadow:0 4px 15px rgba(79,140,255,.5)}
 .hdr-pill.dev{background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff}
 
-.maint-banner{
-  background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;
+.maint-banner{background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;
   padding:10px 16px;text-align:center;font-weight:900;font-size:12px;
   display:none;align-items:center;justify-content:center;gap:8px;
-  box-shadow:0 4px 15px rgba(245,158,11,.4);animation:maintPulse 2s infinite;
-  position:sticky;top:0;z-index:49;
-}
+  position:sticky;top:0;z-index:49}
 .maint-banner.show{display:flex}
-@keyframes maintPulse{0%,100%{background:linear-gradient(135deg,#f59e0b,#d97706)}50%{background:linear-gradient(135deg,#eab308,#f59e0b)}}
-
-/* إشعار التفعيل */
-.activation-banner{
-  background:linear-gradient(135deg,#22c55e,#059669);color:#fff;
-  padding:14px 16px;text-align:center;font-weight:900;font-size:13px;
-  display:none;align-items:center;justify-content:center;gap:10px;
-  box-shadow:0 4px 20px rgba(34,197,94,.5);animation:bounceIn .5s ease;
-  border-radius:14px;margin-bottom:12px;position:relative;
-}
-.activation-banner.show{display:flex}
-.activation-banner .icon{font-size:24px;animation:floatY 2s infinite}
-.activation-banner .close-banner{
-  position:absolute;left:10px;top:50%;transform:translateY(-50%);
-  background:rgba(255,255,255,.2);border:none;color:#fff;
-  width:28px;height:28px;border-radius:50%;cursor:pointer;
-  font-size:14px;display:flex;align-items:center;justify-content:center;
-}
 
 .screen{display:none;padding:16px;flex:1;animation:fadeIn .35s ease}
 .screen.active{display:block}
@@ -88,13 +66,9 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 
 .btn{width:100%;padding:13px;border:none;border-radius:14px;font-family:'Cairo',sans-serif;
   font-weight:800;font-size:14px;color:#fff;cursor:pointer;margin-bottom:8px;
-  transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;
-  position:relative;overflow:hidden}
+  transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
 .btn:active{transform:scale(.96)}
 .btn:disabled{opacity:.4;cursor:not-allowed}
-.btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);transition:.5s}
-.btn:active::before{left:100%}
 .btn-primary{background:var(--grad1);box-shadow:0 4px 20px rgba(79,140,255,.4)}
 .btn-success{background:var(--grad3);box-shadow:0 4px 20px rgba(34,197,94,.4)}
 .btn-danger{background:var(--grad2);box-shadow:0 4px 20px rgba(239,68,68,.4)}
@@ -113,35 +87,28 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-.stat{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:12px;text-align:center;
-  transition:.2s;position:relative;overflow:hidden}
-.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--grad1);opacity:.5}
+.stat{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:12px;text-align:center}
 .stat .v{font-size:20px;font-weight:900;color:var(--gold);margin-bottom:4px}
 .stat .l{font-size:11px;color:var(--muted);font-weight:700}
 
 .svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .svc-card{background:linear-gradient(135deg,var(--card),var(--card2));
   border:1px solid var(--border);border-radius:16px;padding:16px 12px;
-  cursor:pointer;text-align:center;transition:.2s;position:relative;overflow:hidden}
-.svc-card:hover{transform:translateY(-3px);border-color:var(--primary);box-shadow:0 8px 30px rgba(79,140,255,.25)}
+  cursor:pointer;text-align:center;transition:.2s}
+.svc-card:hover{transform:translateY(-3px);border-color:var(--primary)}
 .svc-card:active{transform:scale(.96)}
 .svc-card .svc-icon{width:52px;height:52px;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;
-  border-radius:14px;position:relative;transition:.3s}
-.svc-card:hover .svc-icon{transform:rotate(-8deg) scale(1.1)}
+  border-radius:14px}
 .svc-card .svc-icon svg{width:32px;height:32px}
-.svc-card .svc-icon.followers{background:linear-gradient(135deg,rgba(79,140,255,.25),rgba(124,58,237,.25));
-  box-shadow:0 0 25px rgba(79,140,255,.3)}
-.svc-card .svc-icon.likes{background:linear-gradient(135deg,rgba(244,63,94,.25),rgba(236,72,153,.25));
-  box-shadow:0 0 25px rgba(244,63,94,.3)}
-.svc-card .svc-icon.views{background:linear-gradient(135deg,rgba(251,191,36,.25),rgba(245,158,11,.25));
-  box-shadow:0 0 25px rgba(251,191,36,.3)}
-.svc-card .svc-icon.comments{background:linear-gradient(135deg,rgba(168,85,247,.25),rgba(124,58,237,.25));
-  box-shadow:0 0 25px rgba(168,85,247,.3)}
+.svc-card .svc-icon.followers{background:linear-gradient(135deg,rgba(79,140,255,.25),rgba(124,58,237,.25))}
+.svc-card .svc-icon.likes{background:linear-gradient(135deg,rgba(244,63,94,.25),rgba(236,72,153,.25))}
+.svc-card .svc-icon.views{background:linear-gradient(135deg,rgba(251,191,36,.25),rgba(245,158,11,.25))}
+.svc-card .svc-icon.comments{background:linear-gradient(135deg,rgba(168,85,247,.25),rgba(124,58,237,.25))}
 .svc-card .name{font-weight:900;font-size:14px;margin-bottom:4px}
 .svc-card .price{font-size:11px;color:var(--muted);font-weight:700}
 
 .order-item{background:var(--bg2);border:1px solid var(--border);border-radius:12px;
-  padding:12px 14px;margin-bottom:8px;font-size:12px;transition:.15s}
+  padding:12px 14px;margin-bottom:8px;font-size:12px}
 .order-item .row{display:flex;justify-content:space-between;margin-top:4px;align-items:center}
 .order-item .oid{font-family:monospace;color:var(--muted);font-size:10px;margin:2px 0}
 
@@ -150,8 +117,8 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
   font-weight:800;font-size:13px;z-index:999;transition:.3s;box-shadow:0 10px 40px rgba(0,0,0,.6);
   max-width:90%;text-align:center}
 .toast.show{transform:translateX(-50%) translateY(0)}
-.toast.ok{border-color:var(--success);color:var(--success);box-shadow:0 10px 40px rgba(34,197,94,.35)}
-.toast.err{border-color:var(--danger);color:var(--danger);box-shadow:0 10px 40px rgba(239,68,68,.35)}
+.toast.ok{border-color:var(--success);color:var(--success)}
+.toast.err{border-color:var(--danger);color:var(--danger)}
 
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;
   display:none;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(8px)}
@@ -166,8 +133,6 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
   box-shadow:0 20px 60px rgba(79,140,255,.5);position:relative;
   animation:floatY 3s infinite ease-in-out}
 @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.hero .logo::after{content:'';position:absolute;inset:-4px;border-radius:24px;
-  background:var(--grad1);filter:blur(25px);opacity:.7;z-index:-1}
 .hero .logo svg{width:52px;height:52px;color:#fff}
 .hero h1{font-size:28px;font-weight:900;margin-bottom:6px;
   background:linear-gradient(135deg,#fff,#a5b4fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
@@ -180,18 +145,17 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 .tabbar button{background:none;border:none;color:var(--muted);font-family:'Cairo',sans-serif;
   font-size:10px;font-weight:800;padding:6px 0;cursor:pointer;display:flex;flex-direction:column;
   align-items:center;gap:4px;transition:.2s}
-.tabbar button .ico{font-size:20px;transition:.2s}
+.tabbar button .ico{font-size:20px}
 .tabbar button.active{color:var(--primary)}
-.tabbar button.active .ico{transform:scale(1.2) translateY(-2px);filter:drop-shadow(0 4px 8px rgba(79,140,255,.6))}
+.tabbar button.active .ico{transform:scale(1.2) translateY(-2px)}
 
 .muted{color:var(--muted);font-size:12px;line-height:1.7;font-weight:600}
 .divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:14px 0}
-.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:900;letter-spacing:.5px}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:900}
 .badge.ok{background:rgba(34,197,94,.15);color:var(--success);border:1px solid rgba(34,197,94,.3)}
 .badge.err{background:rgba(239,68,68,.15);color:var(--danger);border:1px solid rgba(239,68,68,.3)}
 .badge.wait{background:rgba(245,158,11,.15);color:var(--warning);border:1px solid rgba(245,158,11,.3)}
 .badge.run{background:rgba(79,140,255,.15);color:var(--primary);border:1px solid rgba(79,140,255,.3)}
-.badge.new{background:linear-gradient(135deg,#22c55e,#059669);color:#fff;animation:pulse 1.5s infinite}
 .loader{width:20px;height:20px;border:2px solid rgba(255,255,255,.2);
   border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;display:inline-block}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -222,7 +186,7 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
   border:2px dashed var(--gold);border-radius:14px;padding:16px;text-align:center;margin:10px 0}
 .code-box .code-lbl{font-size:11px;color:var(--muted);font-weight:700;margin-bottom:6px}
 .code-box .code-val{font-family:monospace;font-size:20px;font-weight:900;color:var(--gold);
-  letter-spacing:3px;text-shadow:0 0 20px rgba(251,191,36,.5)}
+  letter-spacing:3px}
 
 .link-btn{background:none;border:none;color:var(--primary);font-family:'Cairo',sans-serif;
   font-size:12px;font-weight:800;cursor:pointer;text-decoration:underline;padding:6px 0;width:100%;text-align:center;margin-top:4px}
@@ -245,7 +209,6 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 
 .farm-box{background:linear-gradient(135deg,rgba(34,197,94,.08),rgba(5,150,105,.08));
   border:1px solid rgba(34,197,94,.4);border-radius:14px;padding:14px;margin-bottom:12px}
-.farm-box .farm-title{font-weight:900;color:var(--success);font-size:13px;margin-bottom:10px}
 .farm-box .farm-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
 .farm-box .farm-stat{background:rgba(0,0,0,.3);border-radius:10px;padding:8px;text-align:center}
 .farm-box .farm-stat .v{font-size:18px;font-weight:900;color:var(--success)}
@@ -259,14 +222,12 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 .support-fab{position:fixed;bottom:90px;left:16px;width:56px;height:56px;border-radius:50%;
   background:var(--grad1);color:#fff;border:none;cursor:pointer;
   box-shadow:0 8px 30px rgba(79,140,255,.5);display:flex;align-items:center;justify-content:center;
-  font-size:24px;z-index:100;transition:.3s;animation:fabPulse 2s infinite}
+  font-size:24px;z-index:100;transition:.3s}
 .support-fab:hover{transform:scale(1.1)}
-.support-fab:active{transform:scale(.95)}
 .support-fab .badge-dot{position:absolute;top:2px;right:2px;width:14px;height:14px;border-radius:50%;
   background:var(--danger);border:2px solid var(--bg);display:none}
 .support-fab .badge-dot.show{display:block;animation:pulse 1.5s infinite}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
-@keyframes fabPulse{0%,100%{box-shadow:0 8px 30px rgba(79,140,255,.5)}50%{box-shadow:0 8px 40px rgba(79,140,255,.8)}}
 
 .chat-screen{display:flex;flex-direction:column;height:calc(100vh - 200px);padding:0}
 .chat-header{background:linear-gradient(135deg,rgba(79,140,255,.15),rgba(168,85,247,.15));
@@ -277,14 +238,13 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 .chat-header .info{flex:1;min-width:0}
 .chat-header .name{font-weight:900;font-size:14px}
 .chat-header .status{font-size:11px;color:var(--success);font-weight:700;display:flex;align-items:center;gap:4px}
-.chat-header .status::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--success);
-  box-shadow:0 0 8px var(--success);animation:pulse 2s infinite}
+.chat-header .status::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--success)}
 
 .chat-body{flex:1;overflow-y:auto;padding:10px 0;display:flex;flex-direction:column;gap:8px}
 .chat-msg{max-width:78%;padding:10px 14px;border-radius:16px;font-size:13px;
   line-height:1.6;word-wrap:break-word;position:relative;animation:slideUp .3s ease}
 .chat-msg.me{align-self:flex-start;background:var(--grad1);color:#fff;
-  border-bottom-right-radius:4px;box-shadow:0 4px 15px rgba(79,140,255,.3)}
+  border-bottom-right-radius:4px}
 .chat-msg.them{align-self:flex-end;background:var(--card2);border:1px solid var(--border);
   color:var(--text);border-bottom-left-radius:4px}
 .chat-msg .time{font-size:9px;opacity:.6;margin-top:4px;display:block;text-align:left}
@@ -295,12 +255,9 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
   background:rgba(13,18,32,.95);position:sticky;bottom:0}
 .chat-input-bar input{flex:1;padding:12px 16px;border-radius:24px;border:1px solid var(--border);
   background:var(--bg2);color:var(--text);font-family:'Cairo',sans-serif;font-size:13px;outline:none}
-.chat-input-bar input:focus{border-color:var(--primary)}
 .chat-input-bar button{width:48px;height:48px;border-radius:50%;border:none;
   background:var(--grad1);color:#fff;cursor:pointer;font-size:18px;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;
-  transition:.2s;box-shadow:0 4px 15px rgba(79,140,255,.4)}
-.chat-input-bar button:active{transform:scale(.92)}
+  display:flex;align-items:center;justify-content:center;flex-shrink:0}
 
 .section-title{
   background:linear-gradient(135deg,rgba(79,140,255,.15),rgba(168,85,247,.15));
@@ -321,37 +278,35 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 .acc-card .acc-points{background:var(--grad-gold);color:#000;
   padding:4px 10px;border-radius:20px;font-size:11px;font-weight:900;flex-shrink:0}
 
-/* ═══ حالة الحساب (مستخدم/متاح) ═══ */
-.acc-status{
-  padding:3px 10px;border-radius:20px;font-size:10px;font-weight:900;
-  flex-shrink:0;
-}
-.acc-status.in-use{
-  background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;
-  animation:pulse 2s infinite;
-}
-.acc-status.available{
-  background:rgba(34,197,94,.15);color:var(--success);
-  border:1px solid rgba(34,197,94,.3);
-}
-
-.maint-icon{font-size:90px;margin-bottom:20px;animation:floatY 2s infinite;text-align:center}
+.maint-icon{font-size:90px;margin-bottom:20px;text-align:center}
 .maint-title{font-size:26px;font-weight:900;margin-bottom:12px;text-align:center;
   background:linear-gradient(135deg,#fbbf24,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
-#hiddenDevLoginBtn{
-  display:none;
-  width:100%;padding:14px;margin-top:20px;
-  background:linear-gradient(135deg,rgba(239,68,68,.15),rgba(220,38,38,.1));
-  border:1px dashed rgba(239,68,68,.4);border-radius:14px;
-  color:var(--danger);font-family:'Cairo',sans-serif;
-  font-weight:900;font-size:13px;cursor:pointer;
-  align-items:center;justify-content:center;gap:8px;
-  transition:.2s;
+.fb-status{
+  padding:10px 14px;border-radius:12px;margin-bottom:12px;
+  font-weight:900;font-size:12px;text-align:center;
 }
-#hiddenDevLoginBtn:hover{
-  background:linear-gradient(135deg,rgba(239,68,68,.25),rgba(220,38,38,.2));
-  transform:scale(1.02);
+.fb-status.connected{background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.4);color:var(--success)}
+.fb-status.connecting{background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.4);color:var(--warning)}
+.fb-status.error{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);color:var(--danger)}
+
+.acc-status{padding:3px 10px;border-radius:20px;font-size:10px;font-weight:900;flex-shrink:0}
+.acc-status.in-use{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;animation:pulse 2s infinite}
+.acc-status.available{background:rgba(34,197,94,.15);color:var(--success);border:1px solid rgba(34,197,94,.3)}
+
+.activation-banner{
+  background:linear-gradient(135deg,#22c55e,#059669);color:#fff;
+  padding:14px 16px;text-align:center;font-weight:900;font-size:13px;
+  display:none;align-items:center;justify-content:center;gap:10px;
+  border-radius:14px;margin-bottom:12px;position:relative;
+}
+.activation-banner.show{display:flex;animation:bounceIn .5s ease}
+.activation-banner .icon{font-size:24px;animation:floatY 2s infinite}
+.activation-banner .close-banner{
+  position:absolute;left:10px;top:50%;transform:translateY(-50%);
+  background:rgba(255,255,255,.2);border:none;color:#fff;
+  width:28px;height:28px;border-radius:50%;cursor:pointer;
+  font-size:14px;display:flex;align-items:center;justify-content:center;
 }
 </style>
 </head>
@@ -360,28 +315,18 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 <div class="splash" id="splash">
   <div class="logo-big">⚡</div>
   <h1>VIP Services</h1>
-  <div class="tag">PRO EDITION · v17.0</div>
+  <div class="tag">PRO EDITION · v18.0 · CLOUD</div>
   <div class="loader-big"></div>
 </div>
 
 <div class="stars" id="stars"></div>
 
 <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
-  <symbol id="ic-followers" viewBox="0 0 24 24">
-    <path fill="currentColor" d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
-  </symbol>
-  <symbol id="ic-likes" viewBox="0 0 24 24">
-    <path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-  </symbol>
-  <symbol id="ic-views" viewBox="0 0 24 24">
-    <path fill="currentColor" d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
-  </symbol>
-  <symbol id="ic-comments" viewBox="0 0 24 24">
-    <path fill="currentColor" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
-  </symbol>
-  <symbol id="ic-rocket" viewBox="0 0 24 24">
-    <path fill="currentColor" d="M12 2C8 6 6 10 6 14c0 2 1 4 2 5h8c1-1 2-3 2-5 0-4-2-8-6-12zm0 13c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
-  </symbol>
+  <symbol id="ic-followers" viewBox="0 0 24 24"><path fill="currentColor" d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></symbol>
+  <symbol id="ic-likes" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></symbol>
+  <symbol id="ic-views" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></symbol>
+  <symbol id="ic-comments" viewBox="0 0 24 24"><path fill="currentColor" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></symbol>
+  <symbol id="ic-rocket" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C8 6 6 10 6 14c0 2 1 4 2 5h8c1-1 2-3 2-5 0-4-2-8-6-12zm0 13c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></symbol>
 </svg>
 
 <div class="app">
@@ -395,62 +340,57 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
     <div class="hdr-right" id="hdrRight"></div>
   </div>
 
-  <!-- ═══ LOGIN ═══ -->
+  <!-- LOGIN -->
   <div class="screen active" id="scr-login">
     <div class="hero">
       <div class="logo"><svg><use href="#ic-rocket"/></svg></div>
       <h1>خدمات احترافية</h1>
-      <div class="ver">PRO EDITION · v17.0</div>
-      <div class="sub">🚀 منصة عالمية للخدمات الاحترافية<br>💎 اشترك VIP · واحصل على كل الميزات</div>
+      <div class="ver">PRO EDITION · v18.0 · CLOUD</div>
+      <div class="sub">🚀 منصة عالمية للخدمات<br>💎 اشترك VIP · كل شيء مزامن</div>
     </div>
+
+    <div class="card">
+      <div id="fbStatus" class="fb-status connecting">⏳ جاري الاتصال بالسحابة...</div>
+    </div>
+
     <div class="card">
       <div class="card-title" id="authTitle">🔐 تسجيل الدخول</div>
       <input class="inp" id="inUsername" placeholder="👤 اسم المستخدم" maxlength="30">
       <input class="inp" id="inPassword" type="password" placeholder="🔒 كلمة المرور" maxlength="40">
       <button class="btn btn-primary" id="btnLogin">🚪 دخول</button>
-      <button class="link-btn" id="toggleAuth">✨ ليس لديك حساب؟ إنشاء حساب جديد</button>
-    </div>
-    <div class="card">
-      <div class="card-title">💬 الدعم</div>
-      <div class="muted center" style="margin-bottom:10px">تواصل مباشرة مع المطور</div>
-      <button class="btn btn-ghost" id="btnContact">💬 فتح المحادثة</button>
+      <button class="link-btn" id="toggleAuth">✨ ليس لديك حساب؟ إنشاء حساب</button>
     </div>
   </div>
 
-  <!-- ═══ MAINTENANCE ═══ -->
+  <!-- MAINTENANCE -->
   <div class="screen" id="scr-maintenance">
     <div style="padding:20px 0">
       <div class="maint-icon">🛠️</div>
       <div class="maint-title">الموقع في صيانة</div>
-      <div style="color:var(--muted);font-size:13px;line-height:1.9;font-weight:600;margin-bottom:20px;text-align:center">
+      <div style="color:var(--muted);font-size:13px;line-height:1.9;text-align:center;margin-bottom:20px">
         نعمل حالياً على تحسين الخدمات<br>سنعود قريباً بإذن الله
       </div>
     </div>
-    <div class="card" style="border-color:rgba(251,191,36,.4);background:linear-gradient(135deg,rgba(251,191,36,.05),var(--card))">
+    <div class="card" style="border-color:rgba(251,191,36,.4)">
       <div class="card-title" style="color:var(--gold)">📢 رسالة من المطور</div>
-      <div class="muted" id="maintMessage" style="font-size:13px;line-height:1.9;text-align:center;padding:8px 0">
-        نعمل حالياً على تحسين الخدمات، سنعود قريباً.
+      <div class="muted" id="maintMessage" style="text-align:center;font-size:13px;line-height:1.9;padding:8px 0">
+        نعمل حالياً على تحسين الخدمات
       </div>
     </div>
     <div class="card" id="maintTimeCard" style="display:none">
-      <div class="card-title">⏰ الوقت المتوقع للعودة</div>
+      <div class="card-title">⏰ الوقت المتوقع</div>
       <div class="code-box" style="margin:0">
         <div class="code-val" id="maintTime" style="font-size:18px">—</div>
       </div>
     </div>
-    <div style="text-align:center;margin-top:20px">
-      <div style="font-size:40px;margin-bottom:8px">⚡</div>
-      <div style="font-size:12px;color:var(--muted);font-weight:700">VIP Services</div>
-    </div>
-    <button id="hiddenDevLoginBtn">🔐 دخول المطور</button>
   </div>
 
-  <!-- ═══ VIP GATE ═══ -->
+  <!-- VIP GATE -->
   <div class="screen" id="scr-gate">
     <div id="activationBanner" class="activation-banner">
       <div class="icon">🎉</div>
       <div style="flex:1;text-align:right">
-        <div style="font-size:11px;opacity:.9">تم تفعيل باقتك بنجاح!</div>
+        <div style="font-size:11px;opacity:.9">تم تفعيل باقتك!</div>
         <div id="activationDetails" style="font-size:13px;font-weight:900"></div>
       </div>
       <button class="close-banner" onclick="document.getElementById('activationBanner').classList.remove('show')">✖</button>
@@ -459,11 +399,10 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
     <div class="card vip-gate">
       <div class="icon">💎</div>
       <h2 id="gateTitle">مرحباً</h2>
-      <p id="gateSub">هذه المنصة مخصصة للمشتركين VIP فقط<br>اشترك الآن لتفتح كل الميزات</p>
+      <p id="gateSub">اشترك الآن لتفتح كل الميزات</p>
     </div>
     <div class="card">
       <div class="card-title">🎫 معرّفك الخاص</div>
-      <div class="muted" style="margin-bottom:8px">احفظه — تحتاجه للتواصل مع المطور</div>
       <div class="code-box">
         <div class="code-lbl">🆔 USER ID</div>
         <div class="code-val" id="gateUserId">—</div>
@@ -471,7 +410,6 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
     </div>
     <div class="card">
       <div class="card-title">🎟️ لديك كود تفعيل؟</div>
-      <div class="muted" style="margin-bottom:10px">أدخل الكود اللي وصلك من المطور</div>
       <input class="inp" id="gateActivationCode" placeholder="VIP-XXXXXX">
       <button class="btn btn-gold" id="btnActivateCode">🎟️ تفعيل الكود</button>
     </div>
@@ -479,20 +417,10 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
       <div class="card-title">💎 باقات VIP</div>
       <div id="gatePlans"></div>
     </div>
-    <div class="card">
-      <div class="card-title">🎁 مميزات VIP</div>
-      <div class="feat-list">
-        <div class="feat-item"><span>🚀</span> رشق تلقائي مستمر 24/7</div>
-        <div class="feat-item"><span>🛍️</span> كل الخدمات مفتوحة</div>
-        <div class="feat-item"><span>⚡</span> أولوية تنفيذ عالية</div>
-        <div class="feat-item"><span>💬</span> دعم مباشر مع المطور</div>
-      </div>
-    </div>
-    <button class="btn btn-gold" id="gateContact">💬 تواصل مع المطور</button>
     <button class="btn btn-ghost" id="gateLogout">🚪 تسجيل خروج</button>
   </div>
 
-  <!-- ═══ VIP MAIN ═══ -->
+  <!-- VIP MAIN -->
   <div class="screen" id="scr-vip">
     <div id="vipActivationBanner" class="activation-banner">
       <div class="icon">🎉</div>
@@ -510,14 +438,11 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
         <div class="stat"><div class="v" id="vipPlan">—</div><div class="l">📋 الباقة</div></div>
         <div class="stat"><div class="v" id="vipDays">0</div><div class="l">⏱ المتبقي</div></div>
       </div>
-      <div class="muted center" style="margin-top:12px;font-size:11px">
-        ⚙️ النظام يختار حساب تلقائياً في كل طلب
-      </div>
     </div>
     <div class="section-title">🛍️ الخدمات</div>
     <div class="btn-row">
       <button class="btn btn-purple" id="btnServices">🛍️ الخدمات</button>
-      <button class="btn btn-warning" id="btnBlast">🚀 الرشق التلقائي</button>
+      <button class="btn btn-warning" id="btnBlast">🚀 الرشق</button>
     </div>
     <div class="section-title">📋 سجلي</div>
     <div class="btn-row">
@@ -527,7 +452,7 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
     <button class="btn btn-ghost" id="btnVipLogout" style="margin-top:16px">🚪 تسجيل خروج</button>
   </div>
 
-  <!-- ═══ SERVICES ═══ -->
+  <!-- SERVICES -->
   <div class="screen" id="scr-services">
     <div class="card">
       <div class="card-title">🛍️ الخدمات المتاحة</div>
@@ -536,7 +461,7 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
     <button class="btn btn-ghost" data-back>🔙 رجوع</button>
   </div>
 
-  <!-- ═══ CREATE ORDER ═══ -->
+  <!-- ORDER -->
   <div class="screen" id="scr-order">
     <div class="card">
       <div class="card-title" id="ordTitle">🛍️ إنشاء طلب</div>
@@ -548,7 +473,7 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
     <button class="btn btn-ghost" data-back>🔙 رجوع</button>
   </div>
 
-  <!-- ═══ ORDERS ═══ -->
+  <!-- ORDERS -->
   <div class="screen" id="scr-orders">
     <div class="card">
       <div class="card-title">📋 طلباتي</div>
@@ -557,74 +482,67 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
     <button class="btn btn-ghost" data-back>🔙 رجوع</button>
   </div>
 
-  <!-- ═══ BLAST ═══ -->
+  <!-- BLAST -->
   <div class="screen" id="scr-blast">
     <div class="card">
       <div class="card-title">🚀 الرشق التلقائي</div>
-      <div class="muted" style="margin-bottom:12px">💡 يرشق فوراً ثم كل X ساعة</div>
       <div class="svc-grid" id="blastSvcGrid"></div>
     </div>
     <div class="card">
-      <div class="card-title">⏰ الفاصل الزمني</div>
+      <div class="card-title">⏰ الفاصل</div>
       <div class="grid3" id="blastIntervals"></div>
     </div>
     <div class="card" id="blastConfigCard" style="display:none">
       <div class="card-title" id="blastCfgTitle">🚀 إعداد</div>
       <input class="inp" id="blastTarget" placeholder="الهدف">
       <input class="inp" id="blastAmount" type="number" placeholder="الكمية">
-      <button class="btn btn-success" id="btnStartBlast">🚀 بدء الرشق</button>
+      <button class="btn btn-success" id="btnStartBlast">🚀 بدء</button>
     </div>
     <div class="card">
-      <div class="card-title">📊 المهام النشطة</div>
+      <div class="card-title">📊 المهام</div>
       <div id="blastTasksList"><div class="muted">لا توجد مهام</div></div>
     </div>
     <button class="btn btn-ghost" data-back>🔙 رجوع</button>
   </div>
 
-  <!-- ═══ USER CHAT ═══ -->
+  <!-- CHAT -->
   <div class="screen" id="scr-chat">
     <div class="chat-screen">
       <div class="chat-header">
         <div class="avatar">👑</div>
-        <div class="info">
-          <div class="name">المطور</div>
-          <div class="status">متصل الآن</div>
-        </div>
+        <div class="info"><div class="name">المطور</div><div class="status">متصل</div></div>
       </div>
       <div class="chat-body" id="chatBody"></div>
       <div class="chat-input-bar">
-        <input type="text" id="chatInput" placeholder="اكتب رسالتك..." maxlength="500">
+        <input type="text" id="chatInput" placeholder="اكتب..." maxlength="500">
         <button id="chatSend">➤</button>
       </div>
     </div>
-    <button class="btn btn-ghost" id="chatBackBtn" style="margin-top:8px">🔙 رجوع للرئيسية</button>
+    <button class="btn btn-ghost" id="chatBackBtn" style="margin-top:8px">🔙 رجوع</button>
   </div>
 
-  <!-- ═══ ADMIN CHAT ═══ -->
+  <!-- ADMIN CHAT -->
   <div class="screen" id="scr-adminchat">
     <div class="chat-screen">
       <div class="chat-header">
         <div class="avatar">👤</div>
-        <div class="info">
-          <div class="name" id="adminChatName">العضو</div>
-          <div class="status">عضو VIP</div>
-        </div>
+        <div class="info"><div class="name" id="adminChatName">العضو</div><div class="status">عضو</div></div>
         <button class="btn btn-danger" style="width:auto;padding:6px 12px;margin:0;font-size:11px" id="adminChatClose">✖</button>
       </div>
       <div class="chat-body" id="adminChatBody"></div>
       <div class="chat-input-bar">
-        <input type="text" id="adminChatInput" placeholder="اكتب ردك..." maxlength="500">
+        <input type="text" id="adminChatInput" placeholder="اكتب..." maxlength="500">
         <button id="adminChatSend">➤</button>
       </div>
     </div>
-    <button class="btn btn-ghost" data-back style="margin-top:8px">🔙 رجوع للوحة</button>
+    <button class="btn btn-ghost" data-back style="margin-top:8px">🔙 رجوع</button>
   </div>
 
-  <!-- ═══ ADMIN ═══ -->
+  <!-- ADMIN -->
   <div class="screen" id="scr-admin">
-    <div class="card" style="border-color:rgba(239,68,68,.4);background:linear-gradient(135deg,rgba(239,68,68,.08),var(--card))">
+    <div class="card" style="border-color:rgba(239,68,68,.4)">
       <div class="card-title" style="color:var(--danger)">👑 لوحة المطور</div>
-      <div class="muted">🆔 أنت داخل كـ: <b id="adminMe"></b></div>
+      <div class="muted">🆔 أنت: <b id="adminMe"></b></div>
     </div>
 
     <div class="section-title admin">📊 الإحصائيات</div>
@@ -637,51 +555,17 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
       </div>
     </div>
 
-    <div class="section-title admin">🛠️ وضع الصيانة</div>
-    <div class="card" style="border-color:rgba(251,191,36,.4);background:linear-gradient(135deg,rgba(251,191,36,.05),var(--card))">
-      <div class="card-title" style="color:var(--gold)">🛠️ التحكم بالصيانة</div>
-      <div id="maintStatus" style="padding:10px 14px;border-radius:12px;margin-bottom:12px;
-        background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);font-weight:800;
-        font-size:13px;text-align:center;color:var(--success)">
-        🟢 الموقع يعمل
-      </div>
-      <input class="inp" id="maintMessageInput" placeholder="رسالة تظهر للأعضاء (اختياري)">
+    <div class="section-title admin">🛠️ الصيانة</div>
+    <div class="card">
+      <div id="maintStatus" style="padding:10px;border-radius:12px;margin-bottom:12px;
+        background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);
+        font-weight:800;text-align:center;color:var(--success)">🟢 يعمل</div>
+      <input class="inp" id="maintMessageInput" placeholder="رسالة للصيانة">
       <input class="inp" id="maintTimeInput" placeholder="الوقت المتوقع">
       <button class="btn btn-warning" id="maintEnableBtn">🛠️ تفعيل الصيانة</button>
-      <button class="btn btn-success" id="maintDisableBtn" style="display:none">✅ تعطيل الصيانة</button>
+      <button class="btn btn-success" id="maintDisableBtn" style="display:none">✅ تعطيل</button>
     </div>
 
-    <div class="section-title admin">🔐 زر دخول المطور المخفي</div>
-    <div class="card" style="border-color:rgba(239,68,68,.4);background:linear-gradient(135deg,rgba(239,68,68,.05),var(--card))">
-      <div id="devBtnStatus" style="padding:10px 14px;border-radius:12px;margin-bottom:12px;
-        background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);font-weight:800;
-        font-size:13px;text-align:center;color:var(--success)">
-        🟢 الزر مخفي
-      </div>
-      <button class="btn btn-success" id="showDevBtn">✅ إظهار الزر</button>
-      <button class="btn btn-danger" id="hideDevBtn" style="display:none">🚫 إخفاء الزر</button>
-    </div>
-
-    <!-- 🟢 التجميع -->
-    <div class="section-title admin">🟢 التجميع</div>
-    <div class="card" style="border-color:rgba(34,197,94,.4);background:linear-gradient(135deg,rgba(34,197,94,.05),var(--card))">
-      <div class="grid2" style="margin-bottom:12px">
-        <div class="stat"><div class="v" id="adFarmScore">0</div><div class="l">⭐ جمعت</div></div>
-        <div class="stat"><div class="v" id="adFarmTasks">0</div><div class="l">✅ المهام</div></div>
-      </div>
-      <div id="farmStatus" style="padding:10px 14px;border-radius:12px;margin-bottom:12px;
-        background:rgba(148,163,184,.1);border:1px solid rgba(148,163,184,.3);
-        font-weight:800;font-size:12px;text-align:center;color:var(--muted)">
-        ⚪ لا يوجد تجميع نشط
-      </div>
-      <button class="btn btn-success" id="adStartFarmAll" style="margin-bottom:14px">🟢 تجميع الكل</button>
-      <button class="btn btn-danger" id="adStopFarmAll" style="display:none;margin-bottom:14px">⏹ إيقاف التجميع</button>
-      <div class="divider"></div>
-      <div class="muted" style="margin-bottom:10px;font-size:11px;text-align:center">🔵 أو اختر حساباً محدداً</div>
-      <div id="adFarmAccList"></div>
-    </div>
-
-    <!-- 💎 الباقات -->
     <div class="section-title admin">💎 الباقات</div>
     <div class="card">
       <input class="inp" id="adPlanName" placeholder="اسم الباقة">
@@ -693,61 +577,50 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
       <input class="inp" id="adPlanPrice" placeholder="السعر">
       <button class="btn btn-success" id="adAddPlan">➕ إضافة</button>
       <div class="divider"></div>
-      <div class="muted" style="margin-bottom:8px">📋 الباقات:</div>
       <div id="adPlansList"></div>
     </div>
 
-    <!-- 👥 الحسابات -->
-    <div class="section-title admin">👥 الحسابات (محفوظة دائمياً)</div>
+    <div class="section-title admin">👥 الحسابات ☁️ سحابية</div>
     <div class="card">
-      <input class="inp" id="adAccUser" placeholder="👤 اسم المستخدم TikTok">
+      <div class="fb-status connected" style="margin-bottom:12px">☁️ الحسابات تظهر عند كل الأجهزة</div>
+      <input class="inp" id="adAccUser" placeholder="👤 اسم TikTok">
       <input class="inp" id="adAccPass" type="password" placeholder="🔒 كلمة المرور">
       <button class="btn btn-success" id="adAddAcc">➕ إضافة حساب</button>
       <div class="divider"></div>
-      <div class="muted" style="margin-bottom:8px">📋 الحسابات (💾 محفوظة):</div>
       <div id="adAccsList"><div class="muted">لا توجد حسابات</div></div>
     </div>
 
-    <!-- 🎟️ الأكواد -->
-    <div class="section-title admin">🎟️ الأكواد (تتحدث تلقائياً)</div>
-    <div class="card" style="border-color:rgba(251,191,36,.4)">
-      <div id="codeAutoUpdate" style="padding:8px 12px;border-radius:10px;margin-bottom:10px;
-        background:rgba(79,140,255,.1);border:1px solid rgba(79,140,255,.3);
-        font-size:11px;font-weight:800;text-align:center;color:var(--primary)">
-        🔄 يتحدث تلقائياً كل 3 ثواني
-      </div>
+    <div class="section-title admin">🎟️ الأكواد ☁️ سحابية</div>
+    <div class="card">
+      <div class="fb-status connected" style="margin-bottom:12px">☁️ الأكواد تظهر عند كل الأجهزة فوراً</div>
       <div class="muted" style="margin-bottom:6px;font-size:11px">اختر الباقة:</div>
       <div id="adCodePlanPicker"></div>
-      <div class="muted" style="margin:10px 0 6px;font-size:11px">عدد الاستخدامات:</div>
+      <div class="muted" style="margin:10px 0 6px;font-size:11px">الاستخدامات:</div>
       <div class="grid3" id="adUsesGrid">
         <button class="btn btn-ghost" data-uses="1">1</button>
         <button class="btn btn-ghost" data-uses="5">5</button>
         <button class="btn btn-ghost" data-uses="10">10</button>
       </div>
-      <input class="inp" id="adCustomUses" type="number" placeholder="أو عدد مخصص" min="1" style="margin-top:8px">
-      <button class="btn btn-gold" id="adGenCode">🎟️ توليد الكود</button>
+      <input class="inp" id="adCustomUses" type="number" placeholder="أو مخصص" min="1" style="margin-top:8px">
+      <button class="btn btn-gold" id="adGenCode">🎟️ توليد</button>
       <div class="divider"></div>
-      <div class="muted" style="margin-bottom:8px">📋 الأكواد المولّدة:</div>
       <div id="adCodesList"></div>
     </div>
 
-    <!-- 💎 تفعيل يدوي -->
     <div class="section-title admin">💎 تفعيل يدوي</div>
     <div class="card">
-      <input class="inp" id="adVipUserId" placeholder="User ID أو اسم المستخدم">
+      <input class="inp" id="adVipUserId" placeholder="User ID">
       <div class="muted" style="margin-bottom:8px">اختر الباقة:</div>
       <div id="adVipPlanPicker"></div>
-      <button class="btn btn-purple" id="adActivateVip">💎 تفعيل VIP</button>
-      <button class="btn btn-danger" id="adCancelVip">❌ إلغاء VIP</button>
+      <button class="btn btn-purple" id="adActivateVip">💎 تفعيل</button>
+      <button class="btn btn-danger" id="adCancelVip">❌ إلغاء</button>
     </div>
 
-    <!-- 💌 المحادثات -->
     <div class="section-title admin">💌 المحادثات</div>
-    <div class="card" style="border-color:rgba(79,140,255,.4)">
-      <div id="adChatList"><div class="muted">لا توجد محادثات</div></div>
+    <div class="card">
+      <div id="adChatList"><div class="muted">لا توجد</div></div>
     </div>
 
-    <!-- 👥 الأعضاء -->
     <div class="section-title admin">👥 الأعضاء</div>
     <div class="card">
       <input class="inp" id="adBanUserId" placeholder="User ID">
@@ -767,35 +640,47 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
     <button data-tab="scr-services"><span class="ico">🛍️</span>الخدمات</button>
     <button data-tab="scr-blast"><span class="ico">🚀</span>الرشق</button>
   </div>
-
 </div>
 
-<button class="support-fab" id="supportFab">
-  💬
-  <span class="badge-dot" id="supportBadge"></span>
-</button>
+<button class="support-fab" id="supportFab">💬<span class="badge-dot" id="supportBadge"></span></button>
 
 <div class="modal" id="modal"><div class="modal-box" id="modalBox"></div></div>
 <div class="toast" id="toast"></div>
 
+<!-- ═══════════════════════════════════════════════════════
+     🔥 Firebase SDK
+═══════════════════════════════════════════════════════ -->
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getDatabase, ref, get, set, update, onValue, remove } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA46OFqOn-gXl7xTcihgFXy_ShCTvfEC9w",
+  authDomain: "hizmetler-b8180.firebaseapp.com",
+  databaseURL: "https://hizmetler-b8180-default-rtdb.firebaseio.com",
+  projectId: "hizmetler-b8180",
+  storageBucket: "hizmetler-b8180.firebasestorage.app",
+  messagingSenderId: "995391705592",
+  appId: "1:995391705592:web:6143cc72537875ea26060d",
+  measurementId: "G-ZCL7D7D8Q5"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+window.fbDB = { ref, get, set, update, onValue, remove };
+window.fbApp = app;
+console.log('✅ Firebase initialized');
+</script>
+
 <script>
+function waitForFirebase(cb, attempts = 0) {
+  if (window.fbDB) { cb(); return; }
+  if (attempts > 100) { toast('❌ فشل الاتصال بـ Firebase', 'err'); return; }
+  setTimeout(() => waitForFirebase(cb, attempts + 1), 50);
+}
+
 const DEV_CREDS = { username: 'IlIIHIl', password: 'aksbdnlbb115' };
-
-const maintDB = {
-  get() {
-    try {
-      const v = localStorage.getItem('vip_maintenance');
-      return v ? JSON.parse(v) : { active: false, message: '', estimatedTime: '' };
-    } catch { return { active: false, message: '', estimatedTime: '' }; }
-  },
-  set(data) { localStorage.setItem('vip_maintenance', JSON.stringify(data)); }
-};
-let maintenance = maintDB.get();
-
-const devBtnDB = {
-  get() { try { return localStorage.getItem('vip_show_dev_btn') === 'true'; } catch { return false; } },
-  set(show) { localStorage.setItem('vip_show_dev_btn', show ? 'true' : 'false'); }
-};
 
 const CFG = {
   FARM_POINTS_LIMIT: 300,
@@ -824,19 +709,15 @@ const SERVICE_ICONS = {
 };
 const SERVICE_TARGETS = {followers:'اسم المستخدم', likes:'رابط الفيديو', views:'رابط الفيديو', comments:'رابط الفيديو'};
 
-const DB = {
-  get(k, def) { try { const v = localStorage.getItem('vip_'+k); return v ? JSON.parse(v) : def; } catch { return def; } },
-  set(k, v) { try { localStorage.setItem('vip_'+k, JSON.stringify(v)); } catch {} },
-};
-let users = DB.get('users', {});
-let plansDB = DB.get('plans', {});
-let tiktokAccs = DB.get('tiktokAccs', {});
-let ordersDB = DB.get('orders', {});
-let blastsDB = DB.get('blasts', {});
-let codesDB = DB.get('codes', {});
-let chatsDB = DB.get('chats', {});
-// ═══ جلسات الحسابات النشطة (من في الحساب الآن) ═══
-let activeSessions = DB.get('activeSessions', {}); // {accId: userId}
+let users = {};
+let plansDB = {};
+let tiktokAccs = {};
+let ordersDB = {};
+let blastsDB = {};
+let codesDB = {};
+let chatsDB = {};
+let activeSessions = {};
+let maintenance = { active: false, message: '', estimatedTime: '' };
 
 const state = {
   userId: null, isAdmin: false, isVIP: false,
@@ -848,8 +729,9 @@ const state = {
   adminCodePlan: null, adminCodeUses: 1,
   adminChatUserId: null,
   authMode: 'login',
-  chatSource: 'vip',
+  lastVipExpiry: null,
   lastCodesHash: '',
+  fbReady: false,
 };
 
 const $ = s => document.querySelector(s);
@@ -908,26 +790,97 @@ function updateHeader() {
   else { right.innerHTML = ''; }
 }
 
-/* ═══ إشعار التفعيل — يظهر عند العضو بعد تفعيل الباقة ═══ */
-function showActivationBanner(planName, duration, unit) {
-  const details = `💎 ${planName} — ${duration} ${unit === 'hours' ? 'ساعة' : 'يوم'}`;
-  const banner = $('#activationBanner');
-  const vipBanner = $('#vipActivationBanner');
-  if (banner) {
-    $('#activationDetails').textContent = details;
-    banner.classList.add('show');
-    setTimeout(() => banner.classList.remove('show'), 10000);
-  }
-  if (vipBanner) {
-    $('#vipActivationDetails').textContent = details;
-    vipBanner.classList.add('show');
-    setTimeout(() => vipBanner.classList.remove('show'), 10000);
-  }
-  // اهتزاز خفيف
-  if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+async function fbGet(path) {
+  try {
+    const snap = await window.fbDB.get(window.fbDB.ref(window.fbDB, path));
+    return snap.val();
+  } catch(e) { console.error('fbGet:', e); return null; }
+}
+async function fbSet(path, value) {
+  try {
+    await window.fbDB.set(window.fbDB.ref(window.fbDB, path), value);
+    return true;
+  } catch(e) { console.error('fbSet:', e); return false; }
+}
+async function fbUpdate(path, value) {
+  try {
+    await window.fbDB.update(window.fbDB.ref(window.fbDB, path), value);
+    return true;
+  } catch(e) { console.error('fbUpdate:', e); return false; }
+}
+async function fbRemove(path) {
+  try {
+    await window.fbDB.remove(window.fbDB.ref(window.fbDB, path));
+    return true;
+  } catch(e) { console.error('fbRemove:', e); return false; }
 }
 
-/* ═══ Crypto/API ═══ */
+function setupRealtimeSync() {
+  window.fbDB.onValue(window.fbDB.ref(window.fbDB, 'users'), (snap) => {
+    users = snap.val() || {};
+    if (state.isAdmin && $('#scr-admin').classList.contains('active')) renderAdminPanel();
+    checkVipChanges();
+  });
+
+  window.fbDB.onValue(window.fbDB.ref(window.fbDB, 'plans'), (snap) => {
+    plansDB = snap.val() || {};
+    if (state.isAdmin && $('#scr-admin').classList.contains('active')) renderAdminPanel();
+    if ($('#scr-gate').classList.contains('active')) showGate();
+  });
+
+  window.fbDB.onValue(window.fbDB.ref(window.fbDB, 'tiktokAccs'), (snap) => {
+    tiktokAccs = snap.val() || {};
+    if (state.isAdmin && $('#scr-admin').classList.contains('active')) renderAdminPanel();
+  });
+
+  window.fbDB.onValue(window.fbDB.ref(window.fbDB, 'codes'), (snap) => {
+    codesDB = snap.val() || {};
+    if (state.isAdmin && $('#scr-admin').classList.contains('active')) renderCodesList();
+  });
+
+  window.fbDB.onValue(window.fbDB.ref(window.fbDB, 'activeSessions'), (snap) => {
+    activeSessions = snap.val() || {};
+    if (state.isAdmin && $('#scr-admin').classList.contains('active')) renderAdminPanel();
+  });
+
+  window.fbDB.onValue(window.fbDB.ref(window.fbDB, 'maintenance'), (snap) => {
+    maintenance = snap.val() || { active: false };
+    if (state.isAdmin && $('#scr-admin').classList.contains('active')) updateMaintenanceUI();
+    if (!state.isAdmin && maintenance.active) {
+      if (!$('#scr-maintenance').classList.contains('active') && !$('#scr-chat').classList.contains('active')) {
+        showMaintenanceScreen();
+      }
+    }
+    if (!state.isAdmin && !maintenance.active && $('#scr-maintenance').classList.contains('active')) {
+      if (state.isVIP) { $('#tabbar').style.display = 'grid'; showScreen('scr-vip'); renderVIPMain(); }
+      else if (state.userId) showGate();
+      else showScreen('scr-login');
+    }
+  });
+
+  window.fbDB.onValue(window.fbDB.ref(window.fbDB, 'chats'), (snap) => {
+    chatsDB = snap.val() || {};
+    if (state.userId && $('#scr-chat').classList.contains('active')) renderUserChat();
+    if (state.adminChatUserId && $('#scr-adminchat').classList.contains('active')) renderAdminChat();
+    if (state.isAdmin && $('#scr-admin').classList.contains('active')) renderChatList();
+    updateSupportBadge();
+  });
+}
+
+async function loadAllData() {
+  const [u, p, a, c, s, m] = await Promise.all([
+    fbGet('users'), fbGet('plans'), fbGet('tiktokAccs'),
+    fbGet('codes'), fbGet('activeSessions'), fbGet('maintenance')
+  ]);
+  users = u || {};
+  plansDB = p || {};
+  tiktokAccs = a || {};
+  codesDB = c || {};
+  activeSessions = s || {};
+  maintenance = m || { active: false, message: '', estimatedTime: '' };
+  state.fbReady = true;
+}
+
 const SECRET_KEY = new Uint8Array(CFG.KEY_BYTES.map(b => b ^ 0x43));
 async function hmacSha256(keyBytes, msg) {
   const key = await crypto.subtle.importKey('raw', keyBytes, {name:'HMAC', hash:'SHA-256'}, false, ['sign']);
@@ -965,7 +918,7 @@ async function apiLogin(username, password) {
   };
   const {data, csrf} = await apiRequest('LoginAccount', payload, null, null, false);
   if (data.data?.loginTiktok) return {token:data.data.loginTiktok.accessToken, csrf, user:data.data.loginTiktok.user};
-  throw new Error(data.errors?.[0]?.message || 'فشل تسجيل الدخول');
+  throw new Error(data.errors?.[0]?.message || 'فشل');
 }
 async function apiAttest(token, csrf) {
   const {data} = await apiRequest('AttestDevice', {
@@ -1003,128 +956,83 @@ async function apiCreateOrder(svc, amount, target, token, csrf) {
   return data;
 }
 
-function saveOrder(uid, o) {
-  if (!ordersDB[uid]) ordersDB[uid] = [];
-  ordersDB[uid].push(o); DB.set('orders', ordersDB);
-}
-function getOrdersFor(uid) { return ordersDB[uid] || []; }
-function saveBlast(uid, b) {
-  if (!blastsDB[uid]) blastsDB[uid] = [];
-  blastsDB[uid].push(b); DB.set('blasts', blastsDB);
-}
-function getBlastsFor(uid) { return blastsDB[uid] || []; }
-function updateBlast(uid, tid, patch) {
-  const arr = blastsDB[uid]; if (!arr) return;
-  const b = arr.find(x => x.task_id === tid); if (b) { Object.assign(b, patch); DB.set('blasts', blastsDB); }
-}
-function removeBlast(uid, tid) {
-  if (!blastsDB[uid]) return;
-  blastsDB[uid] = blastsDB[uid].filter(x => x.task_id !== tid); DB.set('blasts', blastsDB);
-}
-
-function getTiktokAccounts() {
-  return Object.entries(tiktokAccs).map(([id, a]) => ({id, ...a}));
-}
-
-/* ═══ جلسات نشطة — من في الحساب الآن ═══ */
-function isAccountInUse(accId) {
-  return !!activeSessions[accId];
-}
-function getAccountUser(accId) {
-  const uid = activeSessions[accId];
-  if (!uid) return null;
-  return users[uid] || {username: uid};
-}
-function markAccountInUse(accId, userId) {
-  activeSessions[accId] = userId;
-  DB.set('activeSessions', activeSessions);
-}
-function releaseAccount(accId) {
-  delete activeSessions[accId];
-  DB.set('activeSessions', activeSessions);
-}
-
-/* ═══ Fallback — العضو ما يختار، النظام يختار ═══ */
 async function tryCreateOrderWithFallback(svc, amount, target) {
-  const allAccs = getTiktokAccounts().filter(a => a.linked && a.token);
-  if (!allAccs.length) throw new Error('لا توجد حسابات متاحة');
+  const allAccs = Object.entries(tiktokAccs).filter(([id, a]) => a.linked && a.token);
+  if (!allAccs.length) throw new Error('لا توجد حسابات');
   let lastError = null;
-  for (const acc of allAccs) {
+  for (const [accId, acc] of allAccs) {
     try {
       const data = await apiCreateOrder(svc, amount, target, acc.token, acc.csrf);
       if (data.data?.createOrder) {
-        // علّم الحساب أنه قيد الاستخدام
-        markAccountInUse(acc.id, state.userId);
-        return { success: true, order: data.data.createOrder, account: acc };
+        await fbSet(`activeSessions/${accId}`, state.userId);
+        return { success: true, order: data.data.createOrder, account: {id: accId, ...acc} };
       }
       lastError = data.errors?.[0]?.message || 'فشل';
-    } catch(e) {
-      lastError = e.message;
-    }
+    } catch(e) { lastError = e.message; }
   }
   throw new Error(lastError || 'كل الحسابات فشلت');
 }
 
-/* ═══ Auth ═══ */
 function switchAuthMode() {
   state.authMode = state.authMode === 'login' ? 'register' : 'login';
   if (state.authMode === 'login') {
     $('#authTitle').textContent = '🔐 تسجيل الدخول';
     $('#btnLogin').textContent = '🚪 دخول';
     $('#btnLogin').className = 'btn btn-primary';
-    $('#toggleAuth').textContent = '✨ ليس لديك حساب؟ إنشاء حساب جديد';
+    $('#toggleAuth').textContent = '✨ ليس لديك حساب؟ إنشاء حساب';
   } else {
-    $('#authTitle').textContent = '✨ إنشاء حساب جديد';
-    $('#btnLogin').textContent = '➕ إنشاء الحساب';
+    $('#authTitle').textContent = '✨ إنشاء حساب';
+    $('#btnLogin').textContent = '➕ إنشاء';
     $('#btnLogin').className = 'btn btn-gold';
-    $('#toggleAuth').textContent = '🔙 لديك حساب؟ تسجيل الدخول';
+    $('#toggleAuth').textContent = '🔙 لديك حساب؟ دخول';
   }
 }
-function doAuth() {
+
+async function doAuth() {
   const un = $('#inUsername').value.trim();
   const pw = $('#inPassword').value;
   
   if (un === DEV_CREDS.username && pw === DEV_CREDS.password) {
-    enterAdminMode();
-    return;
+    enterAdminMode(); return;
   }
   
-  maintenance = maintDB.get();
   if (maintenance.active) { showMaintenanceScreen(); return; }
   
   if (state.authMode === 'register') {
-    if (un.length < 3) return toast('❌ اسم المستخدم قصير', 'err');
-    if (pw.length < 5) return toast('❌ كلمة المرور قصيرة', 'err');
-    if (!/^[a-zA-Z0-9_]+$/.test(un)) return toast('❌ حروف إنجليزية وأرقام فقط', 'err');
+    if (un.length < 3) return toast('❌ اسم قصير', 'err');
+    if (pw.length < 5) return toast('❌ كلمة قصيرة', 'err');
+    if (!/^[a-zA-Z0-9_]+$/.test(un)) return toast('❌ حروف إنجليزية فقط', 'err');
     if (un === DEV_CREDS.username) return toast('❌ محجوز', 'err');
-    if (getUserByUsername(un)) return toast('❌ الاسم مستخدم', 'err');
+    if (getUserByUsername(un)) return toast('❌ مستخدم', 'err');
+    
     const userId = genUserId();
-    users[userId] = {
+    await fbSet(`users/${userId}`, {
       id: userId, username: un, password: pw,
       created: new Date().toISOString(), banned: false, vip: null,
-    };
-    DB.set('users', users);
+    });
+    
     state.userId = userId; state.isAdmin = false; state.isVIP = false;
     localStorage.setItem('vip_current', userId);
     updateHeader(); showGate();
-    toast(`✅ تم إنشاء حسابك!`, 'ok');
+    toast(`✅ تم إنشاؤه!`, 'ok');
     return;
   }
   if (!un || !pw) return toast('❌ أدخل البيانات', 'err');
   const found = getUserByUsername(un);
-  if (!found) return toast('❌ المستخدم غير موجود', 'err');
-  if (found.user.password !== pw) return toast('❌ كلمة المرور خاطئة', 'err');
-  if (found.user.banned) return toast('🚫 حسابك محظور', 'err');
+  if (!found) return toast('❌ غير موجود', 'err');
+  if (found.user.password !== pw) return toast('❌ كلمة خاطئة', 'err');
+  if (found.user.banned) return toast('🚫 محظور', 'err');
   state.userId = found.id;
   state.isAdmin = false;
   state.isVIP = isVIPUser(found.id);
+  state.lastVipExpiry = found.user.vip?.expiry || null;
   localStorage.setItem('vip_current', found.id);
   updateHeader(); routeAfterLogin();
   toast(`✅ مرحباً ${found.user.username}`, 'ok');
 }
+
 function routeAfterLogin() {
   if (state.isAdmin) { renderAdminPanel(); showScreen('scr-admin'); return; }
-  maintenance = maintDB.get();
   if (maintenance.active) { showMaintenanceScreen(); return; }
   if (state.isVIP) { $('#tabbar').style.display = 'grid'; renderVIPMain(); showScreen('scr-vip'); }
   else { $('#tabbar').style.display = 'none'; showGate(); }
@@ -1133,15 +1041,13 @@ function routeAfterLogin() {
 function showMaintenanceScreen() {
   $('#tabbar').style.display = 'none';
   $('#supportFab').style.display = 'none';
-  $('#maintMessage').textContent = maintenance.message || 'نعمل حالياً على تحسين الخدمات، سنعود قريباً.';
+  $('#maintMessage').textContent = maintenance.message || 'نعمل حالياً على تحسين الخدمات';
   if (maintenance.estimatedTime) {
     $('#maintTimeCard').style.display = 'block';
     $('#maintTime').textContent = maintenance.estimatedTime;
   } else {
     $('#maintTimeCard').style.display = 'none';
   }
-  const devBtn = $('#hiddenDevLoginBtn');
-  if (devBtn) devBtn.style.display = devBtnDB.get() ? 'flex' : 'none';
   showScreen('scr-maintenance');
 }
 
@@ -1149,9 +1055,9 @@ function showGate() {
   const uid = state.userId; const u = users[uid] || {};
   $('#gateTitle').textContent = `أهلاً ${u.username || uid}`;
   if (u.vip && u.vip.expiry && new Date(u.vip.expiry) <= new Date()) {
-    $('#gateSub').innerHTML = '⚠️ انتهى اشتراكك VIP<br>استخدم كود تفعيل جديد';
+    $('#gateSub').innerHTML = '⚠️ انتهى اشتراكك';
   } else {
-    $('#gateSub').innerHTML = 'هذه المنصة مخصصة للمشتركين VIP فقط<br>اشترك الآن لتفتح كل الميزات';
+    $('#gateSub').innerHTML = 'اشترك الآن لتفتح كل الميزات';
   }
   $('#gateUserId').textContent = uid;
   const list = Object.entries(plansDB);
@@ -1171,87 +1077,111 @@ function showGate() {
   showScreen('scr-gate');
 }
 
-/* ═══ الخروج — يحرر الحسابات اللي يستخدمها العضو ═══ */
-function releaseMyAccounts(userId) {
-  for (const [accId, uid] of Object.entries(activeSessions)) {
-    if (uid === userId) {
-      delete activeSessions[accId];
-    }
+async function releaseMyAccounts(userId) {
+  const entries = Object.entries(activeSessions);
+  for (const [accId, uid] of entries) {
+    if (uid === userId) await fbRemove(`activeSessions/${accId}`);
   }
-  DB.set('activeSessions', activeSessions);
 }
 
-function fullLogout() {
+async function fullLogout() {
   if (state.farming) adminStopFarm();
-  
-  // حرر الحسابات
-  if (state.userId && state.userId !== 'DEV') {
-    releaseMyAccounts(state.userId);
-  }
+  if (state.userId && state.userId !== 'DEV') await releaseMyAccounts(state.userId);
   
   if (state.isAdmin) {
-    state.userId = null; state.isAdmin = false; state.isVIP = false; state.adminChatUserId = null;
+    state.userId = null; state.isAdmin = false; state.isVIP = false;
     localStorage.removeItem('vip_current');
     $('#tabbar').style.display = 'none';
     $('#supportFab').style.display = 'none';
     $('#inUsername').value = ''; $('#inPassword').value = '';
     state.authMode = 'login'; switchAuthMode(); switchAuthMode();
     updateHeader();
-    maintenance = maintDB.get();
-    if (maintenance.active) { showMaintenanceScreen(); }
-    else { showScreen('scr-login'); }
-    toast('👋 خرجت من حساب المطور', 'ok');
+    if (maintenance.active) showMaintenanceScreen();
+    else showScreen('scr-login');
     return;
   }
   
-  if (!confirm('🚪 هل تريد الخروج من الحساب؟')) return;
-  state.userId = null; state.isAdmin = false; state.isVIP = false; state.adminChatUserId = null;
+  if (!confirm('🚪 هل تريد الخروج؟')) return;
+  state.userId = null; state.isAdmin = false; state.isVIP = false;
   localStorage.removeItem('vip_current');
   $('#tabbar').style.display = 'none';
   $('#supportFab').style.display = 'none';
   $('#inUsername').value = ''; $('#inPassword').value = '';
   state.authMode = 'login'; switchAuthMode(); switchAuthMode();
   updateHeader();
-  maintenance = maintDB.get();
-  if (maintenance.active) { showMaintenanceScreen(); }
-  else { showScreen('scr-login'); }
+  if (maintenance.active) showMaintenanceScreen();
+  else showScreen('scr-login');
 }
 
-function activateCode() {
+async function activateCode() {
   const code = $('#gateActivationCode').value.trim().toUpperCase();
   if (!code) return toast('❌ أدخل الكود', 'err');
-  const entry = codesDB[code];
+  
+  const entry = await fbGet(`codes/${code}`);
   if (!entry) return toast('❌ كود غير صحيح', 'err');
-  if (entry.uses >= entry.maxUses) return toast(`❌ انتهت استخدامات الكود`, 'err');
+  if (entry.uses >= entry.maxUses) return toast(`❌ انتهى الكود`, 'err');
+  
   const p = plansDB[entry.planId];
   if (!p) return toast('❌ الباقة غير موجودة', 'err');
+  
   const ms = p.unit === 'hours' ? p.duration * 3600000 : p.duration * 86400000;
   const currentExpiry = users[state.userId].vip?.expiry;
   const startFrom = (currentExpiry && new Date(currentExpiry) > new Date()) ? new Date(currentExpiry) : new Date();
-  users[state.userId].vip = {
-    expiry: new Date(startFrom.getTime() + ms).toISOString(),
-    planId: entry.planId, planName: p.name,
-  };
-  DB.set('users', users);
-  entry.uses = (entry.uses || 0) + 1;
-  entry.usedBy = entry.usedBy || [];
-  entry.usedBy.push({ userId: state.userId, at: new Date().toISOString() });
-  DB.set('codes', codesDB);
+  const newExpiry = new Date(startFrom.getTime() + ms).toISOString();
+  
+  await fbUpdate(`users/${state.userId}/vip`, {
+    expiry: newExpiry,
+    planId: entry.planId,
+    planName: p.name,
+  });
+  
+  const usedBy = entry.usedBy || [];
+  usedBy.push({ userId: state.userId, at: new Date().toISOString() });
+  await fbUpdate(`codes/${code}`, {
+    uses: (entry.uses || 0) + 1,
+    usedBy,
+  });
+  
   state.isVIP = true;
+  state.lastVipExpiry = newExpiry;
   $('#gateActivationCode').value = '';
   
-  // ✅ إشعار التفعيل
   showActivationBanner(p.name, p.duration, p.unit);
-  
-  const remaining = entry.maxUses - entry.uses;
-  toast(`🎉 تم تفعيل ${p.name}!`, 'ok');
+  toast(`🎉 تم التفعيل!`, 'ok');
   setTimeout(() => { $('#tabbar').style.display = 'grid'; renderVIPMain(); showScreen('scr-vip'); }, 800);
 }
 
+function showActivationBanner(planName, duration, unit) {
+  const details = `💎 ${planName} — ${duration} ${unit === 'hours' ? 'ساعة' : 'يوم'}`;
+  const b1 = $('#activationBanner');
+  const b2 = $('#vipActivationBanner');
+  if (b1) { $('#activationDetails').textContent = details; b1.classList.add('show'); setTimeout(() => b1.classList.remove('show'), 10000); }
+  if (b2) { $('#vipActivationDetails').textContent = details; b2.classList.add('show'); setTimeout(() => b2.classList.remove('show'), 10000); }
+  if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+}
+
+function checkVipChanges() {
+  if (!state.userId || state.isAdmin) return;
+  const u = users[state.userId];
+  if (!u) return;
+  const currentVIP = u.vip?.expiry || null;
+  if (currentVIP && currentVIP !== state.lastVipExpiry && !isNaN(new Date(currentVIP))) {
+    const plan = plansDB[u.vip.planId];
+    if (plan) showActivationBanner(plan.name, plan.duration, plan.unit);
+    if (!state.isVIP || $('#scr-gate').classList.contains('active')) {
+      state.isVIP = true;
+      $('#tabbar').style.display = 'grid';
+      renderVIPMain();
+      showScreen('scr-vip');
+    }
+  }
+  state.lastVipExpiry = currentVIP;
+}
+
 function renderVIPMain() {
-  const uid = state.userId; const u = users[uid] || {};
+  const u = users[state.userId] || {};
   $('#vipPlan').textContent = u.vip?.planName || '👑';
-  $('#vipDays').textContent = getVIPTimeLeft(uid) || '0';
+  $('#vipDays').textContent = getVIPTimeLeft(state.userId) || '0';
   updateHeader();
 }
 
@@ -1260,10 +1190,7 @@ function renderServices() {
   for (const [k, price] of Object.entries(SERVICE_PRICES)) {
     const d = document.createElement('div');
     d.className = 'svc-card';
-    d.innerHTML = `
-      <div class="svc-icon ${k}">${SERVICE_ICONS[k]}</div>
-      <div class="name">${SERVICE_NAMES[k]}</div>
-      <div class="price">${price} نقطة / وحدة</div>`;
+    d.innerHTML = `<div class="svc-icon ${k}">${SERVICE_ICONS[k]}</div><div class="name">${SERVICE_NAMES[k]}</div><div class="price">${price} نقطة</div>`;
     d.onclick = () => openOrderForm(k);
     g.appendChild(d);
   }
@@ -1285,36 +1212,33 @@ async function createOrder() {
   if (!target) return toast('❌ أدخل الهدف', 'err');
   if (!amount || amount < lim[0] || amount > lim[1]) return toast(`❌ ${lim[0]} – ${lim[1]}`, 'err');
   const btn = $('#btnCreateOrder');
-  btn.disabled = true; btn.innerHTML = '<span class="loader"></span> جاري...';
+  btn.disabled = true; btn.innerHTML = '<span class="loader"></span>';
   try {
     const result = await tryCreateOrderWithFallback(svc, amount, target);
     if (result.success) {
-      saveOrder(state.userId, {
+      await fbSet(`orders/${state.userId}/${Date.now()}`, {
         order_id: result.order._id, service_type: svc, target, amount,
         status: 'pending', created_at: new Date().toISOString(),
         account: result.account.username,
       });
-      toast('✅ تم إنشاء الطلب', 'ok');
+      toast('✅ تم', 'ok');
       showScreen('scr-vip'); renderVIPMain();
     }
-  } catch(e) {
-    toast('❌ ' + (e.message || 'كل الحسابات فشلت'), 'err');
-  } finally {
-    btn.disabled = false; btn.textContent = '✅ تأكيد الطلب';
-  }
+  } catch(e) { toast('❌ ' + e.message, 'err'); }
+  finally { btn.disabled = false; btn.textContent = '✅ تأكيد'; }
 }
 
-function renderOrders() {
-  const list = getOrdersFor(state.userId);
+async function renderOrders() {
+  const data = await fbGet(`orders/${state.userId}`);
+  const list = data ? Object.values(data) : [];
   const box = $('#ordersList');
   if (!list.length) { box.innerHTML = '<div class="muted center" style="padding:20px">لا توجد طلبات</div>'; return; }
   const map = {pending:['⏳','wait'], processing:['🔄','run'], completed:['✅','ok'], failed:['❌','err']};
-  box.innerHTML = [...list].reverse().slice(0,30).map(o => {
+  box.innerHTML = list.reverse().slice(0,30).map(o => {
     const [i, cls] = map[o.status] || ['❓',''];
     return `<div class="order-item">
-      <div class="row"><b>${SERVICE_NAMES[o.service_type]}</b><span class="badge ${cls}">${i} ${o.status}</span></div>
-      <div class="oid">${o.order_id.slice(0,14)}…</div>
-      <div class="row"><span>🎯 ${o.target.slice(0,24)}</span><span>🔢 ${o.amount}</span></div>
+      <div class="row"><b>${SERVICE_NAMES[o.service_type]}</b><span class="badge ${cls}">${i}</span></div>
+      <div class="row"><span>🎯 ${o.target?.slice(0,24)}</span><span>🔢 ${o.amount}</span></div>
     </div>`;
   }).join('');
 }
@@ -1344,29 +1268,29 @@ function updateBlastConfigUI() {
   $('#blastCfgTitle').textContent = `${SERVICE_NAMES[state.blastSvc]} — كل ${state.blastHours}س`;
   $('#blastTarget').placeholder = SERVICE_TARGETS[state.blastSvc];
   const lim = SERVICE_LIMITS[state.blastSvc];
-  $('#blastAmount').placeholder = `الكمية (${lim[0]} – ${lim[1]})`;
+  $('#blastAmount').placeholder = `(${lim[0]} – ${lim[1]})`;
 }
 async function startBlast() {
   if (!state.blastSvc) return toast('❌ اختر خدمة', 'err');
-  const accs = getTiktokAccounts().filter(a => a.linked && a.token);
-  if (!accs.length) return toast('❌ لا توجد حسابات', 'err');
   const target = $('#blastTarget').value.trim();
   const amount = parseInt($('#blastAmount').value);
   const lim = SERVICE_LIMITS[state.blastSvc];
   if (!target) return toast('❌ أدخل الهدف', 'err');
   if (!amount || amount < lim[0] || amount > lim[1]) return toast(`❌ ${lim[0]} – ${lim[1]}`, 'err');
   const tid = 'blst_' + randomHex(6);
-  saveBlast(state.userId, {task_id:tid, service_type:state.blastSvc, target,
-    amount_per_run:amount, hours_interval:state.blastHours, status:'active', run_count:0,
-    created_at:new Date().toISOString()});
+  await fbSet(`blasts/${state.userId}/${tid}`, {
+    task_id: tid, service_type: state.blastSvc, target,
+    amount_per_run: amount, hours_interval: state.blastHours,
+    status: 'active', run_count: 0, created_at: new Date().toISOString()
+  });
   state.blastTimers[tid] = setInterval(() => runBlastTask(tid), state.blastHours * 3600000);
   runBlastTask(tid);
-  toast('🚀 بدأ الرشق', 'ok');
+  toast('🚀 بدأ', 'ok');
   $('#blastTarget').value = ''; $('#blastAmount').value = '';
   renderBlastTasks();
 }
 async function runBlastTask(tid) {
-  const b = getBlastsFor(state.userId).find(x => x.task_id === tid);
+  const b = await fbGet(`blasts/${state.userId}/${tid}`);
   if (!b || b.status !== 'active') {
     if (state.blastTimers[tid]) { clearInterval(state.blastTimers[tid]); delete state.blastTimers[tid]; }
     return;
@@ -1374,43 +1298,35 @@ async function runBlastTask(tid) {
   try {
     const result = await tryCreateOrderWithFallback(b.service_type, b.amount_per_run, b.target);
     if (result.success) {
-      saveOrder(state.userId, {
+      await fbSet(`orders/${state.userId}/${Date.now()}`, {
         order_id: result.order._id, service_type: b.service_type, target: b.target,
         amount: b.amount_per_run, status: 'pending',
         created_at: new Date().toISOString(), account: result.account.username
       });
-      updateBlast(state.userId, tid, {
-        run_count: b.run_count + 1,
-        next_run_at: new Date(Date.now() + b.hours_interval * 3600000).toISOString(),
-      });
-      toast(`🚀 رشقة ${b.run_count+1}`, 'ok');
+      await fbUpdate(`blasts/${state.userId}/${tid}`, { run_count: (b.run_count||0) + 1 });
+      toast(`🚀 رشقة ${(b.run_count||0)+1}`, 'ok');
     }
-  } catch(e) {
-    toast(`⏹ فشلت كل الحسابات`, 'err');
-    updateBlast(state.userId, tid, { status: 'stopped' });
-    if (state.blastTimers[tid]) { clearInterval(state.blastTimers[tid]); delete state.blastTimers[tid]; }
-  }
+  } catch(e) { toast(`⏹ توقف`, 'err'); await fbUpdate(`blasts/${state.userId}/${tid}`, { status: 'stopped' }); }
   renderBlastTasks();
 }
 function stopBlastTask(tid) {
-  updateBlast(state.userId, tid, {status:'stopped'});
+  fbUpdate(`blasts/${state.userId}/${tid}`, {status:'stopped'});
   if (state.blastTimers[tid]) { clearInterval(state.blastTimers[tid]); delete state.blastTimers[tid]; }
-  renderBlastTasks(); toast('⏹ تم', 'ok');
+  renderBlastTasks(); toast('⏹', 'ok');
 }
 function deleteBlastTask(tid) {
-  stopBlastTask(tid); removeBlast(state.userId, tid); renderBlastTasks(); toast('🗑 حُذفت', 'ok');
+  stopBlastTask(tid); fbRemove(`blasts/${state.userId}/${tid}`); renderBlastTasks();
 }
-function renderBlastTasks() {
-  const list = getBlastsFor(state.userId);
+async function renderBlastTasks() {
+  const data = await fbGet(`blasts/${state.userId}`);
+  const list = data ? Object.values(data) : [];
   const box = $('#blastTasksList');
-  if (!list.length) { box.innerHTML = '<div class="muted">لا توجد مهام</div>'; return; }
+  if (!list.length) { box.innerHTML = '<div class="muted">لا توجد</div>'; return; }
   box.innerHTML = list.map(b => {
     const active = b.status === 'active';
     return `<div class="order-item">
-      <div class="row"><b>${SERVICE_NAMES[b.service_type]}</b>
-      <span class="badge ${active?'ok':'err'}">${active?'🟢 نشطة':'⏹ موقوفة'}</span></div>
-      <div class="row"><span>🎯 ${b.target.slice(0,24)}</span><span>🔢 ${b.amount_per_run}</span></div>
-      <div class="row muted"><span>⏰ كل ${b.hours_interval}h</span><span>📊 ${b.run_count}</span></div>
+      <div class="row"><b>${SERVICE_NAMES[b.service_type]}</b><span class="badge ${active?'ok':'err'}">${active?'🟢':'⏹'}</span></div>
+      <div class="row"><span>🎯 ${b.target?.slice(0,24)}</span><span>🔢 ${b.amount_per_run}</span></div>
       <div class="btn-row" style="margin-top:8px">
         ${active ? `<button class="btn btn-warning" data-stop="${b.task_id}">⏹</button>`:''}
         <button class="btn btn-danger" data-del="${b.task_id}">🗑</button>
@@ -1421,22 +1337,16 @@ function renderBlastTasks() {
   box.querySelectorAll('[data-del]').forEach(el => el.onclick = () => deleteBlastTask(el.dataset.del));
 }
 
-function getChat(uid) { return chatsDB[uid] || []; }
-function saveChat(uid, msgs) { chatsDB[uid] = msgs; DB.set('chats', chatsDB); }
-function addChatMsg(uid, from, text) {
-  const msgs = getChat(uid);
-  msgs.push({ from, text, at: new Date().toISOString() });
-  saveChat(uid, msgs);
-}
-function renderUserChat() {
+async function renderUserChat() {
   if (!state.userId) return;
-  const msgs = getChat(state.userId);
+  const data = await fbGet(`chats/${state.userId}`);
+  const msgs = data ? Object.values(data) : [];
   const body = $('#chatBody');
   if (!msgs.length) {
     body.innerHTML = `<div class="chat-empty"><div class="icon">💬</div><div>لا توجد رسائل</div></div>`;
     return;
   }
-  body.innerHTML = msgs.map(m => `
+  body.innerHTML = msgs.sort((a,b) => a.at.localeCompare(b.at)).map(m => `
     <div class="chat-msg ${m.from === 'user' ? 'me' : 'them'}">
       ${escapeHtml(m.text)}
       <span class="time">${new Date(m.at).toLocaleTimeString('ar', {hour:'2-digit', minute:'2-digit'})}</span>
@@ -1444,16 +1354,17 @@ function renderUserChat() {
   `).join('');
   body.scrollTop = body.scrollHeight;
 }
-function renderAdminChat() {
+async function renderAdminChat() {
   if (!state.adminChatUserId) return;
-  const msgs = getChat(state.adminChatUserId);
+  const data = await fbGet(`chats/${state.adminChatUserId}`);
+  const msgs = data ? Object.values(data) : [];
   const body = $('#adminChatBody');
   $('#adminChatName').textContent = users[state.adminChatUserId]?.username || state.adminChatUserId;
   if (!msgs.length) {
-    body.innerHTML = `<div class="chat-empty"><div class="icon">💬</div><div>لا توجد رسائل</div></div>`;
+    body.innerHTML = `<div class="chat-empty"><div class="icon">💬</div><div>لا رسائل</div></div>`;
     return;
   }
-  body.innerHTML = msgs.map(m => `
+  body.innerHTML = msgs.sort((a,b) => a.at.localeCompare(b.at)).map(m => `
     <div class="chat-msg ${m.from === 'dev' ? 'me' : 'them'}">
       ${escapeHtml(m.text)}
       <span class="time">${new Date(m.at).toLocaleTimeString('ar', {hour:'2-digit', minute:'2-digit'})}</span>
@@ -1462,25 +1373,23 @@ function renderAdminChat() {
   body.scrollTop = body.scrollHeight;
 }
 function escapeHtml(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
-function sendUserMsg() {
+async function sendUserMsg() {
   const input = $('#chatInput');
   const text = input.value.trim();
   if (!text) return;
   if (!state.userId) return toast('❌ سجل دخول', 'err');
-  addChatMsg(state.userId, 'user', text);
+  await fbSet(`chats/${state.userId}/${Date.now()}`, { from: 'user', text, at: new Date().toISOString() });
   input.value = '';
   renderUserChat();
-  toast('✅ تم الإرسال', 'ok');
 }
-function sendAdminMsg() {
+async function sendAdminMsg() {
   const input = $('#adminChatInput');
   const text = input.value.trim();
   if (!text) return;
-  if (!state.adminChatUserId) return toast('❌ لا توجد محادثة', 'err');
-  addChatMsg(state.adminChatUserId, 'dev', text);
+  if (!state.adminChatUserId) return;
+  await fbSet(`chats/${state.adminChatUserId}/${Date.now()}`, { from: 'dev', text, at: new Date().toISOString() });
   input.value = '';
   renderAdminChat();
-  toast('✅ تم الرد', 'ok');
 }
 function updateSupportBadge() {
   const fab = $('#supportFab');
@@ -1488,27 +1397,14 @@ function updateSupportBadge() {
   if (!state.userId || state.isAdmin) { fab.style.display = 'none'; return; }
   if (maintenance.active) { fab.style.display = 'none'; return; }
   fab.style.display = 'flex';
-  const msgs = getChat(state.userId);
-  const lastReadKey = 'vip_lastRead_' + state.userId;
-  const lastRead = localStorage.getItem(lastReadKey) || '';
-  const unread = msgs.filter(m => m.from === 'dev' && m.at > lastRead).length;
-  dot.classList.toggle('show', unread > 0);
 }
-
 function openChat(source) {
-  state.chatSource = source || 'vip';
   showScreen('scr-chat');
   renderUserChat();
-  if (state.userId) {
-    localStorage.setItem('vip_lastRead_' + state.userId, new Date().toISOString());
-    updateSupportBadge();
-  }
 }
-
 function backFromChat() {
-  const maint = maintDB.get();
   if (state.isAdmin) { showScreen('scr-admin'); renderAdminPanel(); return; }
-  if (maint.active) { showMaintenanceScreen(); return; }
+  if (maintenance.active) { showMaintenanceScreen(); return; }
   if (state.isVIP) { $('#tabbar').style.display = 'grid'; showScreen('scr-vip'); renderVIPMain(); return; }
   if (state.userId) { showGate(); return; }
   showScreen('scr-login');
@@ -1531,69 +1427,61 @@ function renderAdminPanel() {
   $('#adPlans').textContent = Object.keys(plansDB).length;
   $('#adAccs').textContent = Object.keys(tiktokAccs).length;
 
-  maintenance = maintDB.get();
   updateMaintenanceUI();
-  updateDevBtnUI();
-  updateFarmUI();
 
-  // ═══ الحسابات + حالة الاستخدام ═══
   const al = $('#adAccsList');
   const accs = Object.entries(tiktokAccs);
   al.innerHTML = accs.length ? accs.map(([id, a]) => {
     const points = a.userData?.score ?? '?';
-    const inUse = isAccountInUse(id);
-    const userUsing = inUse ? getAccountUser(id) : null;
+    const inUse = !!activeSessions[id];
+    const userUsing = inUse ? (users[activeSessions[id]]?.username || activeSessions[id]) : null;
     return `<div class="acc-card">
       <div class="acc-info">
         <div class="acc-name">👤 ${a.username}</div>
-        <div class="acc-sub">${a.linked ? '✅ جاهز' : '⚠️ غير مربوط'}</div>
+        <div class="acc-sub">${a.linked ? '✅' : '⚠️'}</div>
       </div>
       <span class="acc-points">⭐ ${points}</span>
-      ${inUse ? 
-        `<span class="acc-status in-use">🔒 ${userUsing?.username || 'مستخدم'}</span>` :
-        `<span class="acc-status available">✅ متاح</span>`
-      }
+      ${inUse ? `<span class="acc-status in-use">🔒 ${userUsing}</span>` : `<span class="acc-status available">✅ متاح</span>`}
       <button class="btn btn-danger" style="width:auto;padding:4px 10px;margin:0;font-size:11px" data-acc-del="${id}">🗑</button>
     </div>`;
-  }).join('') : '<div class="muted">لا توجد حسابات</div>';
-  al.querySelectorAll('[data-acc-del]').forEach(el => el.onclick = () => {
-    if (state.farming && state.farmingAccId === el.dataset.accDel) adminStopFarm();
-    delete tiktokAccs[el.dataset.accDel]; DB.set('tiktokAccs', tiktokAccs);
-    renderAdminPanel(); toast('🗑 حُذف', 'ok');
+  }).join('') : '<div class="muted">لا توجد</div>';
+  al.querySelectorAll('[data-acc-del]').forEach(el => el.onclick = async () => {
+    await fbRemove(`tiktokAccs/${el.dataset.accDel}`);
+    if (activeSessions[el.dataset.accDel]) await fbRemove(`activeSessions/${el.dataset.accDel}`);
+    toast('🗑', 'ok');
   });
 
-  // الباقات
   const pb = $('#adPlansList');
   const plist = Object.entries(plansDB);
   pb.innerHTML = plist.length ? plist.map(([k, p]) =>
     `<div class="order-item">
       <div class="row"><b>💎 ${p.name}</b><span>${p.price}</span></div>
-      <div class="row muted"><span>${p.unit === 'hours' ? '⏱' : '📅'} ${p.duration} ${p.unit === 'hours' ? 'ساعة' : 'يوم'}</span>
+      <div class="row muted"><span>${p.unit === 'hours' ? '⏱' : '📅'} ${p.duration}</span>
       <button class="btn btn-danger" style="width:auto;padding:4px 10px;margin:0" data-plan-del="${k}">🗑</button></div>
-    </div>`).join('') : '<div class="muted">لا توجد باقات</div>';
-  pb.querySelectorAll('[data-plan-del]').forEach(el => el.onclick = () => {
-    delete plansDB[el.dataset.planDel]; DB.set('plans', plansDB);
-    renderAdminPanel(); toast('🗑', 'ok');
+    </div>`).join('') : '<div class="muted">لا توجد</div>';
+  pb.querySelectorAll('[data-plan-del]').forEach(el => el.onclick = async () => {
+    await fbRemove(`plans/${el.dataset.planDel}`);
+    toast('🗑', 'ok');
   });
 
   const vp = $('#adVipPlanPicker');
   vp.innerHTML = plist.length ? plist.map(([k, p]) =>
-    `<button class="btn btn-ghost" data-pick="${k}">${p.name} · ${p.duration}${p.unit === 'hours' ? 'س' : 'ي'} · ${p.price}</button>`
-  ).join('') : '<div class="muted">أضف باقة أولاً</div>';
+    `<button class="btn btn-ghost" data-pick="${k}">${p.name} · ${p.duration}${p.unit === 'hours' ? 'س' : 'ي'}</button>`
+  ).join('') : '<div class="muted">أضف باقة</div>';
   vp.querySelectorAll('[data-pick]').forEach(el => el.onclick = () => {
     state.adminSelectedPlan = el.dataset.pick;
     vp.querySelectorAll('button').forEach(b => b.className = 'btn btn-ghost');
-    el.className = 'btn btn-purple'; toast('✅ ' + plansDB[el.dataset.pick].name, 'ok');
+    el.className = 'btn btn-purple';
   });
 
   const cp = $('#adCodePlanPicker');
   cp.innerHTML = plist.length ? plist.map(([k, p]) =>
-    `<button class="btn btn-ghost" data-codepick="${k}">${p.name} · ${p.duration}${p.unit === 'hours' ? 'س' : 'ي'}</button>`
-  ).join('') : '<div class="muted">أضف باقة أولاً</div>';
+    `<button class="btn btn-ghost" data-codepick="${k}">${p.name}</button>`
+  ).join('') : '<div class="muted">أضف باقة</div>';
   cp.querySelectorAll('[data-codepick]').forEach(el => el.onclick = () => {
     state.adminCodePlan = el.dataset.codepick;
     cp.querySelectorAll('button').forEach(b => b.className = 'btn btn-ghost');
-    el.className = 'btn btn-gold'; toast('✅ ' + plansDB[el.dataset.codepick].name, 'ok');
+    el.className = 'btn btn-gold';
   });
 
   renderCodesList();
@@ -1606,15 +1494,13 @@ function renderAdminPanel() {
       <div class="row"><b>👤 ${u.username}</b>
       <span class="badge ${isVIPUser(id)?'ok':'err'}">${isVIPUser(id)?'💎 VIP':'عادي'}</span></div>
       <div class="oid">🆔 ${id}</div>
-      <div class="row muted"><span>${u.vip?.planName||'—'}</span><span>${isVIPUser(id) ? getVIPTimeLeft(id) : ''}</span></div>
-    </div>`).join('') : '<div class="muted">لا يوجد أعضاء</div>';
+    </div>`).join('') : '<div class="muted">لا يوجد</div>';
 }
 
-/* ═══ الأكواد — تتحدث تلقائياً ═══ */
 function renderCodesList() {
   const list = $('#adCodesList');
   const codes = Object.entries(codesDB).sort((a, b) => new Date(b[1].createdAt) - new Date(a[1].createdAt));
-  if (!codes.length) { list.innerHTML = '<div class="muted">لا توجد أكواد</div>'; return; }
+  if (!codes.length) { list.innerHTML = '<div class="muted">لا توجد</div>'; return; }
   list.innerHTML = codes.slice(0, 30).map(([code, e]) => {
     const plan = plansDB[e.planId];
     const planName = plan ? plan.name : '؟';
@@ -1628,32 +1514,27 @@ function renderCodesList() {
         <span>📋 ${planName}</span>
         ${!isDone ? `<button class="btn btn-danger" style="width:auto;padding:4px 10px;margin:0" data-code-del="${code}">🗑</button>` : `<span>🔒</span>`}
       </div>
-      <div class="muted" style="font-size:10px;margin-top:4px">استُخدم ${uses}/${max}</div>
     </div>`;
   }).join('');
-  list.querySelectorAll('[data-code-del]').forEach(el => el.onclick = () => {
-    delete codesDB[el.dataset.codeDel]; DB.set('codes', codesDB);
-    renderAdminPanel(); toast('🗑', 'ok');
+  list.querySelectorAll('[data-code-del]').forEach(el => el.onclick = async () => {
+    await fbRemove(`codes/${el.dataset.codeDel}`);
+    toast('🗑', 'ok');
   });
 }
 
 function renderChatList() {
   const list = $('#adChatList');
-  const entries = Object.entries(chatsDB).filter(([uid, msgs]) => msgs.length > 0);
-  if (!entries.length) { list.innerHTML = '<div class="muted">لا توجد محادثات</div>'; return; }
-  entries.sort((a, b) => {
-    const aLast = a[1][a[1].length-1]?.at || '';
-    const bLast = b[1][b[1].length-1]?.at || '';
-    return bLast.localeCompare(aLast);
-  });
+  const entries = Object.entries(chatsDB).filter(([uid, msgs]) => msgs && Object.keys(msgs).length > 0);
+  if (!entries.length) { list.innerHTML = '<div class="muted">لا توجد</div>'; return; }
   list.innerHTML = entries.map(([uid, msgs]) => {
-    const last = msgs[msgs.length - 1];
+    const msgArr = Object.values(msgs);
+    const last = msgArr[msgArr.length - 1];
     const user = users[uid]?.username || uid;
     return `<div class="order-item" style="cursor:pointer" data-chat-open="${uid}">
       <div class="row"><b>👤 ${user}</b>
         <span class="badge ${last.from === 'dev' ? 'run' : 'wait'}">${last.from === 'dev' ? 'رديت' : 'جديد'}</span>
       </div>
-      <div class="muted" style="margin:6px 0;font-size:11px">${last.text.slice(0, 50)}</div>
+      <div class="muted" style="margin:6px 0;font-size:11px">${last.text?.slice(0, 50)}</div>
     </div>`;
   }).join('');
   list.querySelectorAll('[data-chat-open]').forEach(el => el.onclick = () => {
@@ -1663,86 +1544,74 @@ function renderChatList() {
   });
 }
 
-function adminAddAccount() {
+async function adminAddAccount() {
   const u = $('#adAccUser').value.trim().replace('@','');
   const p = $('#adAccPass').value;
-  if (u.length < 2) return toast('❌ اسم المستخدم قصير', 'err');
-  if (p.length < 5) return toast('❌ كلمة المرور قصيرة', 'err');
-  const btn = $('#adAddAcc'); btn.disabled = true; btn.innerHTML = '<span class="loader"></span> جاري...';
-  apiLogin(u, p).then(async ({token, csrf, user}) => {
+  if (u.length < 2) return toast('❌ اسم قصير', 'err');
+  if (p.length < 5) return toast('❌ كلمة قصيرة', 'err');
+  const btn = $('#adAddAcc'); btn.disabled = true; btn.innerHTML = '<span class="loader"></span>';
+  try {
+    const {token, csrf, user} = await apiLogin(u, p);
     if (!token) throw new Error('فشل');
     const ok = await apiAttest(token, csrf);
     if (!ok) throw new Error('فشل التحقق');
     const accId = 'acc_' + randomHex(6);
-    tiktokAccs[accId] = {
+    await fbSet(`tiktokAccs/${accId}`, {
       username: u, password: p, token, csrf, userData: user,
       linked: true, added_at: new Date().toISOString(),
-    };
-    DB.set('tiktokAccs', tiktokAccs);
+    });
     $('#adAccUser').value = ''; $('#adAccPass').value = '';
-    renderAdminPanel();
-    toast('✅ تم إضافة الحساب (💾 محفوظ دائمياً)', 'ok');
-  }).catch(e => toast('❌ ' + (e.message || 'فشل'), 'err'))
-    .finally(() => { btn.disabled = false; btn.textContent = '➕ إضافة حساب'; });
+    toast('✅ أُضيف سحابياً', 'ok');
+  } catch(e) { toast('❌ ' + e.message, 'err'); }
+  finally { btn.disabled = false; btn.textContent = '➕ إضافة'; }
 }
 
-function adminAddPlan() {
+async function adminAddPlan() {
   const name = $('#adPlanName').value.trim();
   const dur = parseInt($('#adPlanDur').value);
   const price = $('#adPlanPrice').value.trim();
-  if (!name || !dur || dur < 1 || !price) return toast('❌ املأ الحقول', 'err');
+  if (!name || !dur || dur < 1 || !price) return toast('❌ املأ', 'err');
   const id = 'plan_' + randomHex(4);
-  plansDB[id] = {name, duration: dur, unit: state.planUnit, price};
-  DB.set('plans', plansDB);
+  await fbSet(`plans/${id}`, {name, duration: dur, unit: state.planUnit, price});
   $('#adPlanName').value = ''; $('#adPlanDur').value = ''; $('#adPlanPrice').value = '';
-  renderAdminPanel(); toast('✅ أُضيفت', 'ok');
+  toast('✅ أُضيفت سحابياً', 'ok');
 }
 
-function adminGenCode() {
-  if (!state.adminCodePlan || !plansDB[state.adminCodePlan]) return toast('❌ اختر الباقة أولاً', 'err');
+async function adminGenCode() {
+  if (!state.adminCodePlan || !plansDB[state.adminCodePlan]) return toast('❌ اختر الباقة', 'err');
   const custom = parseInt($('#adCustomUses').value);
   const uses = (!isNaN(custom) && custom > 0) ? custom : state.adminCodeUses;
   let code;
   do { code = genCode(); } while (codesDB[code]);
-  codesDB[code] = {
-    planId: state.adminCodePlan, maxUses: uses, uses: 0, usedBy: [],
+  await fbSet(`codes/${code}`, {
+    planId: state.adminCodePlan, maxUses: uses, uses: 0, usedBy: {},
     createdAt: new Date().toISOString(),
-  };
-  DB.set('codes', codesDB);
+  });
   $('#adCustomUses').value = '';
-  renderAdminPanel();
   const plan = plansDB[state.adminCodePlan];
   const durText = plan.unit === 'hours' ? plan.duration + ' ساعة' : plan.duration + ' يوم';
   openModal(`
     <div class="center" style="margin-bottom:16px">
-      <div style="font-size:56px;margin-bottom:8px">🎟️</div>
+      <div style="font-size:56px">🎟️</div>
       <div style="font-size:18px;font-weight:900;color:var(--gold)">تم توليد الكود!</div>
     </div>
     <div class="code-box">
-      <div class="code-lbl">🎟️ ACTIVATION CODE</div>
+      <div class="code-lbl">ACTIVATION CODE</div>
       <div class="code-val">${code}</div>
     </div>
     <div class="muted center" style="margin:8px 0">
-      📋 الباقة: <b>${plan.name}</b><br>
-      ⏱ المدة: <b>${durText}</b><br>
-      🔢 الاستخدامات: <b>${uses}</b> مرة
+      📋 ${plan.name}<br>⏱ ${durText}<br>🔢 ${uses} مرة
     </div>
-    <button class="btn btn-success" onclick="copyCode('${code}')">📋 نسخ الكود</button>
-    <button class="btn btn-ghost" onclick="closeModal()">✅ تم</button>
+    <button class="btn btn-success" onclick="copyCode('${code}')">📋 نسخ</button>
+    <button class="btn btn-ghost" onclick="closeModal()">✅</button>
   `);
+  toast('✅ الكود أُنشئ سحابياً', 'ok');
 }
 function copyCode(code) {
-  navigator.clipboard.writeText(code).then(() => toast('✅ تم النسخ', 'ok'))
-    .catch(() => {
-      const inp = document.createElement('input');
-      inp.value = code; document.body.appendChild(inp);
-      inp.select(); document.execCommand('copy');
-      document.body.removeChild(inp);
-      toast('✅ تم النسخ', 'ok');
-    });
+  navigator.clipboard.writeText(code).then(() => toast('✅ تم النسخ', 'ok'));
 }
 
-function adminActivateVIP() {
+async function adminActivateVIP() {
   const uid = $('#adVipUserId').value.trim();
   if (!uid) return toast('❌ أدخل User ID', 'err');
   let targetId = uid;
@@ -1754,21 +1623,14 @@ function adminActivateVIP() {
   if (!state.adminSelectedPlan || !plansDB[state.adminSelectedPlan]) return toast('❌ اختر الباقة', 'err');
   const p = plansDB[state.adminSelectedPlan];
   const ms = p.unit === 'hours' ? p.duration * 3600000 : p.duration * 86400000;
-  const wasVIP = isVIPUser(targetId);
-  users[targetId].vip = {
+  await fbUpdate(`users/${targetId}/vip`, {
     expiry: new Date(Date.now() + ms).toISOString(),
     planId: state.adminSelectedPlan, planName: p.name,
-  };
-  DB.set('users', users);
-  
-  // ✅ إذا العضو كان مسجل دخول في نافذة أخرى → يشوف الإشعار فوراً
-  // (عبر setInterval اللي يفحص)
-  
-  toast(`💎 تم تفعيل VIP لـ ${users[targetId].username}`, 'ok');
-  renderAdminPanel();
+  });
+  toast(`💎 تم التفعيل سحابياً`, 'ok');
 }
 
-function adminCancelVIP() {
+async function adminCancelVIP() {
   const uid = $('#adVipUserId').value.trim();
   let targetId = uid;
   if (!users[uid]) {
@@ -1776,261 +1638,45 @@ function adminCancelVIP() {
     if (found) targetId = found.id;
     else return toast('❌ غير موجود', 'err');
   }
-  users[targetId].vip = null; DB.set('users', users);
-  toast('✅ تم الإلغاء', 'ok'); renderAdminPanel();
+  await fbRemove(`users/${targetId}/vip`);
+  toast('✅', 'ok');
 }
 
-/* ═══════════════════════════════════════════════════════
-   🟢 التجميع
-═══════════════════════════════════════════════════════ */
-function updateFarmUI() {
-  const status = $('#farmStatus');
-  const startAllBtn = $('#adStartFarmAll');
-  const stopAllBtn = $('#adStopFarmAll');
-  if (!status) return;
-  
-  if (!state.farming) {
-    status.style.background = 'rgba(148,163,184,.1)';
-    status.style.borderColor = 'rgba(148,163,184,.3)';
-    status.style.color = 'var(--muted)';
-    status.textContent = '⚪ لا يوجد تجميع نشط';
-    if (startAllBtn) startAllBtn.style.display = 'flex';
-    if (stopAllBtn) stopAllBtn.style.display = 'none';
-  } else {
-    status.style.background = 'rgba(34,197,94,.15)';
-    status.style.borderColor = 'rgba(34,197,94,.5)';
-    status.style.color = 'var(--success)';
-    if (state.farmingMode === 'all') {
-      const count = getTiktokAccounts().filter(a => a.linked && a.token).length;
-      status.textContent = `🟢 تجميع تلقائي — ${count} حساب`;
-    } else {
-      const acc = tiktokAccs[state.farmingAccId];
-      status.textContent = `🟢 تجميع على: ${acc?.username || '—'}`;
-    }
-    if (startAllBtn) startAllBtn.style.display = 'none';
-    if (stopAllBtn) stopAllBtn.style.display = 'flex';
-  }
-  renderFarmAccList();
-}
-
-function renderFarmAccList() {
-  const list = $('#adFarmAccList');
-  if (!list) return;
-  const accs = Object.entries(tiktokAccs).filter(([id, a]) => a.linked && a.token);
-  if (!accs.length) {
-    list.innerHTML = '<div class="muted" style="text-align:center;padding:16px">لا توجد حسابات</div>';
-    return;
-  }
-  list.innerHTML = accs.map(([id, a]) => {
-    const points = a.userData?.score ?? '?';
-    const stats = state.farmingAccStats[id] || {tasks: 0, score: 0};
-    const isFarming = state.farming && state.farmingMode === 'single' && state.farmingAccId === id;
-    const isFarmingAll = state.farming && state.farmingMode === 'all';
-    const isActive = isFarming || isFarmingAll;
-    return `<div class="acc-card ${isActive ? '' : ''}" style="${isActive ? 'border-color:rgba(34,197,94,.7);background:linear-gradient(135deg,rgba(34,197,94,.18),rgba(5,150,105,.15));' : ''}">
-      <div class="acc-info">
-        <div class="acc-name">👤 ${a.username}</div>
-        <div class="acc-sub">⭐ ${points} | ✅ ${stats.tasks} | 📈 ${stats.score}</div>
-      </div>
-      ${isFarming ?
-        `<button class="btn btn-danger" style="width:auto;padding:4px 10px;margin:0;font-size:11px" data-farm-stop="${id}">⏹</button>` :
-        isFarmingAll ?
-        `<span class="badge ok">🟢 يجمع</span>` :
-        `<button class="btn btn-success" style="width:auto;padding:4px 10px;margin:0;font-size:11px" data-farm-start="${id}">🟢 تجميع</button>`
-      }
-    </div>`;
-  }).join('');
-  list.querySelectorAll('[data-farm-start]').forEach(el => el.onclick = () => adminStartFarmSingle(el.dataset.farmStart));
-  list.querySelectorAll('[data-farm-stop]').forEach(el => el.onclick = () => adminStopFarm());
-}
-
-function adminStartFarmAll() {
-  const accs = Object.entries(tiktokAccs).filter(([id, a]) => a.linked && a.token);
-  if (!accs.length) return toast('❌ أضف حساب', 'err');
-  if (state.farming) adminStopFarm();
-  state.farming = true;
-  state.farmingMode = 'all';
-  state.farmingAccId = null;
-  state.farmingAccStats = {};
-  state.farmStats = {tasks:0, score:0, bad:0};
-  accs.forEach(([id]) => { state.farmingAccStats[id] = {tasks:0, score:0, bad:0}; });
-  $('#adFarmScore').textContent = '0';
-  $('#adFarmTasks').textContent = '0';
-  updateFarmUI();
-  toast(`🟢 بدأ تجميع الكل على ${accs.length} حساب`, 'ok');
-  adminFarmLoop();
-}
-
-function adminStartFarmSingle(accId) {
-  const acc = tiktokAccs[accId];
-  if (!acc || !acc.linked || !acc.token) return toast('❌ غير جاهز', 'err');
-  if (state.farming) adminStopFarm();
-  state.farming = true;
-  state.farmingMode = 'single';
-  state.farmingAccId = accId;
-  state.farmingAccStats = {};
-  state.farmingAccStats[accId] = {tasks:0, score:0, bad:0};
-  state.farmStats = {tasks:0, score:0, bad:0};
-  $('#adFarmScore').textContent = '0';
-  $('#adFarmTasks').textContent = '0';
-  updateFarmUI();
-  toast(`🟢 بدأ التجميع على: ${acc.username}`, 'ok');
-  adminFarmLoop();
-}
-
-function adminStopFarm() {
-  state.farming = false;
-  state.farmingMode = null;
-  state.farmingAccId = null;
-  if (state.farmTimer) clearTimeout(state.farmTimer);
-  state.farmTimer = null;
-  updateFarmUI();
-  toast('⏹ تم إيقاف التجميع', 'ok');
-}
-
-async function adminFarmLoop() {
-  if (!state.farming) return;
-  const accs = getTiktokAccounts().filter(a => a.linked && a.token);
-  if (!accs.length) { adminStopFarm(); return; }
-  let targetAccs = accs;
-  if (state.farmingMode === 'single') {
-    const single = accs.find(a => a.id === state.farmingAccId);
-    if (!single) { adminStopFarm(); return; }
-    targetAccs = [single];
-  }
-  try {
-    for (const acc of targetAccs) {
-      if (!state.farming) return;
-      const apiOrders = await apiGetOrders(acc.token, acc.csrf);
-      const pend = apiOrders.filter(o => o.status === 'pending');
-      if (!pend.length) continue;
-      const toProcess = pend.slice(0, 3);
-      for (const o of toProcess) {
-        if (!state.farming) return;
-        try {
-          const result = await apiActionOrder(o._id, acc.token, acc.csrf);
-          if (!state.farmingAccStats[acc.id]) state.farmingAccStats[acc.id] = {tasks:0, score:0, bad:0};
-          state.farmingAccStats[acc.id].tasks++;
-          const gained = Number(result.data?.actionOrder?.score || 0);
-          if (gained > 0) {
-            state.farmingAccStats[acc.id].score += gained;
-            if (tiktokAccs[acc.id] && tiktokAccs[acc.id].userData) {
-              tiktokAccs[acc.id].userData.score = (tiktokAccs[acc.id].userData.score || 0) + gained;
-              DB.set('tiktokAccs', tiktokAccs);
-            }
-          } else state.farmingAccStats[acc.id].bad++;
-          state.farmStats.tasks++;
-          state.farmStats.score += gained;
-          $('#adFarmScore').textContent = state.farmStats.score;
-          $('#adFarmTasks').textContent = state.farmStats.tasks;
-          updateFarmUI();
-        } catch(e) { console.warn(e); }
-        await new Promise(r => setTimeout(r, 100 + Math.random()*150));
-      }
-    }
-    if (state.farmStats.score >= CFG.FARM_POINTS_LIMIT) {
-      toast(`🎯 جمعت ${CFG.FARM_POINTS_LIMIT} نقطة!`, 'ok');
-      adminStopFarm(); renderAdminPanel(); return;
-    }
-  } catch(e) { console.warn(e); }
-  if (state.farming) state.farmTimer = setTimeout(adminFarmLoop, 2000);
-}
-
-/* ═══ الصيانة ═══ */
 function updateMaintenanceUI() {
   const status = $('#maintStatus');
-  const enableBtn = $('#maintEnableBtn');
-  const disableBtn = $('#maintDisableBtn');
   if (!status) return;
   if (maintenance.active) {
     status.style.background = 'rgba(239,68,68,.1)';
     status.style.borderColor = 'rgba(239,68,68,.3)';
     status.style.color = 'var(--danger)';
-    status.textContent = '🔴 وضع الصيانة مُفعّل';
-    enableBtn.style.display = 'none';
-    disableBtn.style.display = 'flex';
+    status.textContent = '🔴 الصيانة مُفعّلة';
+    $('#maintEnableBtn').style.display = 'none';
+    $('#maintDisableBtn').style.display = 'flex';
     $('#maintMessageInput').value = maintenance.message || '';
     $('#maintTimeInput').value = maintenance.estimatedTime || '';
   } else {
     status.style.background = 'rgba(34,197,94,.1)';
     status.style.borderColor = 'rgba(34,197,94,.3)';
     status.style.color = 'var(--success)';
-    status.textContent = '🟢 الموقع يعمل';
-    enableBtn.style.display = 'flex';
-    disableBtn.style.display = 'none';
+    status.textContent = '🟢 يعمل';
+    $('#maintEnableBtn').style.display = 'flex';
+    $('#maintDisableBtn').style.display = 'none';
   }
 }
 
-function updateDevBtnUI() {
-  const devBtnStatus = $('#devBtnStatus');
-  const showDevBtn = $('#showDevBtn');
-  const hideDevBtn = $('#hideDevBtn');
-  if (!devBtnStatus) return;
-  if (devBtnDB.get()) {
-    devBtnStatus.textContent = '🔴 الزر ظاهر في شاشة الصيانة';
-    devBtnStatus.style.background = 'rgba(239,68,68,.1)';
-    devBtnStatus.style.borderColor = 'rgba(239,68,68,.3)';
-    devBtnStatus.style.color = 'var(--danger)';
-    if (showDevBtn) showDevBtn.style.display = 'none';
-    if (hideDevBtn) hideDevBtn.style.display = 'flex';
-  } else {
-    devBtnStatus.textContent = '🟢 الزر مخفي';
-    devBtnStatus.style.background = 'rgba(34,197,94,.1)';
-    devBtnStatus.style.borderColor = 'rgba(34,197,94,.3)';
-    devBtnStatus.style.color = 'var(--success)';
-    if (showDevBtn) showDevBtn.style.display = 'flex';
-    if (hideDevBtn) hideDevBtn.style.display = 'none';
-  }
-}
-
-function enableMaintenance() {
+async function enableMaintenance() {
   const msg = $('#maintMessageInput').value.trim();
   const time = $('#maintTimeInput').value.trim();
-  maintenance = {
+  await fbSet('maintenance', {
     active: true,
-    message: msg || 'نعمل حالياً على تحسين الخدمات، سنعود قريباً.',
+    message: msg || 'نعمل حالياً على تحسين الخدمات',
     estimatedTime: time,
-  };
-  maintDB.set(maintenance);
-  updateMaintenanceUI();
-  toast('🛠️ تم تفعيل الصيانة', 'ok');
+  });
+  toast('🛠️ الصيانة مُفعّلة سحابياً', 'ok');
 }
-
-function disableMaintenance() {
-  maintenance = { active: false, message: '', estimatedTime: '' };
-  maintDB.set(maintenance);
-  updateMaintenanceUI();
-  toast('✅ تم تعطيل الصيانة', 'ok');
-}
-
-/* ═══ التحقق من التفعيل الجديد — للعضو ═══ */
-let lastVipState = {};
-function checkVipChanges() {
-  if (!state.userId || state.isAdmin) return;
-  const u = users[state.userId];
-  if (!u) return;
-  
-  const currentVIP = u.vip?.expiry || null;
-  const lastVIP = lastVipState[state.userId] || null;
-  
-  if (currentVIP && currentVIP !== lastVIP && !isNaN(new Date(currentVIP))) {
-    // تم تفعيل جديد
-    if (u.vip?.planName) {
-      const plan = plansDB[u.vip.planId];
-      if (plan) {
-        showActivationBanner(plan.name, plan.duration, plan.unit);
-      }
-    }
-    // انقل للـ VIP
-    if (!state.isVIP || $('#scr-gate').classList.contains('active')) {
-      state.isVIP = true;
-      $('#tabbar').style.display = 'grid';
-      renderVIPMain();
-      showScreen('scr-vip');
-    }
-  }
-  
-  lastVipState[state.userId] = currentVIP;
+async function disableMaintenance() {
+  await fbSet('maintenance', { active: false, message: '', estimatedTime: '' });
+  toast('✅ تم التعطيل', 'ok');
 }
 
 function createStars() {
@@ -2046,16 +1692,48 @@ function createStars() {
   }
 }
 
-/* ═══ Init ═══ */
 document.addEventListener('DOMContentLoaded', () => {
   createStars();
   setTimeout(() => $('#splash')?.classList.add('hide'), 1800);
+  
+  waitForFirebase(async () => {
+    $('#fbStatus').className = 'fb-status connecting';
+    $('#fbStatus').textContent = '⏳ جاري تحميل البيانات...';
+    
+    try {
+      await loadAllData();
+      setupRealtimeSync();
+      state.fbReady = true;
+      $('#fbStatus').className = 'fb-status connected';
+      $('#fbStatus').textContent = '☁️ متصل بالسحابة — البيانات مشتركة';
+      
+      const saved = localStorage.getItem('vip_current');
+      if (saved === 'DEV') enterAdminMode();
+      else if (saved && users[saved]) {
+        state.userId = saved;
+        state.isAdmin = false;
+        state.isVIP = isVIPUser(saved);
+        state.lastVipExpiry = users[saved].vip?.expiry || null;
+        updateHeader();
+        if (maintenance.active) showMaintenanceScreen();
+        else routeAfterLogin();
+        updateSupportBadge();
+      } else if (maintenance.active) {
+        showMaintenanceScreen();
+      } else {
+        updateHeader();
+      }
+    } catch(e) {
+      console.error(e);
+      $('#fbStatus').className = 'fb-status error';
+      $('#fbStatus').textContent = '❌ فشل الاتصال — تحقق من إعدادات Firebase';
+      toast('❌ فشل تحميل البيانات', 'err');
+    }
+  });
 
   $('#btnLogin').onclick = doAuth;
   $('#toggleAuth').onclick = switchAuthMode;
   $('#inPassword').addEventListener('keydown', e => { if (e.key === 'Enter') doAuth(); });
-  $('#btnContact').onclick = () => openChat('login');
-  $('#gateContact').onclick = () => openChat('gate');
   $('#gateLogout').onclick = fullLogout;
   $('#btnActivateCode').onclick = activateCode;
   $('#gateActivationCode').addEventListener('keydown', e => { if (e.key === 'Enter') activateCode(); });
@@ -2063,32 +1741,11 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#btnServices').onclick = () => { renderServices(); showScreen('scr-services'); };
   $('#btnBlast').onclick = () => { renderBlastServices(); renderBlastIntervals(); renderBlastTasks(); showScreen('scr-blast'); };
   $('#btnOrders').onclick = () => { renderOrders(); showScreen('scr-orders'); };
-  $('#btnSupport').onclick = () => openChat('vip');
+  $('#btnSupport').onclick = () => { showScreen('scr-chat'); renderUserChat(); };
   $('#btnVipLogout').onclick = fullLogout;
 
-  $('#supportFab').onclick = () => {
-    const active = $('.screen.active');
-    if (active?.id === 'scr-gate') openChat('gate');
-    else if (active?.id === 'scr-vip') openChat('vip');
-    else openChat('login');
-  };
-
+  $('#supportFab').onclick = () => { showScreen('scr-chat'); renderUserChat(); };
   $('#chatBackBtn').onclick = backFromChat;
-
-  const hiddenDevBtn = $('#hiddenDevLoginBtn');
-  if (hiddenDevBtn) {
-    hiddenDevBtn.onclick = () => {
-      showScreen('scr-login');
-      toast('🔐 شاشة دخول المطور', 'ok');
-      setTimeout(() => $('#inUsername')?.focus(), 200);
-    };
-  }
-
-  const showDevBtn = $('#showDevBtn');
-  const hideDevBtn = $('#hideDevBtn');
-  if (showDevBtn) showDevBtn.onclick = () => { devBtnDB.set(true); updateDevBtnUI(); toast('✅ الزر ظاهر', 'ok'); };
-  if (hideDevBtn) hideDevBtn.onclick = () => { devBtnDB.set(false); updateDevBtnUI(); toast('🚫 الزر مخفي', 'ok'); };
-
   $('#chatSend').onclick = sendUserMsg;
   $('#chatInput').addEventListener('keydown', e => { if (e.key === 'Enter') sendUserMsg(); });
   $('#adminChatSend').onclick = sendAdminMsg;
@@ -2100,15 +1757,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if ($('#maintEnableBtn')) $('#maintEnableBtn').onclick = enableMaintenance;
   if ($('#maintDisableBtn')) $('#maintDisableBtn').onclick = disableMaintenance;
-  if ($('#adStartFarmAll')) $('#adStartFarmAll').onclick = adminStartFarmAll;
-  if ($('#adStopFarmAll')) $('#adStopFarmAll').onclick = adminStopFarm;
 
   $$('[data-back]').forEach(b => b.onclick = () => {
     if ($('#scr-chat').classList.contains('active')) { backFromChat(); return; }
-    if ($('#scr-adminchat').classList.contains('active')) {
-      state.adminChatUserId = null;
-      showScreen('scr-admin'); renderAdminPanel(); return;
-    }
+    if ($('#scr-adminchat').classList.contains('active')) { state.adminChatUserId = null; showScreen('scr-admin'); renderAdminPanel(); return; }
     if (state.isAdmin) { showScreen('scr-admin'); renderAdminPanel(); }
     else if (state.isVIP) { showScreen('scr-vip'); renderVIPMain(); }
     else if (state.userId) { showGate(); }
@@ -2133,7 +1785,6 @@ document.addEventListener('DOMContentLoaded', () => {
     $('#adCustomUses').value = '';
     $$('[data-uses]').forEach(b => b.classList.remove('btn-primary'));
     btn.classList.add('btn-primary');
-    toast('✅ ' + btn.dataset.uses + ' استخدام', 'ok');
   });
 
   $('#adAddAcc').onclick = adminAddAccount;
@@ -2141,24 +1792,25 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#adGenCode').onclick = adminGenCode;
   $('#adActivateVip').onclick = adminActivateVIP;
   $('#adCancelVip').onclick = adminCancelVIP;
-  $('#adBan').onclick = () => {
+  $('#adBan').onclick = async () => {
     const u = $('#adBanUserId').value.trim();
     let targetId = u;
     if (!users[u]) {
       const f = getUserByUsername(u);
       if (f) targetId = f.id; else return toast('❌', 'err');
     }
-    users[targetId].banned = true; DB.set('users', users);
-    toast('🚫', 'ok'); renderAdminPanel();
+    await fbUpdate(`users/${targetId}`, { banned: true });
+    toast('🚫', 'ok');
   };
-  $('#adUnban').onclick = () => {
+  $('#adUnban').onclick = async () => {
     const u = $('#adBanUserId').value.trim();
     let targetId = u;
     if (!users[u]) {
       const f = getUserByUsername(u);
       if (f) targetId = f.id; else return toast('❌', 'err');
     }
-    if (users[targetId]) { users[targetId].banned = false; DB.set('users', users); toast('✅', 'ok'); renderAdminPanel(); }
+    await fbUpdate(`users/${targetId}`, { banned: false });
+    toast('✅', 'ok');
   };
   $('#adLogout').onclick = fullLogout;
   $('#modal').onclick = e => { if (e.target.id === 'modal') closeModal(); };
@@ -2169,68 +1821,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const usesBtn = document.querySelector('[data-uses="1"]');
   if (usesBtn) usesBtn.classList.add('btn-primary');
 
-  maintenance = maintDB.get();
-  
-  const saved = localStorage.getItem('vip_current');
-  if (saved === 'DEV') { 
-    enterAdminMode(); 
-  }
-  else if (saved && users[saved]) {
-    state.userId = saved;
-    state.isAdmin = false;
-    state.isVIP = isVIPUser(saved);
-    updateHeader();
-    if (maintenance.active) showMaintenanceScreen();
-    else routeAfterLogin();
-    updateSupportBadge();
-    lastVipState[saved] = users[saved].vip?.expiry || null;
-  } else if (maintenance.active) {
-    showMaintenanceScreen();
-  } else {
-    updateHeader();
-  }
-
-  // ═══ تحديث دوري كل 3 ثواني ═══
-  setInterval(() => {
-    if ($('#scr-chat').classList.contains('active') && state.userId) renderUserChat();
-    if ($('#scr-adminchat').classList.contains('active') && state.adminChatUserId) renderAdminChat();
-    updateSupportBadge();
-    if (state.isVIP && $('#scr-vip').classList.contains('active')) renderVIPMain();
-    
-    // التحقق من التفعيل الجديد
-    checkVipChanges();
-    
-    // الأكواد تتحدث تلقائياً في لوحة المطور
-    if (state.isAdmin && $('#scr-admin').classList.contains('active')) {
-      const codesHash = JSON.stringify(codesDB);
-      if (codesHash !== state.lastCodesHash) {
-        state.lastCodesHash = codesHash;
-        renderCodesList();
-      }
-      // أيضاً حدّث الحسابات (حالة الاستخدام)
-      renderAdminPanel();
-    }
-    
-    const prevMaint = maintenance.active;
-    maintenance = maintDB.get();
-    if (prevMaint !== maintenance.active) {
-      if (maintenance.active && !state.isAdmin && 
-          !$('#scr-chat').classList.contains('active') && 
-          !$('#scr-adminchat').classList.contains('active') &&
-          !$('#scr-maintenance').classList.contains('active')) {
-        showMaintenanceScreen();
-      }
-      if (!maintenance.active && $('#scr-maintenance').classList.contains('active')) {
-        if (state.isVIP) { $('#tabbar').style.display = 'grid'; showScreen('scr-vip'); renderVIPMain(); }
-        else if (state.userId) { showGate(); }
-        else { showScreen('scr-login'); }
-      }
-    }
-  }, 3000);
-
-  window.addEventListener('beforeunload', () => {
-    if (state.userId && state.userId !== 'DEV') releaseMyAccounts(state.userId);
-  });
+  window.copyCode = copyCode;
+  window.closeModal = closeModal;
 });
 
 window.copyCode = copyCode;
